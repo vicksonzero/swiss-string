@@ -1,0 +1,24 @@
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-toolbar ul {
+  display: flex;
+}
+
+mat-toolbar li {
+  display: block;
+  margin-left: 30px;
+}
+
+mat-icon {
+  vertical-align: text-bottom;
+}
+
+
+main {
+  padding: 12px;
+}
+.filler {
+  flex: 1 1 auto;
+}
