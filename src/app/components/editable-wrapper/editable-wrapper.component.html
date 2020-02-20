@@ -1,0 +1,2 @@
+<input type="text" *ngIf="isEdit" [value]="value" autofocus (blur)="onEditorBlur()" #editor (keyup.enter)="onEditorEnter()" >
+<span *ngIf="!isEdit" (click)="onContentClicked()">{{value}}</span>
