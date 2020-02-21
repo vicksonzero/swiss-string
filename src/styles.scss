@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'variables';
+
 html,
 body {
   width: 100%;
@@ -15,7 +16,11 @@ body {
   flex: 1 1 auto;
 }
 
-
 .btn-primary {
   background-color: $primary-color;
+}
+
+
+.app-text-secondary {
+  color: $primary-color;
 }

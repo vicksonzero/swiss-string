@@ -2,11 +2,13 @@ import { Step } from './Step';
 
 export const mockSteps: Step[] = [
   {
+    id: 2,
     title: 'Step 1',
-    type: 'Generic Step',
+    type: 'Step',
   },
   {
+    id: 1,
     title: 'Step 2',
-    type: 'Generic Step',
+    type: 'Step',
   },
-];
+].map(v => new Step(v));

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Step } from '../s/Step';
+import { StepsService } from '../s/steps.service';
 
 @Component({
   selector: 'app-step',
@@ -8,12 +9,23 @@ import { Step } from '../s/Step';
 })
 export class StepComponent implements OnInit {
   isExpanded = true;
+  @Input() itemIndex: number;
   @Input() step: Step;
-  constructor() { }
+  constructor(private stepsService: StepsService) { }
 
   ngOnInit() {
   }
   onExpandButtonClick() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  onClickRemoveStep() {
+    this.stepsService.removeStep(this.step.id);
+  }
+
+  onTitleUpdated(val: any) {
+    console.log('onTitleUpdated');
+    this.step.title = val;
+    this.stepsService.updateStep(this.step.id, this.step);
   }
 }

@@ -1,4 +1,13 @@
 <div>
-  <app-step *ngFor="let step of steps" [step]="step"></app-step>
+  <app-step *ngFor="let step of steps; let i = index; trackBy: trackItem" [step]="step" [itemIndex]="i+1"></app-step>
+  <div *ngIf="steps.length <= 0">
+    <p>Start by pressing "Add step"</p>
+  </div>
 </div>
-<app-button>Add step</app-button>
+<div>
+  <app-button (click)="onClickAddStep()">Add step</app-button>
+</div>
+
+<div>
+  <textarea style="width:500px; height: 200px;">{{stepsJSON}}</textarea>
+</div>

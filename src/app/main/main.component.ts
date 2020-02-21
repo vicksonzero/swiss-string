@@ -10,13 +10,23 @@ import { Step } from '../s/Step';
 export class MainComponent implements OnInit {
 
   steps: Step[];
+
+  stepsJSON = '';
   constructor(private stepsService: StepsService) {
     this.stepsService.steps$.subscribe((steps) => {
       this.steps = steps;
+      this.stepsJSON = JSON.stringify(steps, null, 4);
     });
   }
 
   ngOnInit() {
   }
 
+  onClickAddStep() {
+    this.stepsService.addStep();
+  }
+
+  trackItem(index: number, item: Step) {
+    return item.id;
+  }
 }

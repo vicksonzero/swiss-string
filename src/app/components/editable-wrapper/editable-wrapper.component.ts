@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterContentChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-editable-wrapper',
@@ -8,7 +8,8 @@ import { AfterContentChecked, Component, ElementRef, Input, OnInit, ViewChild } 
 export class EditableWrapperComponent implements OnInit, AfterContentChecked {
 
   isEdit = false;
-  @Input() value = 'hi';
+  @Input() value = '';
+  @Output() valueChange = new EventEmitter<string>();
 
   @ViewChild('editor', { static: false }) editorElement: ElementRef<HTMLInputElement>;
   constructor() {
@@ -33,7 +34,7 @@ export class EditableWrapperComponent implements OnInit, AfterContentChecked {
     }, 100);
   }
 
-  onEditorEnter(){
+  onEditorEnter() {
     this.finalizeInput();
   }
 
@@ -41,9 +42,10 @@ export class EditableWrapperComponent implements OnInit, AfterContentChecked {
     this.finalizeInput();
   }
 
-  finalizeInput(){
+  finalizeInput() {
 
     this.value = this.editorElement.nativeElement.value;
     this.isEdit = false;
+    this.valueChange.emit(this.value);
   }
 }

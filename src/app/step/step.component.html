@@ -4,17 +4,18 @@
       <button class="expand-button btn btn-outline-primary btn-sm" (click)="onExpandButtonClick()">
         {{isExpanded ? '-' : '+' }}
       </button>
-      <app-editable-wrapper [value]="step.title"></app-editable-wrapper>
-      <span style="display:inline-block;width:8px;"> </span>
-      <span class="text-muted step-type">{{step.type}}</span>
+      <span class="text-secondary">{{itemIndex}}.{{ ' ' }}</span>
+      <app-editable-wrapper [value]="step.title" (valueChange)="onTitleUpdated($event)"></app-editable-wrapper>{{ ' ' }}
+      <span style="display:inline-block;width:4px;"></span>
+      <span class="text-secondary step-type">{{step.type}}</span>
     </h5>
   </div>
   <div class="card-body step-body" [hidden]="!isExpanded">
     <p class="card-text">
       Some quick example text to build on the card title and make up the bulk of the card's content.
     </p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-    <a href="#" class="card-link">Remove</a>
+    <a href="#" class="card-link">Add operator</a>{{ ' ' }}
+    <a href="#" class="card-link">Organize</a>{{ ' ' }}
+    <a href="#" class="card-link" (click)="onClickRemoveStep()">Remove Step</a>
   </div>
 </div>

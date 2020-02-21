@@ -1,4 +1,4 @@
-# swiss-tring
+# Swiss-String
 
 (pronounced sweet-string) mix and match stream operators to transform your data
 
