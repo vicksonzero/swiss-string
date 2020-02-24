@@ -1,7 +1,24 @@
 :host {
   position: absolute;
-  padding: 20px;
   width: 100%;
   min-height: 100%;
   background-color: #efefef;
+
+  // // @media (min-width: 0)
+  // padding: 8px;
+  // // @include media-breakpoint-up(sm) {
+  // //   ...
+  // // }
+
+  // @include media-breakpoint-up(md) {
+  //   padding: 20px;
+  // }
+
+  // // @include media-breakpoint-up(lg) {
+  // //   ...
+  // // }
+
+  // // @include media-breakpoint-up(xl) {
+  // //   ...
+  // // }
 }

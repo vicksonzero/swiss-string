@@ -20,6 +20,16 @@
 .step-body {
   margin-left: 40px;
   padding-top: 0;
+  display: flex;
+}
+
+.step-body.isMobile {
+  display: block;
+}
+
+.step-buttons {
+  margin-left: 40px;
+  padding-top: 0;
 }
 
 .step-type {
@@ -29,4 +39,8 @@
 
 .btn-light:first-child {
   padding-left: 0;
+}
+
+.column.isMobile {
+  width: 100%;
 }

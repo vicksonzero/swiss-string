@@ -1,0 +1,158 @@
+{
+  "steps": [
+    {
+      "id": 2,
+      "title": "Input",
+      "columns": [
+        {
+          "id": 1,
+          "width": 50,
+          "widthUnit": "%",
+          "type": "view",
+          "view": {
+            "type": "textarea",
+            "title": "Input",
+            "name": "input",
+            "content": "hello world"
+          }
+        },
+        {
+          "id": 2,
+          "width": 40,
+          "widthUnit": "%",
+          "type": "view",
+          "view": {
+            "type": "textarea",
+            "title": "Input-Regex",
+            "name": "inputRegex",
+            "content": "llo*"
+          }
+        },
+        {
+          "id": 3,
+          "width": 10,
+          "widthUnit": "%",
+          "type": "view",
+          "view": {
+            "type": "textarea",
+            "title": "Token Names",
+            "name": "inputRegexTokenNames",
+            "content": "aaa"
+          }
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "title": "Process",
+      "columns": [
+        {
+          "id": 1,
+          "width": 100,
+          "widthUnit": "%",
+          "type": "operator",
+          "operator": {
+            "type": "regex-match-rename",
+            "inputs": {
+              "source": "input",
+              "regex": "inputRegex",
+              "names": "inputRegexTokenNames"
+            },
+            "outputs": {
+              "result": "tokens",
+              "residue": "tokens-residue"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Tokens",
+      "columns": [
+        {
+          "id": 1,
+          "width": 50,
+          "widthUnit": "%",
+          "type": "view",
+          "view": {
+            "type": "textarea",
+            "title": "Tokens",
+            "name": "tokens",
+            "content": ""
+          }
+        },
+        {
+          "id": 1,
+          "width": 50,
+          "widthUnit": "%",
+          "type": "view",
+          "view": {
+            "type": "textarea",
+            "title": "Residue",
+            "name": "tokens-residue",
+            "content": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Template",
+      "columns": [
+        {
+          "id": 1,
+          "width": 100,
+          "widthUnit": "%",
+          "type": "view",
+          "view": {
+            "type": "textarea",
+            "title": "Template",
+            "name": "template",
+            "content": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Process",
+      "columns": [
+        {
+          "id": 1,
+          "width": 100,
+          "widthUnit": "%",
+          "type": "operator",
+          "operator": {
+            "type": "handlebars-template",
+            "inputs": {
+              "template": "template",
+              "data": "inputRegex"
+            },
+            "outputs": {
+              "result": "output"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Output",
+      "columns": [
+        {
+          "id": 1,
+          "width": 100,
+          "widthUnit": "%",
+          "type": "view",
+          "view": {
+            "type": "textarea",
+            "title": "Result",
+            "name": "output",
+            "content": ""
+          }
+        }
+      ]
+    }
+  ]
+}

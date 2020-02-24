@@ -8,6 +8,8 @@ import { EditableWrapperComponent } from './components/editable-wrapper/editable
 import { MainComponent } from './main/main.component';
 import { StepComponent } from './step/step.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ColumnComponent } from './column/column.component';
+import { ViewWidgetComponent } from './view-widget/view-widget.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MainComponent,
     ButtonComponent,
     StepComponent,
-    EditableWrapperComponent
+    EditableWrapperComponent,
+    ColumnComponent,
+    ViewWidgetComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -6,7 +6,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './editable-wrapper.component.html',
   styleUrls: ['./editable-wrapper.component.scss']
 })
-export class EditableWrapperComponent implements OnInit, AfterContentChecked {
+export class EditableWrapperComponent implements OnInit {
 
   public faEdit = faEdit;
 
@@ -21,14 +21,6 @@ export class EditableWrapperComponent implements OnInit, AfterContentChecked {
   }
 
   ngOnInit() {
-  }
-
-  ngAfterContentChecked(): void {
-    console.log('hi1');
-
-    if (this.isEdit) {
-      console.log('hi2');
-    }
   }
 
   onContentClicked() {

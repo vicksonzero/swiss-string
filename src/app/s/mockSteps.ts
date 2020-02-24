@@ -1,46 +1,6 @@
 import { Step, StepFactory } from './Step';
+import { steps } from './_mockSteps.json';
 
-export const mockSteps: Step[] = [
-  {
-    id: 2,
-    title: 'Input',
-    type: 'Step' as 'Step',
-    inputs: [
-      { name: 'input' },
-    ],
-    outputs: [
-      { name: 'output' },
-    ],
-    columns: [
-      { width: 100, widthUnit: '%' }
-    ],
-  },
-  {
-    id: 1,
-    title: 'Process',
-    type: 'Step' as 'Step',
-    inputs: [
-      { name: 'input' },
-    ],
-    outputs: [
-      { name: 'output' },
-    ],
-    columns: [
-      { width: 100, widthUnit: '%' }
-    ],
-  },
-  {
-    id: 3,
-    title: 'Output',
-    type: 'Step' as 'Step',
-    inputs: [
-      { name: 'input' },
-    ],
-    outputs: [
-      { name: 'output' },
-    ],
-    columns: [
-      { width: 100, widthUnit: '%' }
-    ],
-  },
-].map(v => StepFactory.createStep(v));
+export const mockSteps: Step[] = (steps
+  .map((v: any) => StepFactory.createStep(v))
+);

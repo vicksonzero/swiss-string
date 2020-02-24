@@ -1,3 +1,5 @@
+import { Operator } from './Operator';
+import { View } from './View';
 
 export interface DataType {
   name: string;
@@ -8,32 +10,31 @@ export enum WidthUnit {
   PERCENTAGE = '%',
 }
 
-export interface ColumnConfig {
+export interface WidgetConfig {
+  id: number;
   width: number;
   widthUnit: WidthUnit | string;
+  type: WidgetType;
 }
 
-// export enum StepType {
-//   STEP = 'Step',
-//   VIEW = 'View',
-//   OPERATOR = 'Operator',
-// }
+export enum WidgetType {
+  BASIC = 'basic',
+  VIEW = 'view',
+  OPERATOR = 'operator',
+}
 
 export interface Step {
   id: number;
   title: string;
-  type: 'Step';
-  inputs: DataType[];
-  outputs: DataType[];
-  columns: ColumnConfig[];
+  columns: WidgetConfig[];
 }
 
-export interface ViewStep extends Step {
-  views: Array<any>;
+export interface ViewWidget extends WidgetConfig {
+  view: View;
 }
 
-export interface OperatorStep extends Step {
-  operators: Array<any>;
+export interface OperatorWidget extends WidgetConfig {
+  operator: Operator;
 }
 
 export class StepFactory {
@@ -41,15 +42,9 @@ export class StepFactory {
     const a = {
       id: 0,
       title: 'Input',
-      type: 'Step' as 'Step',
-      inputs: [
-        { name: 'input' },
-      ],
-      outputs: [
-        { name: 'output' },
-      ],
+      type: WidgetType.BASIC,
       columns: [
-        { width: 100, widthUnit: '%' }
+        { id: 1, width: 100, widthUnit: '%', type: WidgetType.BASIC }
       ],
     };
     return { ...a, ...config };
