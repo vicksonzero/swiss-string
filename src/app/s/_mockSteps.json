@@ -3,6 +3,7 @@
     {
       "id": 2,
       "title": "Input",
+      "type": "view",
       "columns": [
         {
           "id": 1,
@@ -23,7 +24,7 @@
           "type": "view",
           "view": {
             "type": "textarea",
-            "title": "Input-Regex",
+            "title": "Input Regex",
             "name": "inputRegex",
             "content": "llo*"
           }
@@ -45,6 +46,7 @@
     {
       "id": 1,
       "title": "Process",
+      "type": "operator",
       "columns": [
         {
           "id": 1,
@@ -69,10 +71,11 @@
     {
       "id": 3,
       "title": "Tokens",
+      "type": "view",
       "columns": [
         {
           "id": 1,
-          "width": 50,
+          "width": 60,
           "widthUnit": "%",
           "type": "view",
           "view": {
@@ -84,7 +87,7 @@
         },
         {
           "id": 1,
-          "width": 50,
+          "width": 40,
           "widthUnit": "%",
           "type": "view",
           "view": {
@@ -99,6 +102,7 @@
     {
       "id": 6,
       "title": "Template",
+      "type": "view",
       "columns": [
         {
           "id": 1,
@@ -116,7 +120,8 @@
     },
     {
       "id": 4,
-      "title": "Process",
+      "title": "Combine",
+      "type": "operator",
       "columns": [
         {
           "id": 1,
@@ -127,7 +132,7 @@
             "type": "handlebars-template",
             "inputs": {
               "template": "template",
-              "data": "inputRegex"
+              "data": "tokens"
             },
             "outputs": {
               "result": "output"
@@ -139,6 +144,7 @@
     {
       "id": 5,
       "title": "Output",
+      "type": "view",
       "columns": [
         {
           "id": 1,

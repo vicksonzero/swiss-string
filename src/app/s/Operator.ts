@@ -1,8 +1,8 @@
 
 export interface Operator {
   type: string;
-  // name: string;
-  inputs: [];
-  outputs: [];
+  title: string;
+  inputs: { [x: string]: string };
+  outputs: { [x: string]: string };
 }
 

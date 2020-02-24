@@ -10,6 +10,7 @@ import { StepComponent } from './step/step.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ColumnComponent } from './column/column.component';
 import { ViewWidgetComponent } from './view-widget/view-widget.component';
+import { OperatorWidgetComponent } from './operator-widget/operator-widget.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ViewWidgetComponent } from './view-widget/view-widget.component';
     StepComponent,
     EditableWrapperComponent,
     ColumnComponent,
-    ViewWidgetComponent
+    ViewWidgetComponent,
+    OperatorWidgetComponent
   ],
   imports: [
     BrowserModule,

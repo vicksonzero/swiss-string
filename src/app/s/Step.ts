@@ -26,6 +26,7 @@ export enum WidgetType {
 export interface Step {
   id: number;
   title: string;
+  type: WidgetType;
   columns: WidgetConfig[];
 }
 

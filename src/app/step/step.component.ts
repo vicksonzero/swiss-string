@@ -1,6 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { TABLET_PORTRAIT } from 'src/media';
-import { Step, WidgetConfig } from '../s/Step';
+import { OperatorWidget, Step, ViewWidget, WidgetConfig, WidgetType } from '../s/Step';
 import { StepsService } from '../s/steps.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class StepComponent implements OnInit {
   @Input() itemIndex: number;
   @Input() step: Step;
   columns: WidgetConfig[];
+  summary: string;
 
   isMobile = false;
 
@@ -21,6 +22,20 @@ export class StepComponent implements OnInit {
   ngOnInit() {
     this.columns = this.step.columns;
     this.updateDeviceWidth();
+    switch (this.step.type) {
+      case WidgetType.VIEW:
+        this.summary = this.columns.map(c => {
+          return (c as ViewWidget).view.title;
+        }).join(', ');
+        break;
+      case WidgetType.OPERATOR:
+        this.summary = '[' + this.columns.map(c => {
+          return (c as OperatorWidget).operator.title || (c as OperatorWidget).operator.type;
+        }).join(', ') + ']';
+        break;
+      default:
+        this.summary = 'Step';
+    }
   }
   onExpandButtonClick() {
     this.isExpanded = !this.isExpanded;

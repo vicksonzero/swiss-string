@@ -1,13 +1,13 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">
-      <button class="expand-button btn btn-outline-primary btn-sm" (click)="onExpandButtonClick()">
+      <button class="expand-button btn btn-outline-secondary btn-sm" (click)="onExpandButtonClick()">
         {{isExpanded ? '-' : '+' }}
       </button>
       <span class="text-secondary">{{itemIndex}}.{{ ' ' }}</span>
       <app-editable-wrapper [value]="step.title" (valueChange)="onTitleUpdated($event)"></app-editable-wrapper>{{ ' ' }}
       <span style="display:inline-block;width:4px;"></span>
-      <!-- <span class="text-secondary step-type">{{step.type}}</span> -->
+      <span class="text-secondary step-type" [hidden]="isExpanded">{{summary}}</span>
     </h5>
   </div>
   <div class="card-body step-body" [class.isMobile]="isMobile" [hidden]="!isExpanded">
@@ -18,7 +18,7 @@
   </div>
   <div class="card-body step-buttons" [hidden]="!isExpanded">
     <a href="#" class="btn btn-primary">Next</a>{{ ' ' }}
-    <a href="#" class="btn btn-light">Add operator</a>{{ ' ' }}
+    <a href="#" class="btn btn-light">Add {{this.step.type}}</a>{{ ' ' }}
     <a href="#" class="btn btn-light">Organize</a>{{ ' ' }}
     <a href="#" class="btn btn-light" (click)="onClickRemoveStep()">Remove Step</a>
   </div>
