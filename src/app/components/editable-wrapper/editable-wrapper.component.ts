@@ -1,4 +1,5 @@
 import { AfterContentChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-editable-wrapper',
@@ -7,7 +8,10 @@ import { AfterContentChecked, Component, ElementRef, EventEmitter, Input, OnInit
 })
 export class EditableWrapperComponent implements OnInit, AfterContentChecked {
 
+  public faEdit = faEdit;
+
   isEdit = false;
+  isLabelOver = false;
   @Input() value = '';
   @Output() valueChange = new EventEmitter<string>();
 
@@ -29,9 +33,17 @@ export class EditableWrapperComponent implements OnInit, AfterContentChecked {
 
   onContentClicked() {
     this.isEdit = true;
+    this.isLabelOver = false;
     setTimeout(() => {
       this.editorElement.nativeElement.focus();
     }, 100);
+  }
+
+  onMouseEnterLabel() {
+    this.isLabelOver = true;
+  }
+  onMouseLeaveLabel() {
+    this.isLabelOver = false;
   }
 
   onEditorEnter() {

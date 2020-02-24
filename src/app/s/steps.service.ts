@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { mockSteps } from './mockSteps';
-import { Step } from './Step';
+import { Step, StepFactory } from './Step';
 
 @Injectable({
   providedIn: 'root'
@@ -23,14 +23,14 @@ export class StepsService {
     const oldSteps = [...this.stepsSource.getValue()];
 
     this.latestStepID += 1;
-    oldSteps.push(new Step({ id: this.latestStepID, title: 'New Step', type: 'Generic Step' }));
+    oldSteps.push(StepFactory.createStep({ id: this.latestStepID, title: 'New Step' }));
     this.stepsSource.next(oldSteps);
   }
 
   updateStep(stepID: number, newValue: Step) {
     const oldSteps = [...this.stepsSource.getValue()];
     const positionID = oldSteps.findIndex(step => step.id === stepID);
-    oldSteps[positionID] = new Step(newValue);
+    oldSteps[positionID] = StepFactory.createStep(newValue);
 
     this.stepsSource.next(oldSteps);
   }

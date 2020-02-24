@@ -1,2 +1,5 @@
-<input type="text" *ngIf="isEdit" [value]="value" autofocus (blur)="onEditorBlur()" #editor (keyup.enter)="onEditorEnter()" >
-<span *ngIf="!isEdit" (click)="onContentClicked()">{{value}}</span>
+<input type="text" *ngIf="isEdit" [value]="value" (blur)="onEditorBlur()" #editor
+  (keyup.enter)="onEditorEnter()">
+<span *ngIf="!isEdit" (click)="onContentClicked()" (mouseenter)="onMouseEnterLabel()"
+  (mouseleave)="onMouseLeaveLabel()">{{value}}</span>
+<fa-icon [icon]="faEdit" *ngIf="isLabelOver"></fa-icon>

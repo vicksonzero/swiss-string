@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { StepsService } from '../s/steps.service';
 import { Step } from '../s/Step';
+import { StepsService } from '../s/steps.service';
 
 @Component({
   selector: 'app-main',
@@ -10,6 +10,7 @@ import { Step } from '../s/Step';
 export class MainComponent implements OnInit {
 
   steps: Step[];
+  isValid = false;
 
   stepsJSON = '';
   constructor(private stepsService: StepsService) {
@@ -28,5 +29,8 @@ export class MainComponent implements OnInit {
 
   trackItem(index: number, item: Step) {
     return item.id;
+  }
+
+  onPaperChange(val: string) {
   }
 }

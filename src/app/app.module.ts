@@ -7,7 +7,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { EditableWrapperComponent } from './components/editable-wrapper/editable-wrapper.component';
 import { MainComponent } from './main/main.component';
 import { StepComponent } from './step/step.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import { StepComponent } from './step/step.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

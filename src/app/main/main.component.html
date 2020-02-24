@@ -11,3 +11,7 @@
 <div>
   <textarea style="width:500px; height: 200px;">{{stepsJSON}}</textarea>
 </div>
+<div>
+  <textarea style="width:500px; height: 200px;" #paper (change)="onPaperChange($event)"></textarea>
+  <span>{{isValid?'valid':'invalid'}}</span>
+</div>
