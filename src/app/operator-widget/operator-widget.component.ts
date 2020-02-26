@@ -8,6 +8,7 @@ import { OperatorWidget } from '../s/Step';
 })
 export class OperatorWidgetComponent implements OnInit {
 
+  @Input() stepID: number;
   @Input() operatorWidget: OperatorWidget;
   @Input() index: number;
 
@@ -21,5 +22,4 @@ export class OperatorWidgetComponent implements OnInit {
     this.outputs = Object.entries(this.operatorWidget.operator.outputs).map(([k, v]) => v);
     console.log(this.inputs, this.outputs);
   }
-
 }

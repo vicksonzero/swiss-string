@@ -1,12 +1,12 @@
 {
   "steps": [
     {
-      "id": 2,
+      "id": 1,
       "title": "Input",
       "type": "view",
       "columns": [
         {
-          "id": 1,
+          "id": 7,
           "width": 50,
           "widthUnit": "%",
           "type": "view",
@@ -14,11 +14,11 @@
             "type": "textarea",
             "title": "Input",
             "name": "input",
-            "content": "hello world"
+            "default": "hello world"
           }
         },
         {
-          "id": 2,
+          "id": 8,
           "width": 40,
           "widthUnit": "%",
           "type": "view",
@@ -26,7 +26,7 @@
             "type": "textarea",
             "title": "Input Regex",
             "name": "inputRegex",
-            "content": "llo*"
+            "default": "llo*"
           }
         },
         {
@@ -38,18 +38,18 @@
             "type": "textarea",
             "title": "Token Names",
             "name": "inputRegexTokenNames",
-            "content": "aaa"
+            "default": "aaa"
           }
         }
       ]
     },
     {
-      "id": 1,
+      "id": 2,
       "title": "Process",
       "type": "operator",
       "columns": [
         {
-          "id": 1,
+          "id": 9,
           "width": 100,
           "widthUnit": "%",
           "type": "operator",
@@ -74,7 +74,7 @@
       "type": "view",
       "columns": [
         {
-          "id": 1,
+          "id": 10,
           "width": 60,
           "widthUnit": "%",
           "type": "view",
@@ -82,11 +82,11 @@
             "type": "textarea",
             "title": "Tokens",
             "name": "tokens",
-            "content": ""
+            "default": ""
           }
         },
         {
-          "id": 1,
+          "id": 11,
           "width": 40,
           "widthUnit": "%",
           "type": "view",
@@ -94,18 +94,18 @@
             "type": "textarea",
             "title": "Residue",
             "name": "tokens-residue",
-            "content": ""
+            "default": ""
           }
         }
       ]
     },
     {
-      "id": 6,
+      "id": 4,
       "title": "Template",
       "type": "view",
       "columns": [
         {
-          "id": 1,
+          "id": 12,
           "width": 100,
           "widthUnit": "%",
           "type": "view",
@@ -113,18 +113,18 @@
             "type": "textarea",
             "title": "Template",
             "name": "template",
-            "content": ""
+            "default": ""
           }
         }
       ]
     },
     {
-      "id": 4,
+      "id": 5,
       "title": "Combine",
       "type": "operator",
       "columns": [
         {
-          "id": 1,
+          "id": 13,
           "width": 100,
           "widthUnit": "%",
           "type": "operator",
@@ -142,12 +142,12 @@
       ]
     },
     {
-      "id": 5,
+      "id": 6,
       "title": "Output",
       "type": "view",
       "columns": [
         {
-          "id": 1,
+          "id": 14,
           "width": 100,
           "widthUnit": "%",
           "type": "view",
@@ -155,7 +155,7 @@
             "type": "textarea",
             "title": "Result",
             "name": "output",
-            "content": ""
+            "default": ""
           }
         }
       ]

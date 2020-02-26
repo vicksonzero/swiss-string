@@ -2,23 +2,13 @@
   position: absolute;
   width: 100%;
   min-height: 100%;
-  background-color: #efefef;
+  background-color: #EEE; // #efefef;
+}
 
-  // // @media (min-width: 0)
-  // padding: 8px;
-  // // @include media-breakpoint-up(sm) {
-  // //   ...
-  // // }
+.steps-editor {
+  position: relative;
+}
 
-  // @include media-breakpoint-up(md) {
-  //   padding: 20px;
-  // }
-
-  // // @include media-breakpoint-up(lg) {
-  // //   ...
-  // // }
-
-  // // @include media-breakpoint-up(xl) {
-  // //   ...
-  // // }
+.back{
+  position:absolute;
 }

@@ -1,7 +1,14 @@
-<div>
-  <app-step *ngFor="let step of steps; let i = index; trackBy: trackItem" [step]="step" [itemIndex]="i+1"></app-step>
-  <div *ngIf="steps.length <= 0">
-    <p>Start by pressing "Add step"</p>
+<div class="steps-editor">
+  <div class="back" #back>
+    <!-- <svg width="200" height="200" #graph>
+      <circle cx="50" cy="50" r="5" fill="green" />
+    </svg> -->
+  </div>
+  <div class="front" #front>
+    <app-step *ngFor="let step of steps; let i = index; trackBy: trackItem" [step]="step" [itemIndex]="i+1"></app-step>
+    <div *ngIf="steps.length <= 0">
+      <p>Start by pressing "Add step"</p>
+    </div>
   </div>
 </div>
 <div>
@@ -9,9 +16,6 @@
 </div>
 
 <div>
+  <p>stepsJSON</p>
   <textarea style="width:100%; max-width:500px; height: 200px;">{{stepsJSON}}</textarea>
-</div>
-<div>
-  <textarea style="width:100%; max-width:500px; height: 200px;" #paper (change)="onPaperChange($event)"></textarea>
-  <span>{{isValid?'valid':'invalid'}}</span>
 </div>

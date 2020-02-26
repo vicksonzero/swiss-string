@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, HostListener, Input, OnInit } from '@angular/core';
 import { TABLET_PORTRAIT } from 'src/media';
 import { OperatorWidget, Step, ViewWidget, WidgetConfig, WidgetType } from '../s/Step';
 import { StepsService } from '../s/steps.service';
@@ -8,28 +8,29 @@ import { StepsService } from '../s/steps.service';
   templateUrl: './step.component.html',
   styleUrls: ['./step.component.scss']
 })
-export class StepComponent implements OnInit {
+export class StepComponent implements OnInit, AfterContentChecked {
   isExpanded = true;
   @Input() itemIndex: number;
   @Input() step: Step;
-  columns: WidgetConfig[];
   summary: string;
 
   isMobile = false;
 
   constructor(private stepsService: StepsService) { }
 
-  ngOnInit() {
-    this.columns = this.step.columns;
+  ngOnInit(): void {
+  }
+
+  ngAfterContentChecked() {
     this.updateDeviceWidth();
     switch (this.step.type) {
       case WidgetType.VIEW:
-        this.summary = this.columns.map(c => {
+        this.summary = this.step.columns.map(c => {
           return (c as ViewWidget).view.title;
         }).join(', ');
         break;
       case WidgetType.OPERATOR:
-        this.summary = '[' + this.columns.map(c => {
+        this.summary = '[' + this.step.columns.map(c => {
           return (c as OperatorWidget).operator.title || (c as OperatorWidget).operator.type;
         }).join(', ') + ']';
         break;

@@ -1,5 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { TABLET_LANDSCAPE } from 'src/media';
+import { Component, Input, OnInit } from '@angular/core';
 import { OperatorWidget, ViewWidget, WidgetConfig, WidgetType } from '../s/Step';
 
 @Component({
@@ -9,6 +8,7 @@ import { OperatorWidget, ViewWidget, WidgetConfig, WidgetType } from '../s/Step'
 })
 export class ColumnComponent implements OnInit {
 
+  @Input() stepID: number;
   @Input() column: WidgetConfig;
   @Input() index: number;
   viewWidget: ViewWidget | null = null;
@@ -17,8 +17,6 @@ export class ColumnComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.column.type, WidgetType.VIEW);
-
     switch (this.column.type) {
       case WidgetType.VIEW:
         this.viewWidget = this.column as ViewWidget;
@@ -28,5 +26,4 @@ export class ColumnComponent implements OnInit {
         break;
     }
   }
-
 }

@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ColumnComponent } from './column/column.component';
 import { ViewWidgetComponent } from './view-widget/view-widget.component';
 import { OperatorWidgetComponent } from './operator-widget/operator-widget.component';
+import { CircleComponent } from './components/circle/circle.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { OperatorWidgetComponent } from './operator-widget/operator-widget.compo
     EditableWrapperComponent,
     ColumnComponent,
     ViewWidgetComponent,
-    OperatorWidgetComponent
+    OperatorWidgetComponent,
+    CircleComponent
   ],
   imports: [
     BrowserModule,

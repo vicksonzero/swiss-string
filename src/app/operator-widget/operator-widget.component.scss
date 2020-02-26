@@ -1,5 +1,6 @@
 .operator {
   border: 1px solid #888;
+  background-color: white;
   text-align: center;
 }
 
@@ -10,9 +11,11 @@
 .operator-parameter {
   width: 100%;
   text-align: center;
+  margin: 8px;
   border: 1px solid #888;
-  border-left: none;
+  // border-left: none;
+  background-color: white;
 }
 .operator-parameter:first-child {
-  border-left: 1px solid #888;
+  // border-left: 1px solid #888;
 }
