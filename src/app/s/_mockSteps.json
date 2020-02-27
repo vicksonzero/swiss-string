@@ -56,13 +56,28 @@
           "operator": {
             "type": "regex-match-rename",
             "inputs": {
-              "source": "input",
-              "regex": "inputRegex",
-              "names": "inputRegexTokenNames"
+              "source": {
+                "id": 15,
+                "contextName": "input"
+              },
+              "regex": {
+                "id": 16,
+                "contextName": "inputRegex"
+              },
+              "names": {
+                "id": 17,
+                "contextName": "inputRegexTokenNames"
+              }
             },
             "outputs": {
-              "result": "tokens",
-              "residue": "tokens-residue"
+              "result": {
+                "id": 18,
+                "contextName": "tokens"
+              },
+              "residue": {
+                "id": 19,
+                "contextName": "tokens-residue"
+              }
             }
           }
         }
@@ -106,7 +121,7 @@
       "columns": [
         {
           "id": 12,
-          "width": 100,
+          "width": 70,
           "widthUnit": "%",
           "type": "view",
           "view": {
@@ -131,11 +146,20 @@
           "operator": {
             "type": "handlebars-template",
             "inputs": {
-              "template": "template",
-              "data": "tokens"
+              "template": {
+                "id": 20,
+                "contextName": "template"
+              },
+              "data": {
+                "id": 21,
+                "contextName": "tokens"
+              }
             },
             "outputs": {
-              "result": "output"
+              "result": {
+                "id": 22,
+                "contextName": "output"
+              }
             }
           }
         }

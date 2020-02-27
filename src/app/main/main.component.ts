@@ -1,4 +1,5 @@
-import { AfterContentChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterContentChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { hashStringToColor } from 'src/utils';
 import { Step } from '../s/Step';
 import { StepsService } from '../s/steps.service';
 
@@ -7,7 +8,7 @@ import { StepsService } from '../s/steps.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit, AfterContentChecked {
+export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
 
   steps: Step[];
 
@@ -18,6 +19,8 @@ export class MainComponent implements OnInit, AfterContentChecked {
   @ViewChild('graph', { static: false }) graphElement: ElementRef<SVGSVGElement>;
   @ViewChild('front', { static: false }) frontElement: ElementRef<HTMLDivElement>;
   @ViewChild('back', { static: false }) backElement: ElementRef<HTMLDivElement>;
+  updateGraphInterval = 0;
+
   constructor(private stepsService: StepsService) {
     this.stepsService.steps$.subscribe((steps) => {
       this.steps = steps;
@@ -26,57 +29,18 @@ export class MainComponent implements OnInit, AfterContentChecked {
   }
 
   ngOnInit() {
+    this.updateGraphInterval = window.setInterval(() => this.updateDataFlowGraph(), 1000);
   }
 
+  ngOnDestroy() {
+    if (this.updateGraphInterval) {
+      clearInterval(this.updateGraphInterval);
+    }
+  }
+
+
   ngAfterContentChecked() {
-    const viewWidgets = document.querySelectorAll('app-view-widget');
-    const operatorWidgets = document.querySelectorAll('app-operator-widget');
-    console.log('ngAfterContentChecked', viewWidgets, operatorWidgets);
-    if (!this.frontElement) { return; }
-    this.graphWidth = this.frontElement.nativeElement.clientWidth;
-    this.graphHeight = this.frontElement.nativeElement.clientHeight;
-    this.backElement.nativeElement.innerHTML = '';
-    const svg = this.createSVG(this.backElement.nativeElement);
-    const backBB = this.backElement.nativeElement.getBoundingClientRect();
-
-    // draw lines
-    // draw dots 1
-    viewWidgets.forEach((viewWidget) => {
-      const bb = viewWidget.getBoundingClientRect();
-      // const rect = this.createRect(svg);
-      // rect.setAttributeNS(null, 'x', '' + (window.scrollX - backBB.left + bb.left));
-      // rect.setAttributeNS(null, 'y', '' + (window.scrollY - backBB.top + bb.top));
-      // rect.setAttributeNS(null, 'width', '' + (bb.width));
-      // rect.setAttributeNS(null, 'height', '' + (bb.height));
-      const circleIn = this.createPoint(svg);
-      circleIn.setAttributeNS(null, 'fill', '#AA0');
-      circleIn.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
-      circleIn.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.top - 4));
-      const circleOut = this.createPoint(svg);
-      circleOut.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
-      circleOut.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.bottom + 4));
-    });
-
-    // draw dots 2
-    operatorWidgets.forEach((operatorWidget) => {
-      const inputWidgets = operatorWidget.querySelectorAll('.column-input .operator-parameter');
-      inputWidgets.forEach((inputWidget) => {
-        const bb = inputWidget.getBoundingClientRect();
-
-        const circleIn = this.createPoint(svg);
-        circleIn.setAttributeNS(null, 'fill', '#AA0');
-        circleIn.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
-        circleIn.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.top - 4));
-      });
-
-      const outputWidgets = operatorWidget.querySelectorAll('.column-output .operator-parameter');
-      outputWidgets.forEach((outputWidget) => {
-        const bb = outputWidget.getBoundingClientRect();
-        const circleOut = this.createPoint(svg);
-        circleOut.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
-        circleOut.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.bottom + 4));
-      });
-    });
+    this.updateDataFlowGraph();
   }
 
   onClickAddStep() {
@@ -85,6 +49,97 @@ export class MainComponent implements OnInit, AfterContentChecked {
 
   trackItem(index: number, item: Step) {
     return item.id;
+  }
+
+  updateDataFlowGraph() {
+    if (!this.frontElement) { return; }
+    const viewWidgets = document.querySelectorAll('app-view-widget');
+    const operatorWidgets = document.querySelectorAll('app-operator-widget');
+    // console.log('updateDataFlowGraph', viewWidgets, operatorWidgets);
+
+    this.graphWidth = this.frontElement.nativeElement.clientWidth;
+    this.graphHeight = this.frontElement.nativeElement.clientHeight;
+    this.backElement.nativeElement.innerHTML = '';
+    const svg = this.createSVG(this.backElement.nativeElement);
+    const backBB = this.backElement.nativeElement.getBoundingClientRect();
+
+    // draw lines
+    this.stepsService.contexts.forEach((context) => {
+      const { afterStepID, keys } = context;
+      keys.forEach(({ fromID, toID, name }) => {
+        const fromWidgetElement = document.querySelector(`[data-entity-id="${fromID}"]`);
+        const toWidgetElement = document.querySelector(`[data-entity-id="${toID}"]`);
+        if (!fromWidgetElement || !toWidgetElement) { return; }
+        const fromBB = fromWidgetElement.getBoundingClientRect();
+        const toBB = toWidgetElement.getBoundingClientRect();
+
+        if (fromBB.top === 0 && fromBB.left === 0) { return; }
+        if (toBB.top === 0 && toBB.left === 0) { return; }
+
+        const fromPoint = {
+          x: - backBB.left + ((fromBB.left + fromBB.right) / 2),
+          y: - backBB.top + (fromBB.bottom + 4),
+        };
+        const toPoint = {
+          x: - backBB.left + ((toBB.left + toBB.right) / 2),
+          y: - backBB.top + (toBB.top - 4),
+        };
+        // console.log(fromWidgetElement, toWidgetElement);
+        const points = [
+          `${fromPoint.x} ${fromPoint.y}`,
+          `${fromPoint.x} ${fromPoint.y + 100}`,
+          `${toPoint.x} ${toPoint.y - 100}`,
+          `${toPoint.x} ${toPoint.y}`,
+        ];
+        const pathBG = this.createPath(svg);
+        pathBG.setAttributeNS(null, 'stroke', '#DDD');
+        pathBG.setAttributeNS(null, 'stroke-width', '5');
+        pathBG.setAttributeNS(null, 'd', `M ${points[0]} C ${points[1]}, ${points[2]}, ${points[3]}`);
+        const path = this.createPath(svg);
+        path.setAttributeNS(null, 'stroke', hashStringToColor(name));
+        path.setAttributeNS(null, 'stroke-width', '3');
+        path.setAttributeNS(null, 'd', `M ${points[0]} C ${points[1]}, ${points[2]}, ${points[3]}`);
+      });
+    });
+    // draw dots 1
+    viewWidgets.forEach((viewWidget: HTMLDivElement) => {
+      const bb = viewWidget.getBoundingClientRect();
+      // const rect = this.createRect(svg);
+      // rect.setAttributeNS(null, 'x', '' + (window.scrollX - backBB.left + bb.left));
+      // rect.setAttributeNS(null, 'y', '' + (window.scrollY - backBB.top + bb.top));
+      // rect.setAttributeNS(null, 'width', '' + (bb.width));
+      // rect.setAttributeNS(null, 'height', '' + (bb.height));
+      const circleIn = this.createPoint(svg);
+      circleIn.setAttributeNS(null, 'fill', hashStringToColor(viewWidget.dataset.entityName || ''));
+      circleIn.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
+      circleIn.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.top - 4));
+      const circleOut = this.createPoint(svg);
+      circleOut.setAttributeNS(null, 'fill', hashStringToColor(viewWidget.dataset.entityName || ''));
+      circleOut.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
+      circleOut.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.bottom + 4));
+    });
+
+    // draw dots 2
+    operatorWidgets.forEach((operatorWidget: HTMLDivElement) => {
+      const inputWidgets = operatorWidget.querySelectorAll('.column-input .operator-parameter');
+      inputWidgets.forEach((inputWidget: HTMLDivElement) => {
+        const bb = inputWidget.getBoundingClientRect();
+
+        const circleIn = this.createPoint(svg);
+        circleIn.setAttributeNS(null, 'fill', hashStringToColor(inputWidget.dataset.entityName || ''));
+        circleIn.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
+        circleIn.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.top - 4));
+      });
+
+      const outputWidgets = operatorWidget.querySelectorAll('.column-output .operator-parameter');
+      outputWidgets.forEach((outputWidget: HTMLDivElement) => {
+        const bb = outputWidget.getBoundingClientRect();
+        const circleOut = this.createPoint(svg);
+        circleOut.setAttributeNS(null, 'fill', hashStringToColor(outputWidget.dataset.entityName || ''));
+        circleOut.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
+        circleOut.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.bottom + 4));
+      });
+    });
   }
 
   createSVG(svgContainer: HTMLDivElement) {
@@ -105,6 +160,15 @@ export class MainComponent implements OnInit, AfterContentChecked {
 
     svgContainer.appendChild(svg);
     return svg;
+  }
+  createPath(svg: SVGSVGElement) {
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttributeNS(null, 'stroke', '#DDD');
+    path.setAttributeNS(null, 'stroke-width', '3');
+    path.setAttributeNS(null, 'fill', 'transparent');
+    svg.appendChild(path);
+
+    return path;
   }
 
   createPoint(svg: SVGSVGElement) {

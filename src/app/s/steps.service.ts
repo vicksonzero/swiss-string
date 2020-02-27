@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { shareReplay, tap } from 'rxjs/operators';
+import { ContextDef } from './Context';
 import { mockSteps } from './mockSteps';
-import { Step, StepFactory, WidgetConfig } from './Step';
+import { OperatorWidget, Step, StepFactory, ViewWidget, WidgetConfig, WidgetType } from './Step';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,14 @@ import { Step, StepFactory, WidgetConfig } from './Step';
 export class StepsService {
   stepsSource = new BehaviorSubject<Step[]>(mockSteps);
   steps$: Observable<Step[]>;
+  entities: (WidgetConfig | Step)[] = [];
 
   latestStepID = mockSteps.map(s => s.id).reduce((a, v) => Math.max(a, v), 0);
+  contexts: ContextDef[];
 
   constructor() {
     this.steps$ = this.stepsSource.pipe(
+      tap((steps) => this.updateContexts(steps)),
       shareReplay(1),
     );
   }
@@ -53,5 +57,87 @@ export class StepsService {
     targetStep.columns[widgetIndex] = widget;
 
     this.updateStep(stepID, targetStep);
+  }
+
+  updateContexts(steps: Step[]) {
+    this.entities = [];
+    const newContexts: ContextDef[] = [];
+    const contextHolder: { [x: string]: number } = {}; // holds keys and last-seen widgetID
+    for (let i = 0; i < steps.length; i++) {
+      const step = steps[i];
+      // const nextStep = steps[i + 1];
+      const { id, columns, type } = step;
+      // console.log('step', i, id);
+
+      if (this.entities[id]) {
+        throw new Error(`Duplicate entityID "${id}" in index "${i}"`);
+      }
+      this.entities[id] = step;
+
+      const afterContext: ContextDef = {
+        afterStepID: id,
+        keys: [],
+      };
+
+      switch (type) {
+        case WidgetType.VIEW:
+          {
+            columns.forEach((column) => {
+              const { id: columnID, type: columnType } = column;
+              const viewWidget = (column as ViewWidget).view;
+              const { name, title } = viewWidget;
+              // console.log('view', name, columnID);
+
+              const lastSeenID = contextHolder[name];
+              for (const context of newContexts) {
+                for (const key of context.keys) {
+                  if (key.fromID === lastSeenID) {
+                    key.toID = columnID;
+                  }
+                }
+              }
+
+              contextHolder[name] = columnID;
+              afterContext.keys.push({ name, fromID: columnID, toID: null, type: null });
+              // afterContext.types.push(name);
+            });
+          }
+          break;
+        case WidgetType.OPERATOR:
+          {
+            columns.forEach((column) => {
+              const { id: columnID, type: columnType } = column;
+              const operatorWidget = (column as OperatorWidget).operator;
+              const { inputs, outputs } = operatorWidget;
+
+              Object.entries(inputs).forEach(([inputKey, { id: connectorID, contextName }]) => {
+                // console.log('operator', contextName, connectorID);
+
+                const lastSeenID = contextHolder[contextName];
+                for (const context of newContexts) {
+                  for (const key of context.keys) {
+                    if (key.fromID === lastSeenID) {
+                      key.toID = connectorID;
+                    }
+
+                  }
+                }
+                // contextHolder[inputKey] = columnID;
+                // afterContext.keys.push({ name:inputKey, fromID: columnID, toID: null, type: null });
+              });
+
+              Object.entries(outputs).forEach(([outputKey, { id: connectorID, contextName }]) => {
+                contextHolder[contextName] = connectorID;
+                afterContext.keys.push({ name: contextName, fromID: connectorID, toID: null, type: null });
+              });
+            });
+          }
+          break;
+      }
+      // console.log('contextHolder', { ...contextHolder });
+      newContexts.push(afterContext);
+    }
+    // console.log('newContexts', JSON.stringify(newContexts, null, 4));
+    this.contexts = newContexts;
   }
 }

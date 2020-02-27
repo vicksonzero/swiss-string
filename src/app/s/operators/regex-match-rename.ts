@@ -9,7 +9,7 @@ export const operator = {
     outputs: [
         'result', // object[]
         'residue', // string
-        'errorPrompt', // string
+        'err', // string
     ],
     run: (source: string, regex: string, names: string) => {
         const aliasList = ['_fullMatch', ...names.split('\n')];
@@ -23,7 +23,7 @@ export const operator = {
             return {
                 result: [],
                 residue: '',
-                errorPrompt: error.toString(),
+                err: error.toString(),
             };
         }
         const matchResults = source.match(splitRegex);
@@ -41,7 +41,7 @@ export const operator = {
             return {
                 result: [],
                 residue: '',
-                errorPrompt: matchResultSummary,
+                err: matchResultSummary,
             };
         }
 
@@ -63,7 +63,7 @@ export const operator = {
         return {
             result: tokensList,
             residue,
-            errorPrompt: matchResultSummary,
+            err: matchResultSummary,
         };
     },
 };

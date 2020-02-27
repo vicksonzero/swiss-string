@@ -20,6 +20,11 @@ body {
   background-color: $primary-color;
 }
 
-.app-text-secondary{
+.app-text-secondary {
   color: #888; //#DDD;
+}
+
+
+.debug-entity-id {
+  display: none;
 }

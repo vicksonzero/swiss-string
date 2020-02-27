@@ -1,2 +1,2 @@
-<app-view-widget *ngIf="viewWidget != null" [stepID]="stepID" [index]="index" [viewWidget]="viewWidget"></app-view-widget>
+<app-view-widget *ngIf="viewWidget != null" [stepID]="stepID" [index]="index" [viewWidget]="viewWidget" [attr.data-entity-id]="viewWidget.id" [attr.data-entity-name]="viewWidget.view.name"></app-view-widget>
 <app-operator-widget *ngIf="operatorWidget != null" [stepID]="stepID" [index]="index" [operatorWidget]="operatorWidget"></app-operator-widget>
