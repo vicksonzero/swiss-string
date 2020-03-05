@@ -7,9 +7,12 @@ export function djb2(str: string) {
   return hash;
 }
 
+export function hashStringToNumber(str: string) {
+  const hash = djb2(str);
+  return (hash + 2147483648) / 4294967295;
+}
 export function hashStringToColor(str: string) {
   const hash = djb2(str);
-  console.log('hash', hash);
 
   const [r, g, b] = hslToRgb((hash + 2147483648) / 4294967295, 1, 0.5);
   return '#' + ('0' + r.toString(16)).substr(-2) + ('0' + g.toString(16)).substr(-2) + ('0' + b.toString(16)).substr(-2);

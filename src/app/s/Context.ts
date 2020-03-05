@@ -5,5 +5,5 @@ export interface Context {
 }
 export interface ContextDef {
   afterStepID: number;
-  keys: { name: string, fromID: number, toID: number | null, type: string | null }[];
+  keys: { name: string, fromID: number, toID: number | null, type: string | null, destStepIndex: number | null }[];
 }

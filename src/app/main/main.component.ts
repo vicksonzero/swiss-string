@@ -1,5 +1,5 @@
 import { AfterContentChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { hashStringToColor } from 'src/utils';
+import { hashStringToColor, hashStringToNumber } from 'src/utils';
 import { Step } from '../s/Step';
 import { StepsService } from '../s/steps.service';
 
@@ -63,15 +63,18 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
     const svg = this.createSVG(this.backElement.nativeElement);
     const backBB = this.backElement.nativeElement.getBoundingClientRect();
 
+    const sidebarX = 20;
+    const sidebarWidth = 20;
     // draw lines
-    this.stepsService.contexts.forEach((context) => {
+    this.stepsService.contexts.forEach((context, afterStepIndex) => {
       const { afterStepID, keys } = context;
-      keys.forEach(({ fromID, toID, name }) => {
+      keys.forEach(({ fromID, toID, name, destStepIndex }) => {
         const fromWidgetElement = document.querySelector(`[data-entity-id="${fromID}"]`);
         const toWidgetElement = document.querySelector(`[data-entity-id="${toID}"]`);
         if (!fromWidgetElement || !toWidgetElement) { return; }
         const fromBB = fromWidgetElement.getBoundingClientRect();
         const toBB = toWidgetElement.getBoundingClientRect();
+        const _destStepIndex = destStepIndex || -1;
 
         if (fromBB.top === 0 && fromBB.left === 0) { return; }
         if (toBB.top === 0 && toBB.left === 0) { return; }
@@ -85,61 +88,104 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
           y: - backBB.top + (toBB.top - 4),
         };
         // console.log(fromWidgetElement, toWidgetElement);
-        const points = [
-          `${fromPoint.x} ${fromPoint.y}`,
-          `${fromPoint.x} ${fromPoint.y + 100}`,
-          `${toPoint.x} ${toPoint.y - 100}`,
-          `${toPoint.x} ${toPoint.y}`,
-        ];
+
+        const line = (() => {
+          if (_destStepIndex - afterStepIndex <= 1) {
+            return [
+              `M`,
+              `${fromPoint.x} ${fromPoint.y}`,
+              `C`,
+              [
+                `${fromPoint.x} ${fromPoint.y + 100}`,
+                // ...(stepIndex - _sourceStepID <= 1 ? [] : []),
+                `${toPoint.x} ${toPoint.y - 100}`,
+                `${toPoint.x} ${toPoint.y}`,
+              ].join(', '),
+            ].join(' ');
+          } else {
+            const escapeX = sidebarX + hashStringToNumber(name) * sidebarWidth;
+            return [
+              `M`,
+              `${fromPoint.x} ${fromPoint.y}`,
+              `C`,
+              [
+                `${fromPoint.x} ${fromPoint.y + 100}`,
+                // ...(stepIndex - _sourceStepID <= 1 ? [] : []),
+                `${escapeX} ${fromPoint.y + 150 - 100}`,
+                `${escapeX} ${fromPoint.y + 150}`,
+              ].join(', '),
+              `L`,
+              `${escapeX} ${toPoint.y - 150}`,
+              `C`,
+              [
+                `${escapeX} ${toPoint.y - 150 + 100}`,
+                // ...(stepIndex - _sourceStepID <= 1 ? [] : []),
+                `${toPoint.x} ${toPoint.y - 100}`,
+                `${toPoint.x} ${toPoint.y}`,
+              ].join(', '),
+            ].join(' ');
+          }
+        })();
+
         const pathBG = this.createPath(svg);
         pathBG.setAttributeNS(null, 'stroke', '#DDD');
         pathBG.setAttributeNS(null, 'stroke-width', '5');
-        pathBG.setAttributeNS(null, 'd', `M ${points[0]} C ${points[1]}, ${points[2]}, ${points[3]}`);
+        pathBG.setAttributeNS(null, 'd', line);
         const path = this.createPath(svg);
         path.setAttributeNS(null, 'stroke', hashStringToColor(name));
         path.setAttributeNS(null, 'stroke-width', '3');
-        path.setAttributeNS(null, 'd', `M ${points[0]} C ${points[1]}, ${points[2]}, ${points[3]}`);
+        path.setAttributeNS(null, 'd', line);
+
+        const circleIn = this.createPoint(svg);
+        circleIn.setAttributeNS(null, 'fill', hashStringToColor(name));
+        circleIn.setAttributeNS(null, 'cx', '' + fromPoint.x);
+        circleIn.setAttributeNS(null, 'cy', '' + fromPoint.y);
+        const circleOut = this.createPoint(svg);
+        circleOut.setAttributeNS(null, 'fill', hashStringToColor(name));
+        circleOut.setAttributeNS(null, 'cx', '' + toPoint.x);
+        circleOut.setAttributeNS(null, 'cy', '' + toPoint.y);
+
       });
     });
     // draw dots 1
-    viewWidgets.forEach((viewWidget: HTMLDivElement) => {
-      const bb = viewWidget.getBoundingClientRect();
-      // const rect = this.createRect(svg);
-      // rect.setAttributeNS(null, 'x', '' + (window.scrollX - backBB.left + bb.left));
-      // rect.setAttributeNS(null, 'y', '' + (window.scrollY - backBB.top + bb.top));
-      // rect.setAttributeNS(null, 'width', '' + (bb.width));
-      // rect.setAttributeNS(null, 'height', '' + (bb.height));
-      const circleIn = this.createPoint(svg);
-      circleIn.setAttributeNS(null, 'fill', hashStringToColor(viewWidget.dataset.entityName || ''));
-      circleIn.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
-      circleIn.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.top - 4));
-      const circleOut = this.createPoint(svg);
-      circleOut.setAttributeNS(null, 'fill', hashStringToColor(viewWidget.dataset.entityName || ''));
-      circleOut.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
-      circleOut.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.bottom + 4));
-    });
+    // viewWidgets.forEach((viewWidget: HTMLDivElement) => {
+    //   const bb = viewWidget.getBoundingClientRect();
+    //   // const rect = this.createRect(svg);
+    //   // rect.setAttributeNS(null, 'x', '' + (window.scrollX - backBB.left + bb.left));
+    //   // rect.setAttributeNS(null, 'y', '' + (window.scrollY - backBB.top + bb.top));
+    //   // rect.setAttributeNS(null, 'width', '' + (bb.width));
+    //   // rect.setAttributeNS(null, 'height', '' + (bb.height));
+    //   const circleIn = this.createPoint(svg);
+    //   circleIn.setAttributeNS(null, 'fill', hashStringToColor(viewWidget.dataset.entityName || ''));
+    //   circleIn.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
+    //   circleIn.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.top - 4));
+    //   const circleOut = this.createPoint(svg);
+    //   circleOut.setAttributeNS(null, 'fill', hashStringToColor(viewWidget.dataset.entityName || ''));
+    //   circleOut.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
+    //   circleOut.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.bottom + 4));
+    // });
 
-    // draw dots 2
-    operatorWidgets.forEach((operatorWidget: HTMLDivElement) => {
-      const inputWidgets = operatorWidget.querySelectorAll('.column-input .operator-parameter');
-      inputWidgets.forEach((inputWidget: HTMLDivElement) => {
-        const bb = inputWidget.getBoundingClientRect();
+    // // draw dots 2
+    // operatorWidgets.forEach((operatorWidget: HTMLDivElement) => {
+    //   const inputWidgets = operatorWidget.querySelectorAll('.column-input .operator-parameter');
+    //   inputWidgets.forEach((inputWidget: HTMLDivElement) => {
+    //     const bb = inputWidget.getBoundingClientRect();
 
-        const circleIn = this.createPoint(svg);
-        circleIn.setAttributeNS(null, 'fill', hashStringToColor(inputWidget.dataset.entityName || ''));
-        circleIn.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
-        circleIn.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.top - 4));
-      });
+    //     const circleIn = this.createPoint(svg);
+    //     circleIn.setAttributeNS(null, 'fill', hashStringToColor(inputWidget.dataset.entityName || ''));
+    //     circleIn.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
+    //     circleIn.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.top - 4));
+    //   });
 
-      const outputWidgets = operatorWidget.querySelectorAll('.column-output .operator-parameter');
-      outputWidgets.forEach((outputWidget: HTMLDivElement) => {
-        const bb = outputWidget.getBoundingClientRect();
-        const circleOut = this.createPoint(svg);
-        circleOut.setAttributeNS(null, 'fill', hashStringToColor(outputWidget.dataset.entityName || ''));
-        circleOut.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
-        circleOut.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.bottom + 4));
-      });
-    });
+    //   const outputWidgets = operatorWidget.querySelectorAll('.column-output .operator-parameter');
+    //   outputWidgets.forEach((outputWidget: HTMLDivElement) => {
+    //     const bb = outputWidget.getBoundingClientRect();
+    //     const circleOut = this.createPoint(svg);
+    //     circleOut.setAttributeNS(null, 'fill', hashStringToColor(outputWidget.dataset.entityName || ''));
+    //     circleOut.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
+    //     circleOut.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.bottom + 4));
+    //   });
+    // });
   }
 
   createSVG(svgContainer: HTMLDivElement) {
@@ -173,7 +219,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
 
   createPoint(svg: SVGSVGElement) {
     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    circle.setAttributeNS(null, 'r', '10');
+    circle.setAttributeNS(null, 'r', '7');
     circle.setAttributeNS(null, 'stroke', '#DDD');
     circle.setAttributeNS(null, 'stroke-width', '3');
     circle.setAttributeNS(null, 'fill', '#0A0');

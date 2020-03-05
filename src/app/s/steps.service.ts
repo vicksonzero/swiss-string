@@ -62,20 +62,20 @@ export class StepsService {
   updateContexts(steps: Step[]) {
     this.entities = [];
     const newContexts: ContextDef[] = [];
-    const contextHolder: { [x: string]: number } = {}; // holds keys and last-seen widgetID
-    for (let i = 0; i < steps.length; i++) {
-      const step = steps[i];
+    const contextHolder: { [x: string]: { lastSeenColumnID: number, lastSeenStepIndex: number } } = {}; // holds keys and last-seen widgetID
+    for (let stepIndex = 0; stepIndex < steps.length; stepIndex++) {
+      const step = steps[stepIndex];
       // const nextStep = steps[i + 1];
-      const { id, columns, type } = step;
+      const { id: stepID, columns, type } = step;
       // console.log('step', i, id);
 
-      if (this.entities[id]) {
-        throw new Error(`Duplicate entityID "${id}" in index "${i}"`);
+      if (this.entities[stepID]) {
+        throw new Error(`Duplicate entityID "${stepID}" in index "${stepIndex}"`);
       }
-      this.entities[id] = step;
+      this.entities[stepID] = step;
 
       const afterContext: ContextDef = {
-        afterStepID: id,
+        afterStepID: stepID,
         keys: [],
       };
 
@@ -88,17 +88,20 @@ export class StepsService {
               const { name, title } = viewWidget;
               // console.log('view', name, columnID);
 
-              const lastSeenID = contextHolder[name];
-              for (const context of newContexts) {
-                for (const key of context.keys) {
-                  if (key.fromID === lastSeenID) {
-                    key.toID = columnID;
+              if (contextHolder[name]) {
+                const { lastSeenColumnID: lastSeenID } = contextHolder[name];
+                for (const context of newContexts) {
+                  for (const key of context.keys) {
+                    if (key.fromID === lastSeenID) {
+                      key.toID = columnID;
+                      key.destStepIndex = stepIndex;
+                    }
                   }
                 }
               }
 
-              contextHolder[name] = columnID;
-              afterContext.keys.push({ name, fromID: columnID, toID: null, type: null });
+              contextHolder[name] = { lastSeenColumnID: columnID, lastSeenStepIndex: stepIndex };
+              afterContext.keys.push({ name, destStepIndex: stepIndex, fromID: columnID, toID: null, type: null });
               // afterContext.types.push(name);
             });
           }
@@ -113,11 +116,12 @@ export class StepsService {
               Object.entries(inputs).forEach(([inputKey, { id: connectorID, contextName }]) => {
                 // console.log('operator', contextName, connectorID);
 
-                const lastSeenID = contextHolder[contextName];
+                const { lastSeenColumnID: lastSeenID, lastSeenStepIndex } = contextHolder[contextName];
                 for (const context of newContexts) {
                   for (const key of context.keys) {
                     if (key.fromID === lastSeenID) {
                       key.toID = connectorID;
+                      key.destStepIndex = stepIndex;
                     }
 
                   }
@@ -127,8 +131,8 @@ export class StepsService {
               });
 
               Object.entries(outputs).forEach(([outputKey, { id: connectorID, contextName }]) => {
-                contextHolder[contextName] = connectorID;
-                afterContext.keys.push({ name: contextName, fromID: connectorID, toID: null, type: null });
+                contextHolder[contextName] = { lastSeenColumnID: connectorID, lastSeenStepIndex: stepIndex };
+                afterContext.keys.push({ name: contextName, destStepIndex: null, fromID: connectorID, toID: null, type: null });
               });
             });
           }
