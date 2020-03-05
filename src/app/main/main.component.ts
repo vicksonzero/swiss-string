@@ -1,4 +1,5 @@
-import { AfterContentChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterContentChecked, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { TABLET_PORTRAIT } from 'src/media';
 import { hashStringToColor, hashStringToNumber } from 'src/utils';
 import { Step } from '../s/Step';
 import { StepsService } from '../s/steps.service';
@@ -13,6 +14,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
   steps: Step[];
 
   stepsJSON = '';
+  isMobile = false;
 
   graphWidth = 0;
   graphHeight = 0;
@@ -29,6 +31,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
   }
 
   ngOnInit() {
+    this.updateDeviceWidth();
     this.updateGraphInterval = window.setInterval(() => this.updateDataFlowGraph(), 1000);
   }
 
@@ -65,10 +68,12 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
 
     const sidebarX = 20;
     const sidebarWidth = 20;
+    const sidebarLead = 150;
+    const connectorMomentum = 100;
     // draw lines
     this.stepsService.contexts.forEach((context, afterStepIndex) => {
       const { afterStepID, keys } = context;
-      keys.forEach(({ fromID, toID, name, destStepIndex }) => {
+      keys.forEach(({ fromID, toID, name, destStepIndex }, keyIndex) => {
         const fromWidgetElement = document.querySelector(`[data-entity-id="${fromID}"]`);
         const toWidgetElement = document.querySelector(`[data-entity-id="${toID}"]`);
         if (!fromWidgetElement || !toWidgetElement) { return; }
@@ -83,10 +88,16 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
           x: - backBB.left + ((fromBB.left + fromBB.right) / 2),
           y: - backBB.top + (fromBB.bottom + 4),
         };
+        if (this.isMobile) {
+          fromPoint.x = - backBB.left + fromBB.left + fromBB.width * (keyIndex + 0.5) / keys.length;
+        }
         const toPoint = {
           x: - backBB.left + ((toBB.left + toBB.right) / 2),
           y: - backBB.top + (toBB.top - 4),
         };
+        if (this.isMobile) {
+          toPoint.x = - backBB.left + toBB.left + toBB.width * (keyIndex + 0.5) / keys.length;
+        }
         // console.log(fromWidgetElement, toWidgetElement);
 
         const line = (() => {
@@ -96,9 +107,9 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
               `${fromPoint.x} ${fromPoint.y}`,
               `C`,
               [
-                `${fromPoint.x} ${fromPoint.y + 100}`,
+                `${fromPoint.x} ${fromPoint.y + connectorMomentum}`,
                 // ...(stepIndex - _sourceStepID <= 1 ? [] : []),
-                `${toPoint.x} ${toPoint.y - 100}`,
+                `${toPoint.x} ${toPoint.y - connectorMomentum}`,
                 `${toPoint.x} ${toPoint.y}`,
               ].join(', '),
             ].join(' ');
@@ -109,18 +120,18 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
               `${fromPoint.x} ${fromPoint.y}`,
               `C`,
               [
-                `${fromPoint.x} ${fromPoint.y + 100}`,
+                `${fromPoint.x} ${fromPoint.y + connectorMomentum}`,
                 // ...(stepIndex - _sourceStepID <= 1 ? [] : []),
-                `${escapeX} ${fromPoint.y + 150 - 100}`,
-                `${escapeX} ${fromPoint.y + 150}`,
+                `${escapeX} ${fromPoint.y + sidebarLead - connectorMomentum}`,
+                `${escapeX} ${fromPoint.y + sidebarLead}`,
               ].join(', '),
               `L`,
-              `${escapeX} ${toPoint.y - 150}`,
+              `${escapeX} ${toPoint.y - sidebarLead}`,
               `C`,
               [
-                `${escapeX} ${toPoint.y - 150 + 100}`,
+                `${escapeX} ${toPoint.y - sidebarLead + connectorMomentum}`,
                 // ...(stepIndex - _sourceStepID <= 1 ? [] : []),
-                `${toPoint.x} ${toPoint.y - 100}`,
+                `${toPoint.x} ${toPoint.y - connectorMomentum}`,
                 `${toPoint.x} ${toPoint.y}`,
               ].join(', '),
             ].join(' ');
@@ -236,5 +247,16 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
     svg.appendChild(rect);
 
     return rect;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.updateDeviceWidth();
+  }
+  updateDeviceWidth() {
+    const innerWidth = window.innerWidth;
+
+    this.isMobile = (innerWidth < TABLET_PORTRAIT);
+
   }
 }
