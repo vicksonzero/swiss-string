@@ -68,7 +68,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
 
     const sidebarX = 20;
     const sidebarWidth = 20;
-    const sidebarLead = 150;
+    const sidebarLead = 120;
     const connectorMomentum = 100;
     // draw lines
     this.stepsService.contexts.forEach((context, afterStepIndex) => {

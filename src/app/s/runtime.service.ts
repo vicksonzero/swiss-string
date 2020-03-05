@@ -7,9 +7,7 @@ import { WidgetType, ViewWidget, OperatorWidget } from './Step';
   providedIn: 'root'
 })
 export class RuntimeService {
-
-  contexts: Context[];
-
+  contexts: {}[];
   constructor(private stepsService: StepsService) {
     this.stepsService.steps$.subscribe((steps) => {
     });
