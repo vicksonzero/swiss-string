@@ -108,32 +108,30 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
               `C`,
               [
                 `${fromPoint.x} ${fromPoint.y + connectorMomentum}`,
-                // ...(stepIndex - _sourceStepID <= 1 ? [] : []),
                 `${toPoint.x} ${toPoint.y - connectorMomentum}`,
                 `${toPoint.x} ${toPoint.y}`,
               ].join(', '),
             ].join(' ');
           } else {
             const escapeX = sidebarX + hashStringToNumber(name) * sidebarWidth;
+
+            const curve1 = [
+              `${fromPoint.x} ${fromPoint.y + connectorMomentum}`,
+              `${escapeX} ${fromPoint.y + sidebarLead - connectorMomentum}`,
+              `${escapeX} ${fromPoint.y + sidebarLead}`,
+            ].join(', ');
+
+            const curve2 = [
+              `${escapeX} ${toPoint.y - sidebarLead + connectorMomentum}`,
+              `${toPoint.x} ${toPoint.y - connectorMomentum}`,
+              `${toPoint.x} ${toPoint.y}`,
+            ].join(', ');
+
             return [
-              `M`,
-              `${fromPoint.x} ${fromPoint.y}`,
-              `C`,
-              [
-                `${fromPoint.x} ${fromPoint.y + connectorMomentum}`,
-                // ...(stepIndex - _sourceStepID <= 1 ? [] : []),
-                `${escapeX} ${fromPoint.y + sidebarLead - connectorMomentum}`,
-                `${escapeX} ${fromPoint.y + sidebarLead}`,
-              ].join(', '),
-              `L`,
-              `${escapeX} ${toPoint.y - sidebarLead}`,
-              `C`,
-              [
-                `${escapeX} ${toPoint.y - sidebarLead + connectorMomentum}`,
-                // ...(stepIndex - _sourceStepID <= 1 ? [] : []),
-                `${toPoint.x} ${toPoint.y - connectorMomentum}`,
-                `${toPoint.x} ${toPoint.y}`,
-              ].join(', '),
+              `M`, `${fromPoint.x} ${fromPoint.y}`,
+              `C`, curve1,
+              `L`, `${escapeX} ${toPoint.y - sidebarLead}`,
+              `C`, curve2,
             ].join(' ');
           }
         })();
@@ -158,45 +156,6 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
 
       });
     });
-    // draw dots 1
-    // viewWidgets.forEach((viewWidget: HTMLDivElement) => {
-    //   const bb = viewWidget.getBoundingClientRect();
-    //   // const rect = this.createRect(svg);
-    //   // rect.setAttributeNS(null, 'x', '' + (window.scrollX - backBB.left + bb.left));
-    //   // rect.setAttributeNS(null, 'y', '' + (window.scrollY - backBB.top + bb.top));
-    //   // rect.setAttributeNS(null, 'width', '' + (bb.width));
-    //   // rect.setAttributeNS(null, 'height', '' + (bb.height));
-    //   const circleIn = this.createPoint(svg);
-    //   circleIn.setAttributeNS(null, 'fill', hashStringToColor(viewWidget.dataset.entityName || ''));
-    //   circleIn.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
-    //   circleIn.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.top - 4));
-    //   const circleOut = this.createPoint(svg);
-    //   circleOut.setAttributeNS(null, 'fill', hashStringToColor(viewWidget.dataset.entityName || ''));
-    //   circleOut.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
-    //   circleOut.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.bottom + 4));
-    // });
-
-    // // draw dots 2
-    // operatorWidgets.forEach((operatorWidget: HTMLDivElement) => {
-    //   const inputWidgets = operatorWidget.querySelectorAll('.column-input .operator-parameter');
-    //   inputWidgets.forEach((inputWidget: HTMLDivElement) => {
-    //     const bb = inputWidget.getBoundingClientRect();
-
-    //     const circleIn = this.createPoint(svg);
-    //     circleIn.setAttributeNS(null, 'fill', hashStringToColor(inputWidget.dataset.entityName || ''));
-    //     circleIn.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
-    //     circleIn.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.top - 4));
-    //   });
-
-    //   const outputWidgets = operatorWidget.querySelectorAll('.column-output .operator-parameter');
-    //   outputWidgets.forEach((outputWidget: HTMLDivElement) => {
-    //     const bb = outputWidget.getBoundingClientRect();
-    //     const circleOut = this.createPoint(svg);
-    //     circleOut.setAttributeNS(null, 'fill', hashStringToColor(outputWidget.dataset.entityName || ''));
-    //     circleOut.setAttributeNS(null, 'cx', '' + (- backBB.left + (bb.left + bb.right) / 2));
-    //     circleOut.setAttributeNS(null, 'cy', '' + (- backBB.top + bb.bottom + 4));
-    //   });
-    // });
   }
 
   createSVG(svgContainer: HTMLDivElement) {
