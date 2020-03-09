@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ViewWidget } from '../s/Step';
 import { StepsService } from '../s/steps.service';
 
@@ -12,10 +12,12 @@ export class ViewWidgetComponent implements OnInit {
 
   public faPlus = faPlus;
   public faMinus = faMinus;
+  public faTrashAlt = faTrashAlt;
 
   @Input() stepID: number;
   @Input() viewWidget: ViewWidget;
   @Input() index: number;
+  @Input() isOrganizeMode = false;
 
   height = 300;
 
@@ -36,5 +38,9 @@ export class ViewWidgetComponent implements OnInit {
   onClickResizeButton(delta: number) {
     if (delta < 0) { this.height = Math.max(100, this.height - 100); }
     if (delta > 0) { this.height += 100; }
+  }
+
+  onClickTrash() {
+    console.log('onClickTrash stub');
   }
 }

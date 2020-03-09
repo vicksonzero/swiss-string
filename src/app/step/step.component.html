@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">
-      <button class="expand-button btn btn-outline-secondary btn-sm" (click)="onExpandButtonClick()">
+      <button class="expand-button btn btn-secondary btn-sm" (click)="onExpandButtonClick()">
         <fa-icon *ngIf="isExpanded" [icon]="faMinus"></fa-icon>
         <fa-icon *ngIf="!isExpanded" [icon]="faPlus"></fa-icon>
       </button>
@@ -12,11 +12,12 @@
       <span class="app-text-secondary step-type" [hidden]="isExpanded">{{summary}}</span>
     </h5>
     <div class="indented-body after-title" [hidden]="!isExpanded">
-      <div class="step-body" *ngIf="step.type!=='basic'" [class.isMobile]="isMobile">
-        <div class="column-row">
-          <app-column class="column" [class.isMobile]="isMobile" [stepID]="step.id"
+      <div class="step-body" *ngIf="step.type!=='basic'">
+        <div class="column-row" [class.isMobile]="isMobile">
+          <app-column class="column" [stepID]="step.id"
             *ngFor="let column of step.columns; let i = index; trackBy: trackColumn"
-            [style.width]="isMobile ? '' : (column.width+column.widthUnit)" [column]="column" [index]="i">
+            [style.width]="isMobile ? '' : (column.width+column.widthUnit)" [column]="column" [index]="i"
+            [editMode]="editMode">
           </app-column>
           <div *ngIf="step.columns.length <= 0" class="column" [class.isMobile]="isMobile">
             <div class="alert alert-primary" role="alert">
@@ -36,10 +37,16 @@
       </div>
     </div>
 
-    <div class="step-buttons" [hidden]="!isExpanded">
-      <button class="btn btn-light" *ngIf="step.type!=='basic'">Add {{this.step.type}}</button>{{ ' ' }}
-      <button class="btn btn-light" *ngIf="step.type!=='basic'">Organize</button>{{ ' ' }}
-      <button class="btn btn-light" (click)="onClickRemoveStep()">Remove Step</button>
+    <div class="step-buttons toolbar" [hidden]="!isExpanded">
+      <div class="toolbar-default" *ngIf="editMode === StepEditMode.DEFAULT">
+        <button class="btn btn-light" *ngIf="step.type!=='basic'">Add {{this.step.type}}</button>{{ ' ' }}
+        <button class="btn btn-light" *ngIf="step.type!=='basic'" (click)="onClickOrganize()">Organize</button>{{ ' ' }}
+        <button class="btn btn-light" (click)="onClickRemoveStep()">Remove Step</button>
+      </div>
+      <div class="toolbar-organize" *ngIf="editMode === StepEditMode.ORGANIZE">
+        <button class="btn btn-light" *ngIf="step.type!=='basic'" (click)="onClickEndOrganize()">End
+          Organize</button>{{ ' ' }}
+      </div>
     </div>
   </div>
 </div>

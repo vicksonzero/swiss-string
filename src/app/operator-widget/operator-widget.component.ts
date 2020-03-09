@@ -12,6 +12,7 @@ export class OperatorWidgetComponent implements OnInit {
   @Input() stepID: number;
   @Input() operatorWidget: OperatorWidget;
   @Input() index: number;
+  @Input() isOrganizeMode = false;
 
   inputs: OperatorConnectors[] = [];
   outputs: OperatorConnectors[] = [];

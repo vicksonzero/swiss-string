@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { OperatorWidget, ViewWidget, WidgetConfig, WidgetType } from '../s/Step';
+import { StepEditMode } from '../step/step.component';
 
 @Component({
   selector: 'app-column',
@@ -8,9 +9,11 @@ import { OperatorWidget, ViewWidget, WidgetConfig, WidgetType } from '../s/Step'
 })
 export class ColumnComponent implements OnInit {
 
+  StepEditMode = StepEditMode;
   @Input() stepID: number;
   @Input() column: WidgetConfig;
   @Input() index: number;
+  @Input() editMode: StepEditMode;
   viewWidget: ViewWidget | null = null;
   operatorWidget: OperatorWidget | null = null;
 

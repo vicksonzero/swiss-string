@@ -4,6 +4,7 @@ import { TABLET_PORTRAIT } from 'src/media';
 import { hashStringToColor, hashStringToNumber } from 'src/utils';
 import { Step } from '../s/Step';
 import { StepsService } from '../s/steps.service';
+import { SIDEBAR_CROSSING_CONNECTOR_MOMENTUM, SIDEBAR_X, SIDEBAR_WIDTH, SIDEBAR_LEAD } from 'src/constants';
 
 @Component({
   selector: 'app-main',
@@ -68,10 +69,6 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
     const svg = this.createSVG(this.backElement.nativeElement);
     const backBB = this.backElement.nativeElement.getBoundingClientRect();
 
-    const sidebarX = 10;
-    const sidebarWidth = 20;
-    const sidebarLead = 120;
-    const connectorMomentum = 100;
     // draw lines
     this.stepsService.contexts.forEach((context, afterStepIndex) => {
       const { afterStepID, keys } = context;
@@ -109,30 +106,30 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
               `${fromPoint.x} ${fromPoint.y}`,
               `C`,
               [
-                `${fromPoint.x} ${fromPoint.y + connectorMomentum}`,
-                `${toPoint.x} ${toPoint.y - connectorMomentum}`,
+                `${fromPoint.x} ${fromPoint.y + SIDEBAR_CROSSING_CONNECTOR_MOMENTUM}`,
+                `${toPoint.x} ${toPoint.y - SIDEBAR_CROSSING_CONNECTOR_MOMENTUM}`,
                 `${toPoint.x} ${toPoint.y}`,
               ].join(', '),
             ].join(' ');
           } else {
-            const escapeX = sidebarX + hashStringToNumber(name) * sidebarWidth;
+            const escapeX = SIDEBAR_X + hashStringToNumber(name) * SIDEBAR_WIDTH;
 
             const curve1 = [
-              `${fromPoint.x} ${fromPoint.y + connectorMomentum}`,
-              `${escapeX} ${fromPoint.y + sidebarLead - connectorMomentum}`,
-              `${escapeX} ${fromPoint.y + sidebarLead}`,
+              `${fromPoint.x} ${fromPoint.y + SIDEBAR_CROSSING_CONNECTOR_MOMENTUM}`,
+              `${escapeX} ${fromPoint.y + SIDEBAR_LEAD - SIDEBAR_CROSSING_CONNECTOR_MOMENTUM}`,
+              `${escapeX} ${fromPoint.y + SIDEBAR_LEAD}`,
             ].join(', ');
 
             const curve2 = [
-              `${escapeX} ${toPoint.y - sidebarLead + connectorMomentum}`,
-              `${toPoint.x} ${toPoint.y - connectorMomentum}`,
+              `${escapeX} ${toPoint.y - SIDEBAR_LEAD + SIDEBAR_CROSSING_CONNECTOR_MOMENTUM}`,
+              `${toPoint.x} ${toPoint.y - SIDEBAR_CROSSING_CONNECTOR_MOMENTUM}`,
               `${toPoint.x} ${toPoint.y}`,
             ].join(', ');
 
             return [
               `M`, `${fromPoint.x} ${fromPoint.y}`,
               `C`, curve1,
-              `L`, `${escapeX} ${toPoint.y - sidebarLead}`,
+              `L`, `${escapeX} ${toPoint.y - SIDEBAR_LEAD}`,
               `C`, curve2,
             ].join(' ');
           }

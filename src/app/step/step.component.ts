@@ -4,6 +4,11 @@ import { TABLET_PORTRAIT } from 'src/media';
 import { OperatorWidget, Step, ViewWidget, WidgetConfig, WidgetType } from '../s/Step';
 import { StepsService } from '../s/steps.service';
 
+
+export enum StepEditMode {
+  DEFAULT = 'default',
+  ORGANIZE = 'organize',
+}
 @Component({
   selector: 'app-step',
   templateUrl: './step.component.html',
@@ -14,7 +19,9 @@ export class StepComponent implements OnInit, AfterContentChecked {
   public faPlus = faPlus;
   public faMinus = faMinus;
   public faInfoCircle = faInfoCircle;
+  StepEditMode = StepEditMode;
 
+  editMode: StepEditMode = StepEditMode.DEFAULT;
   isExpanded = true;
   @Input() itemIndex: number;
   @Input() step: Step;
@@ -78,5 +85,17 @@ export class StepComponent implements OnInit, AfterContentChecked {
   onClickTypeSelector(widgetType: string) {
     this.step.type = widgetType as WidgetType;
     this.stepsService.updateStep(this.step.id, this.step);
+  }
+
+  changeToEditMode(stepEditMode: StepEditMode) {
+    this.editMode = stepEditMode;
+  }
+
+  onClickOrganize() {
+    this.changeToEditMode(StepEditMode.ORGANIZE);
+  }
+
+  onClickEndOrganize(){
+    this.changeToEditMode(StepEditMode.DEFAULT);
   }
 }

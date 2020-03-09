@@ -11,7 +11,8 @@ export function djb2(str: string) {
 
 export function hashStringToNumber(str: string) {
   const hash = djb2(str);
-  return (hash + 2147483648) / 4294967295;
+  const result = (Math.abs(hash)) / 17179869180;
+  return result;
 }
 export function hashStringToColor(str: string) {
   const [r, g, b] = hslToRgb(hashStringToNumber(str), LINE_COLOR_SATURATION, LINE_COLOR_LIGHTNESS);
