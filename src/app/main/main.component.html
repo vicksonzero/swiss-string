@@ -5,9 +5,13 @@
     </svg> -->
   </div>
   <div class="front" #front>
-    <app-step *ngFor="let step of steps; let i = index; trackBy: trackItem" [step]="step" [itemIndex]="i+1"></app-step>
+    <app-step *ngFor="let step of steps; let i = index; trackBy: trackItem" [step]="step" [itemIndex]="i"
+      [isNextStop]="(step.type==='view' && i+1 < steps.length && steps[i+1].type !==step.type)"></app-step>
     <div *ngIf="steps.length <= 0">
-      <p>Start by pressing "Add step"</p>
+      <div class="alert alert-primary" role="alert">
+        <fa-icon [icon]="faInfoCircle"></fa-icon>
+        Start by pressing "Add step"
+      </div>
     </div>
   </div>
 </div>

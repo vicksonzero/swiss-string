@@ -1,4 +1,5 @@
 import { AfterContentChecked, Component, HostListener, Input, OnInit } from '@angular/core';
+import { faInfoCircle, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TABLET_PORTRAIT } from 'src/media';
 import { OperatorWidget, Step, ViewWidget, WidgetConfig, WidgetType } from '../s/Step';
 import { StepsService } from '../s/steps.service';
@@ -9,9 +10,16 @@ import { StepsService } from '../s/steps.service';
   styleUrls: ['./step.component.scss']
 })
 export class StepComponent implements OnInit, AfterContentChecked {
+
+  public faPlus = faPlus;
+  public faMinus = faMinus;
+  public faInfoCircle = faInfoCircle;
+
   isExpanded = true;
   @Input() itemIndex: number;
   @Input() step: Step;
+
+  @Input() isNextStop: boolean;
   summary: string;
 
   isMobile = false;
@@ -65,5 +73,10 @@ export class StepComponent implements OnInit, AfterContentChecked {
 
     this.isMobile = (innerWidth < TABLET_PORTRAIT);
 
+  }
+
+  onClickTypeSelector(widgetType: string) {
+    this.step.type = widgetType as WidgetType;
+    this.stepsService.updateStep(this.step.id, this.step);
   }
 }

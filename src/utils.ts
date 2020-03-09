@@ -1,3 +1,5 @@
+import { LINE_COLOR_LIGHTNESS, LINE_COLOR_SATURATION } from './constants';
+
 export function djb2(str: string) {
   let hash = 5381;
   for (let i = 0; i < str.length; i++) {
@@ -12,10 +14,13 @@ export function hashStringToNumber(str: string) {
   return (hash + 2147483648) / 4294967295;
 }
 export function hashStringToColor(str: string) {
-  const hash = djb2(str);
-
-  const [r, g, b] = hslToRgb((hash + 2147483648) / 4294967295, 1, 0.5);
-  return '#' + ('0' + r.toString(16)).substr(-2) + ('0' + g.toString(16)).substr(-2) + ('0' + b.toString(16)).substr(-2);
+  const [r, g, b] = hslToRgb(hashStringToNumber(str), LINE_COLOR_SATURATION, LINE_COLOR_LIGHTNESS);
+  return [
+    '#',
+    ('0' + r.toString(16)).substr(-2),
+    ('0' + g.toString(16)).substr(-2),
+    ('0' + b.toString(16)).substr(-2),
+  ].join('');
 }
 
 /**

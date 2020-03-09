@@ -1,5 +1,5 @@
 .card {
-  background-color: rgba(255,255,255,0.7); //rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.7); //rgba(0, 0, 0, 0.3);
 }
 
 .expand-button {
@@ -23,20 +23,45 @@
 }
 
 .step-body {
-  margin-left: 40px;
-  margin-right: 8px;
-  padding-top: 0;
-  display: flex;
   overflow: auto;
+
+  &.isMobile {
+    display: block;
+  }
+
+  .column-row {
+    display: flex;
+    width: 100%;
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+
+  .column {
+    margin: 4px;
+    width: 100%;
+
+    &.isMobile {
+      width: 100%;
+    }
+  }
 }
 
-.step-body.isMobile {
-  display: block;
+.indented-body {
+  margin-left: 40px;
+  margin-right: 8px;
+
+  &.after-title {
+    padding-top: 0px;
+  }
 }
 
 .step-buttons {
-  margin-left: 40px;
+  margin-left: calc(40px - 0.75rem);
   padding-top: 0;
+
+  // .btn-light:first-child {
+  //   padding-left: 0;
+  // }
 }
 
 .step-type {
@@ -44,10 +69,13 @@
   font-style: italic;
 }
 
-.btn-light:first-child {
-  padding-left: 0;
-}
+.step-type-selector {
+  margin-left: -4px;
+  margin-right: -4px;
 
-.column.isMobile {
-  width: 100%;
+  button {
+    width: calc(50% - 8px);
+    margin: 4px;
+    height: 100px;
+  }
 }

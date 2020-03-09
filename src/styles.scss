@@ -16,8 +16,17 @@ body {
   flex: 1 1 auto;
 }
 
+.alert {
+  margin-bottom: 0;
+}
+
 .btn-primary {
   background-color: $primary-color;
+}
+
+.btn-secondary {
+  background-color: $secondary-color;
+  border: none;
 }
 
 .app-text-secondary {

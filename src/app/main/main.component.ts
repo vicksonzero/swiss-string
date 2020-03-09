@@ -1,4 +1,5 @@
 import { AfterContentChecked, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { TABLET_PORTRAIT } from 'src/media';
 import { hashStringToColor, hashStringToNumber } from 'src/utils';
 import { Step } from '../s/Step';
@@ -11,6 +12,7 @@ import { StepsService } from '../s/steps.service';
 })
 export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
 
+  public faInfoCircle = faInfoCircle;
   steps: Step[];
 
   stepsJSON = '';
@@ -138,7 +140,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
 
         const pathBG = this.createPath(svg);
         pathBG.setAttributeNS(null, 'stroke', '#DDD');
-        pathBG.setAttributeNS(null, 'stroke-width', '5');
+        pathBG.setAttributeNS(null, 'stroke-width', '6');
         pathBG.setAttributeNS(null, 'd', line);
         const path = this.createPath(svg);
         path.setAttributeNS(null, 'stroke', hashStringToColor(name));

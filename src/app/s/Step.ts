@@ -40,14 +40,15 @@ export interface OperatorWidget extends WidgetConfig {
 
 export class StepFactory {
   static createStep(config: Partial<Step>): Step {
-    const a = {
+    let result: Step = {
       id: 0,
       title: 'Input',
       type: WidgetType.BASIC,
       columns: [
-        { id: 1, width: 100, widthUnit: '%', type: WidgetType.BASIC }
       ],
     };
-    return { ...a, ...config };
+    result = { ...result, ...config };
+
+    return result;
   }
 }

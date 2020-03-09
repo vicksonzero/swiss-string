@@ -1,10 +1,19 @@
 <div class="column-input">
+  <div class="toolbar">
+    <div class="filler"></div>
+    <button class="btn btn-outline-secondary btn-sm" (click)="onClickResizeButton(+1)">
+      <fa-icon [icon]="faPlus" size="xs"></fa-icon>
+    </button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="onClickResizeButton(-1)">
+      <fa-icon [icon]="faMinus" size="xs"></fa-icon>
+    </button>
+  </div>
   <h6 class="text-secondary view-title">
     <span class="debug-entity-id">[{{viewWidget.id}}]{{' '}}</span>
     <app-editable-wrapper [value]="viewWidget.view.title" (valueChange)="onTitleUpdated($event)"></app-editable-wrapper>
   </h6>
 </div>
 <div class="view">
-  <textarea [style.height]="'300px'">{{viewWidget.view.default}}</textarea>
+  <textarea [style.height]="height+'px'">{{viewWidget.view.default}}</textarea>
 </div>
 <div class="column-output"></div>
