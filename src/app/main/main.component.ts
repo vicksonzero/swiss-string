@@ -66,7 +66,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
     const svg = this.createSVG(this.backElement.nativeElement);
     const backBB = this.backElement.nativeElement.getBoundingClientRect();
 
-    const sidebarX = 20;
+    const sidebarX = 10;
     const sidebarWidth = 20;
     const sidebarLead = 120;
     const connectorMomentum = 100;

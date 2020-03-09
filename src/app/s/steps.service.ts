@@ -167,7 +167,6 @@ export class StepsService {
                 key.toID = connectorID;
                 key.destStepIndex = stepIndex;
               }
-
             }
           }
         }

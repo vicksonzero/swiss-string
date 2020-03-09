@@ -1,7 +1,7 @@
 <div class="column-input operator-parameter-container">
   <div class="operator-parameter" *ngFor="let input of inputs" [attr.data-entity-id]="input.id"
     [attr.data-entity-name]="input.contextName">
-    <span class="debug-entity-id">[{{input.id}}] </span>
+    <span class="debug-entity-id">[{{input.id}}]{{' '}}</span>
     {{input.contextName}}
   </div>
 </div>
@@ -11,7 +11,7 @@
 <div class="column-output operator-parameter-container">
   <div class="operator-parameter" *ngFor="let output of outputs" [attr.data-entity-id]="output.id"
     [attr.data-entity-name]="output.contextName">
-    <span class="debug-entity-id">[{{output.id}}] </span>
+    <span class="debug-entity-id">[{{output.id}}]{{' '}}</span>
     {{output.contextName}}
   </div>
 </div>

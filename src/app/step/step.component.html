@@ -18,9 +18,9 @@
     </app-column>
   </div>
   <div class="card-body step-buttons" [hidden]="!isExpanded">
-    <a href="#" class="btn btn-primary">Next</a>{{ ' ' }}
-    <a href="#" class="btn btn-light">Add {{this.step.type}}</a>{{ ' ' }}
-    <a href="#" class="btn btn-light">Organize</a>{{ ' ' }}
-    <a href="#" class="btn btn-light" (click)="onClickRemoveStep()">Remove Step</a>
+    <button class="btn btn-primary">Next</button>{{ ' ' }}
+    <button class="btn btn-light">Add {{this.step.type}}</button>{{ ' ' }}
+    <button class="btn btn-light">Organize</button>{{ ' ' }}
+    <button class="btn btn-light" (click)="onClickRemoveStep()">Remove Step</button>
   </div>
 </div>
