@@ -1,9 +1,9 @@
 export interface Context {
-  afterStepID: number;
+  beforeStepID: number;
   keys: string[];
   types: string[];
 }
 export interface ContextDef {
-  afterStepID: number;
-  keys: { name: string, fromID: number, toID: number | null, type: string | null, destStepIndex: number | null }[];
+  beforeStepID: number;
+  keys: { name: string, fromID: number, toID: number, type: string | null, fromStepIndex: number }[];
 }

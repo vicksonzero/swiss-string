@@ -1,10 +1,10 @@
 import { AfterContentChecked, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { SIDEBAR_CROSSING_CONNECTOR_MOMENTUM, SIDEBAR_LEAD, SIDEBAR_WIDTH, SIDEBAR_X } from 'src/constants';
 import { TABLET_PORTRAIT } from 'src/media';
 import { hashStringToColor, hashStringToNumber } from 'src/utils';
 import { Step } from '../s/Step';
 import { StepsService } from '../s/steps.service';
-import { SIDEBAR_CROSSING_CONNECTOR_MOMENTUM, SIDEBAR_X, SIDEBAR_WIDTH, SIDEBAR_LEAD } from 'src/constants';
 
 @Component({
   selector: 'app-main',
@@ -30,6 +30,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
     this.stepsService.steps$.subscribe((steps) => {
       this.steps = steps;
       this.stepsJSON = JSON.stringify(steps, null, 4);
+      console.log(this.stepsService.contexts);
     });
   }
 
@@ -70,15 +71,14 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
     const backBB = this.backElement.nativeElement.getBoundingClientRect();
 
     // draw lines
-    this.stepsService.contexts.forEach((context, afterStepIndex) => {
-      const { afterStepID, keys } = context;
-      keys.forEach(({ fromID, toID, name, destStepIndex }, keyIndex) => {
+    this.stepsService.contexts.forEach((context, beforeStepIndex) => {
+      const { beforeStepID, keys } = context;
+      keys.forEach(({ fromID, toID, name, fromStepIndex }, keyIndex) => {
         const fromWidgetElement = document.querySelector(`[data-entity-id="${fromID}"]`);
         const toWidgetElement = document.querySelector(`[data-entity-id="${toID}"]`);
         if (!fromWidgetElement || !toWidgetElement) { return; }
         const fromBB = fromWidgetElement.getBoundingClientRect();
         const toBB = toWidgetElement.getBoundingClientRect();
-        const _destStepIndex = destStepIndex || -1;
 
         if (fromBB.top === 0 && fromBB.left === 0) { return; }
         if (toBB.top === 0 && toBB.left === 0) { return; }
@@ -100,7 +100,7 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
         // console.log(fromWidgetElement, toWidgetElement);
 
         const line = (() => {
-          if (_destStepIndex - afterStepIndex <= 1) {
+          if (beforeStepIndex - fromStepIndex <= 1) {
             return [
               `M`,
               `${fromPoint.x} ${fromPoint.y}`,
@@ -202,6 +202,14 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
     rect.setAttributeNS(null, 'stroke', '#EEE');
     rect.setAttributeNS(null, 'stroke-width', '3');
     rect.setAttributeNS(null, 'fill', '#0A0');
+    svg.appendChild(rect);
+
+    return rect;
+  }
+
+  createText(svg: SVGSVGElement) {
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    rect.setAttributeNS(null, 'class', '#EEE');
     svg.appendChild(rect);
 
     return rect;

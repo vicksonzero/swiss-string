@@ -6,7 +6,7 @@ import { mockSteps } from './mockSteps';
 import { OperatorWidget, Step, StepFactory, ViewWidget, WidgetConfig, WidgetType } from './Step';
 
 export interface ContextHolder {
-  [x: string]: { lastSeenColumnID: number, lastSeenStepIndex: number }
+  [x: string]: { lastSeenColumnID: number, lastSeenStepIndex: number };
 }
 
 @Injectable({
@@ -81,18 +81,18 @@ export class StepsService {
       switch (type) {
         case WidgetType.VIEW:
           {
-            const afterContext = this.updateViewWidgetContext(
+            const beforeContext = this.updateViewWidgetContext(
               stepIndex, stepID, columns as ViewWidget[], contextHolder, newContexts
             );
-            newContexts.push(afterContext);
+            newContexts.push(beforeContext);
           }
           break;
         case WidgetType.OPERATOR:
           {
-            const afterContext = this.updateOperatorWidgetContext(
+            const beforeContext = this.updateOperatorWidgetContext(
               stepIndex, stepID, columns as OperatorWidget[], contextHolder, newContexts
             );
-            newContexts.push(afterContext);
+            newContexts.push(beforeContext);
           }
           break;
       }
@@ -107,8 +107,8 @@ export class StepsService {
     columns: ViewWidget[], contextHolder: ContextHolder, newContexts: ContextDef[]
   ) {
     // mutates contextHolder and newContexts in place
-    const afterContext: ContextDef = {
-      afterStepID: stepID,
+    const beforeContext: ContextDef = {
+      beforeStepID: stepID,
       keys: [],
     };
 
@@ -119,26 +119,18 @@ export class StepsService {
       // console.log('view', name, columnID);
 
       if (contextHolder[name]) {
-        const { lastSeenColumnID: lastSeenID } = contextHolder[name];
-        for (const context of newContexts) {
-          for (const key of context.keys) {
-            if (key.fromID === lastSeenID) {
-              key.toID = columnID;
-              key.destStepIndex = stepIndex;
-            }
-          }
-        }
+        const { lastSeenColumnID: lastSeenID, lastSeenStepIndex } = contextHolder[name];
+        beforeContext.keys.push({
+          name, fromStepIndex: lastSeenStepIndex,
+          fromID: lastSeenID, toID: columnID, type: null,
+        });
       }
 
       contextHolder[name] = { lastSeenColumnID: columnID, lastSeenStepIndex: stepIndex };
-      afterContext.keys.push({
-        name, destStepIndex: stepIndex,
-        fromID: columnID, toID: null, type: null,
-      });
     });
 
 
-    return afterContext;
+    return beforeContext;
   }
 
   updateOperatorWidgetContext(
@@ -146,8 +138,8 @@ export class StepsService {
     columns: OperatorWidget[], contextHolder: ContextHolder, newContexts: ContextDef[]
   ) {
     // mutates contextHolder and newContexts in place
-    const afterContext: ContextDef = {
-      afterStepID: stepID,
+    const beforeContext: ContextDef = {
+      beforeStepID: stepID,
       keys: [],
     };
 
@@ -160,29 +152,21 @@ export class StepsService {
         // console.log('operator', contextName, connectorID);
 
         if (contextHolder[contextName]) {
-          const { lastSeenColumnID: lastSeenID } = contextHolder[contextName];
-          for (const context of newContexts) {
-            for (const key of context.keys) {
-              if (key.fromID === lastSeenID) {
-                key.toID = connectorID;
-                key.destStepIndex = stepIndex;
-              }
-            }
-          }
+          const { lastSeenColumnID: lastSeenID, lastSeenStepIndex } = contextHolder[contextName];
+          beforeContext.keys.push({
+            name: contextName, fromStepIndex: lastSeenStepIndex,
+            fromID: lastSeenID, toID: connectorID, type: null,
+          });
         }
         // contextHolder[inputKey] = columnID;
-        // afterContext.keys.push({ name:inputKey, fromID: columnID, toID: null, type: null });
+        // beforeContext.keys.push({ name:inputKey, fromID: columnID, toID: null, type: null });
       });
 
       Object.entries(outputs).forEach(([outputKey, { id: connectorID, contextName }]) => {
         contextHolder[contextName] = { lastSeenColumnID: connectorID, lastSeenStepIndex: stepIndex };
-        afterContext.keys.push({
-          name: contextName, destStepIndex: null,
-          fromID: connectorID, toID: null, type: null,
-        });
       });
     });
 
-    return afterContext;
+    return beforeContext;
   }
 }

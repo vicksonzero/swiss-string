@@ -12,7 +12,7 @@ export class RuntimeService {
     });
   }
 
-  onClickNext(afterStepID: number) {
+  onClickNext(beforeStepID: number) {
 
   }
 }
