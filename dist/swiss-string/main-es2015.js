@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg\">\n  <a class=\"navbar-brand\" href=\"#\">Swiss-String</a>\n  <a class=\"btn\" href=\"#\">View</a>\n  <!-- Toggle Data Flow Lines -->\n  <!-- Toggle Data Operators -->\n  <!-- Toggle Edit buttons -->\n  <span class=\"filler\"></span>\n  <a class=\"btn\" href=\"#\">Save</a>\n  <a class=\"btn\" href=\"#\">Load</a>\n\n</nav>\n<div class=\"main\">\n  <app-main [style.padding]=\"(isMobile ? 8 : 20) + 'px'\"></app-main>\n</div>\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top\">\n  <a class=\"navbar-brand\" href=\"#\">Swiss-String</a>\n  <a class=\"btn\" href=\"#\">View</a>\n  <!-- Toggle Data Flow Lines -->\n  <!-- Toggle Data Operators -->\n  <!-- Toggle Edit buttons -->\n  <span class=\"filler\"></span>\n  <a class=\"btn\" href=\"#\">Save</a>\n  <a class=\"btn\" href=\"#\">Load</a>\n\n</nav>\n<div class=\"main\">\n  <app-main [style.padding]=\"(isMobile ? 8 : 20) + 'px'\"></app-main>\n</div>\n"
 
 /***/ }),
 
@@ -52,7 +52,7 @@ module.exports = "<app-view-widget\n  *ngIf=\"viewWidget != null\" [stepID]=\"st
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<button class=\"btn btn-primary\">\n  <ng-content></ng-content>\n</button>\n"
+module.exports = "<button class=\"btn btn-primary\" style=\"padding-left: 40px; padding-right: 40px; \">\n  <ng-content></ng-content>\n</button>\n"
 
 /***/ }),
 
@@ -85,7 +85,7 @@ module.exports = "<input type=\"text\" *ngIf=\"isEdit\" [value]=\"value\" (blur)
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"steps-editor\">\n  <div class=\"back\" #back>\n    <!-- <svg width=\"200\" height=\"200\" #graph>\n      <circle cx=\"50\" cy=\"50\" r=\"5\" fill=\"green\" />\n    </svg> -->\n  </div>\n  <div class=\"front\" #front>\n    <app-step *ngFor=\"let step of steps; let i = index; trackBy: trackItem\" [step]=\"step\" [itemIndex]=\"i\"\n      [isNextStop]=\"(step.type==='view' && i+1 < steps.length && steps[i+1].type !==step.type)\"></app-step>\n    <div *ngIf=\"steps.length <= 0\">\n      <div class=\"alert alert-primary\" role=\"alert\">\n        <fa-icon [icon]=\"faInfoCircle\"></fa-icon>\n        Start by pressing \"Add step\"\n      </div>\n    </div>\n  </div>\n</div>\n<div>\n  <app-button (click)=\"onClickAddStep()\">Add step</app-button>\n</div>\n\n<div>\n  <p>stepsJSON</p>\n  <textarea style=\"width:100%; max-width:500px; height: 200px;\">{{stepsJSON}}</textarea>\n</div>\n"
+module.exports = "<div class=\"steps-editor\">\n  <div class=\"back\" #back>\n    <!-- <svg width=\"200\" height=\"200\" #graph>\n      <circle cx=\"50\" cy=\"50\" r=\"5\" fill=\"green\" />\n    </svg> -->\n  </div>\n  <div class=\"front\" #front>\n    <app-step *ngFor=\"let step of steps; let i = index; trackBy: trackItem\" [step]=\"step\" [itemIndex]=\"i\"\n      [isNextStop]=\"(step.type==='view' && i+1 < steps.length && steps[i+1].type !==step.type)\"></app-step>\n    <div *ngIf=\"steps.length <= 0\">\n      <div class=\"alert alert-primary\" role=\"alert\">\n        <fa-icon [icon]=\"faInfoCircle\"></fa-icon>\n        Start by pressing \"Add step\"\n      </div>\n    </div>\n  </div>\n</div>\n<div class=\"card\">\n  <div class=\"card-body indented-card-body\">\n    <app-button (click)=\"onClickAddStep()\">Add step</app-button>\n  </div>\n</div>\n\n<div class=\"card\">\n  <div class=\"card-body\">\n    <h5>stepsJSON</h5>\n    <textarea style=\"width:100%; max-width:500px; height: 200px;\">{{stepsJSON}}</textarea>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -96,7 +96,7 @@ module.exports = "<div class=\"steps-editor\">\n  <div class=\"back\" #back>\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"column-input operator-parameter-container\">\n  <div class=\"operator-parameter\" *ngFor=\"let input of inputs\" [attr.data-entity-id]=\"input.id\"\n    [attr.data-entity-name]=\"input.contextName\">\n    <span class=\"debug-entity-id\">[{{input.id}}]{{' '}}</span>\n    {{input.contextName}}\n  </div>\n</div>\n<div class=\"operator\">\n  <h3 class=\"text-secondary\">{{operatorWidget.operator.title || operatorWidget.operator.type}}</h3>\n</div>\n<div class=\"column-output operator-parameter-container\">\n  <div class=\"operator-parameter\" *ngFor=\"let output of outputs\" [attr.data-entity-id]=\"output.id\"\n    [attr.data-entity-name]=\"output.contextName\">\n    <span class=\"debug-entity-id\">[{{output.id}}]{{' '}}</span>\n    {{output.contextName}}\n  </div>\n</div>\n"
+module.exports = "<div class=\"operator\">\n  <div class=\"column-input operator-parameter-container\">\n    <div class=\"operator-parameter\" *ngFor=\"let input of inputs\" [attr.data-entity-id]=\"input.id\"\n      [attr.data-entity-name]=\"input.contextName\">\n      <span class=\"debug-entity-id\">[{{input.id}}]{{' '}}</span>\n      {{input.contextName}}\n    </div>\n  </div>\n  <div class=\"operator-title\">\n    <h3 class=\"text-secondary\">{{operatorWidget.operator.title || operatorWidget.operator.type}}</h3>\n  </div>\n  <div class=\"column-output operator-parameter-container\">\n    <div class=\"operator-parameter\" *ngFor=\"let output of outputs\" [attr.data-entity-id]=\"output.id\"\n      [attr.data-entity-name]=\"output.contextName\">\n      <span class=\"debug-entity-id\">[{{output.id}}]{{' '}}</span>\n      {{output.contextName}}\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -107,7 +107,7 @@ module.exports = "<div class=\"column-input operator-parameter-container\">\n  <
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\n  <div class=\"card-body\">\n    <h5 class=\"card-title\">\n      <button class=\"expand-button btn btn-secondary btn-sm\" (click)=\"onExpandButtonClick()\">\n        <fa-icon *ngIf=\"isExpanded\" [icon]=\"faMinus\"></fa-icon>\n        <fa-icon *ngIf=\"!isExpanded\" [icon]=\"faPlus\"></fa-icon>\n      </button>\n      <span class=\"app-text-secondary\">{{itemIndex+1}}.{{ ' ' }}</span>\n      <span class=\"debug-entity-id\">[{{step.id}}]{{' '}}</span>\n      <app-editable-wrapper [value]=\"step.title\" (valueChange)=\"onTitleUpdated($event)\"></app-editable-wrapper>{{ ' ' }}\n      <span style=\"display:inline-block;width:4px;\"></span>\n      <span class=\"app-text-secondary step-type\" [hidden]=\"isExpanded\">{{summary}}</span>\n    </h5>\n    <div class=\"indented-body after-title\" [hidden]=\"!isExpanded\">\n      <div class=\"step-body\" *ngIf=\"step.type!=='basic'\">\n        <div class=\"column-row\" [class.isMobile]=\"isMobile\">\n          <app-column class=\"column\" [stepID]=\"step.id\"\n            *ngFor=\"let column of step.columns; let i = index; trackBy: trackColumn\"\n            [style.width]=\"isMobile ? '' : (column.width+column.widthUnit)\" [column]=\"column\" [index]=\"i\"\n            [editMode]=\"editMode\">\n          </app-column>\n          <div *ngIf=\"step.columns.length <= 0\" class=\"column\" [class.isMobile]=\"isMobile\">\n            <div class=\"alert alert-primary\" role=\"alert\">\n              <fa-icon [icon]=\"faInfoCircle\"></fa-icon>\n              Start by pressing \"Add {{this.step.type}}\"\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div *ngIf=\"step.type==='basic'\" [class.isMobile]=\"isMobile\">\n        <h6>Select step type:</h6>\n        <div class=\"column step-type-selector\" [class.isMobile]=\"isMobile\" [style.width]=\"'100%'\">\n          <button class=\"btn btn-secondary\" (click)=\"onClickTypeSelector('view')\">View</button>\n          <button class=\"btn btn-secondary\" (click)=\"onClickTypeSelector('operator')\">Operator</button>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"step-buttons toolbar\" [hidden]=\"!isExpanded\">\n      <div class=\"toolbar-default\" *ngIf=\"editMode === StepEditMode.DEFAULT\">\n        <button class=\"btn btn-light\" *ngIf=\"step.type!=='basic'\">Add {{this.step.type}}</button>{{ ' ' }}\n        <button class=\"btn btn-light\" *ngIf=\"step.type!=='basic'\" (click)=\"onClickOrganize()\">Organize</button>{{ ' ' }}\n        <button class=\"btn btn-light\" (click)=\"onClickRemoveStep()\">Remove Step</button>\n      </div>\n      <div class=\"toolbar-organize\" *ngIf=\"editMode === StepEditMode.ORGANIZE\">\n        <button class=\"btn btn-light\" *ngIf=\"step.type!=='basic'\" (click)=\"onClickEndOrganize()\">End\n          Organize</button>{{ ' ' }}\n      </div>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"isNextStop\" class=\"card\">\n  <div class=\"card-body indented-body\">\n    <button class=\"btn btn-primary\" style=\"padding-left: 40px; padding-right: 40px; \">Next</button>\n  </div>\n</div>\n"
+module.exports = "<div class=\"card\">\n  <div class=\"card-body\">\n    <h5 class=\"card-title\">\n      <button class=\"expand-button btn btn-secondary btn-sm\" (click)=\"onExpandButtonClick()\">\n        <fa-icon *ngIf=\"isExpanded\" [icon]=\"faMinus\"></fa-icon>\n        <fa-icon *ngIf=\"!isExpanded\" [icon]=\"faPlus\"></fa-icon>\n      </button>\n      <span class=\"app-text-secondary\">{{itemIndex+1}}.{{ ' ' }}</span>\n      <span class=\"debug-entity-id\">[{{step.id}}]{{' '}}</span>\n      <app-editable-wrapper [value]=\"step.title\" (valueChange)=\"onTitleUpdated($event)\"></app-editable-wrapper>{{ ' ' }}\n      <span style=\"display:inline-block;width:4px;\"></span>\n      <span class=\"app-text-secondary step-type\" [hidden]=\"isExpanded\">{{summary}}</span>\n    </h5>\n    <div class=\"indented-card-body after-title\" [hidden]=\"!isExpanded\">\n      <div class=\"step-body\" *ngIf=\"step.type!=='basic'\">\n        <div class=\"column-row\" [class.isMobile]=\"isMobile\">\n          <app-column class=\"column\" [stepID]=\"step.id\"\n            *ngFor=\"let column of step.columns; let i = index; trackBy: trackColumn\"\n            [style.width]=\"isMobile ? '' : (column.width+column.widthUnit)\" [column]=\"column\" [index]=\"i\"\n            [editMode]=\"editMode\">\n          </app-column>\n          <div *ngIf=\"step.columns.length <= 0\" class=\"column\" [class.isMobile]=\"isMobile\">\n            <div class=\"alert alert-primary\" role=\"alert\">\n              <fa-icon [icon]=\"faInfoCircle\"></fa-icon>\n              Start by pressing \"Add {{this.step.type}}\"\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div *ngIf=\"step.type==='basic'\" [class.isMobile]=\"isMobile\">\n        <h6>Select step type:</h6>\n        <div class=\"column step-type-selector\" [class.isMobile]=\"isMobile\" [style.width]=\"'100%'\">\n          <button class=\"btn btn-secondary\" (click)=\"onClickTypeSelector('view')\">View</button>\n          <button class=\"btn btn-secondary\" (click)=\"onClickTypeSelector('operator')\">Operator</button>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"step-buttons toolbar\" [hidden]=\"!isExpanded\">\n      <div class=\"toolbar-default\" *ngIf=\"editMode === StepEditMode.DEFAULT\">\n        <button class=\"btn btn-light\" *ngIf=\"step.type!=='basic'\">Add {{this.step.type}}</button>{{ ' ' }}\n        <button class=\"btn btn-light\" *ngIf=\"step.type!=='basic'\" (click)=\"onClickOrganize()\">Organize</button>{{ ' ' }}\n        <button class=\"btn btn-light\" (click)=\"onClickRemoveStep()\">Remove Step</button>\n      </div>\n      <div class=\"toolbar-organize\" *ngIf=\"editMode === StepEditMode.ORGANIZE\">\n        <button class=\"btn btn-light\" *ngIf=\"step.type!=='basic'\" (click)=\"onClickEndOrganize()\">End\n          Organize</button>{{ ' ' }}\n      </div>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"isNextStop\" class=\"card\">\n  <div class=\"card-body indented-card-body\">\n    <app-button>Next</app-button>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -159,7 +159,7 @@ AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".main {\n  position: relative;\n  width: 100%;\n  height: calc(100% - 32px);\n  background-color: #d6eafd;\n}\n\nnav {\n  background-color: #007bff;\n  color: white;\n}\n\nnav a,\nnav button {\n  color: white;\n}\n\n:host {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvQzpcXHBcXHN3aXNzLXN0cmluZy9zcmNcXGFwcFxcYXBwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL0M6XFxwXFxzd2lzcy1zdHJpbmcvc3JjXFx2YXJpYWJsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQTtFQUNFLGtCQUFBO0VBQ0EsV0FBQTtFQUNBLHlCQUFBO0VBQ0EseUJBQUE7QUNERjs7QURJQTtFQUNFLHlCRVZlO0VGV2YsWUFBQTtBQ0RGOztBREdFOztFQUVFLFlBQUE7QUNESjs7QURLQTtFQUNFLGtCQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7QUNGRiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgJy4uL3ZhcmlhYmxlcyc7XG5cbi5tYWluIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiBjYWxjKDEwMCUgLSAzMnB4KTtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDIxNCwgMjM0LCAyNTMpO1xufVxuXG5uYXYge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAkcHJpbWFyeS1jb2xvcjtcbiAgY29sb3I6IHdoaXRlO1xuXG4gIGEsXG4gIGJ1dHRvbiB7XG4gICAgY29sb3I6IHdoaXRlO1xuICB9XG59XG5cbjpob3N0IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuIiwiLm1haW4ge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IGNhbGMoMTAwJSAtIDMycHgpO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZDZlYWZkO1xufVxuXG5uYXYge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDA3YmZmO1xuICBjb2xvcjogd2hpdGU7XG59XG5uYXYgYSxcbm5hdiBidXR0b24ge1xuICBjb2xvcjogd2hpdGU7XG59XG5cbjpob3N0IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufSIsIiRib290c3RyYXAtYmx1ZTogIzAwN2JmZjtcbiRtYXhpbXVtLWJsdWU6ICM1MkIyQ0Y7XG4kZGFyay1za3ktYmx1ZTogIzdFQzRDRjtcbiR3aWxkLWJsdWUteW9uZGVyOiAjOUNBRENFO1xuJGxhbmd1aWQtbGF2ZW5kZXI6ICNEMUNGRTI7XG4kcGFsZS1jaGVzdG51dDojRDRBRkI5O1xuXG5cbiRwcmltYXJ5LWNvbG9yOiAkYm9vdHN0cmFwLWJsdWU7XG4kc2Vjb25kYXJ5LWNvbG9yOiAkbWF4aW11bS1ibHVlO1xuXG4iXX0= */"
+module.exports = ".main {\n  position: relative;\n  width: 100%;\n  height: calc(100% - 32px);\n  background-color: #d6eafd;\n  margin-top: 55px;\n}\n\nnav {\n  background-color: #007bff;\n  color: white;\n}\n\nnav a,\nnav button {\n  color: white;\n}\n\n:host {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvQzpcXHBcXHN3aXNzLXN0cmluZy9zcmNcXGFwcFxcYXBwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL0M6XFxwXFxzd2lzcy1zdHJpbmcvc3JjXFx2YXJpYWJsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQTtFQUNFLGtCQUFBO0VBQ0EsV0FBQTtFQUNBLHlCQUFBO0VBQ0EseUJBQUE7RUFDQSxnQkFBQTtBQ0RGOztBRElBO0VBQ0UseUJFWGU7RUZZZixZQUFBO0FDREY7O0FER0U7O0VBRUUsWUFBQTtBQ0RKOztBREtBO0VBQ0Usa0JBQUE7RUFDQSxXQUFBO0VBQ0EsWUFBQTtBQ0ZGIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCAnLi4vdmFyaWFibGVzJztcblxuLm1haW4ge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IGNhbGMoMTAwJSAtIDMycHgpO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjE0LCAyMzQsIDI1Myk7XG4gIG1hcmdpbi10b3A6IDU1cHg7XG59XG5cbm5hdiB7XG4gIGJhY2tncm91bmQtY29sb3I6ICRwcmltYXJ5LWNvbG9yO1xuICBjb2xvcjogd2hpdGU7XG5cbiAgYSxcbiAgYnV0dG9uIHtcbiAgICBjb2xvcjogd2hpdGU7XG4gIH1cbn1cblxuOmhvc3Qge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG59XG4iLCIubWFpbiB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogY2FsYygxMDAlIC0gMzJweCk7XG4gIGJhY2tncm91bmQtY29sb3I6ICNkNmVhZmQ7XG4gIG1hcmdpbi10b3A6IDU1cHg7XG59XG5cbm5hdiB7XG4gIGJhY2tncm91bmQtY29sb3I6ICMwMDdiZmY7XG4gIGNvbG9yOiB3aGl0ZTtcbn1cbm5hdiBhLFxubmF2IGJ1dHRvbiB7XG4gIGNvbG9yOiB3aGl0ZTtcbn1cblxuOmhvc3Qge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG59IiwiJGJvb3RzdHJhcC1ibHVlOiAjMDA3YmZmO1xuJG1heGltdW0tYmx1ZTogIzUyQjJDRjtcbiRkYXJrLXNreS1ibHVlOiAjN0VDNENGO1xuJHdpbGQtYmx1ZS15b25kZXI6ICM5Q0FEQ0U7XG4kbGFuZ3VpZC1sYXZlbmRlcjogI0QxQ0ZFMjtcbiRwYWxlLWNoZXN0bnV0OiNENEFGQjk7XG5cblxuJHByaW1hcnktY29sb3I6ICRib290c3RyYXAtYmx1ZTtcbiRzZWNvbmRhcnktY29sb3I6ICRtYXhpbXVtLWJsdWU7XG5cbiJdfQ== */"
 
 /***/ }),
 
@@ -547,7 +547,7 @@ EditableWrapperComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":host {\n  position: absolute;\n  width: 100%;\n  min-height: 100%;\n  background-color: #EEE;\n}\n\n.steps-editor {\n  position: relative;\n}\n\n.back {\n  position: absolute;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFpbi9DOlxccFxcc3dpc3Mtc3RyaW5nL3NyY1xcYXBwXFxtYWluXFxtYWluLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9tYWluL21haW4uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxnQkFBQTtFQUNBLHNCQUFBO0FDQ0Y7O0FERUE7RUFDRSxrQkFBQTtBQ0NGOztBREVBO0VBQ0Usa0JBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL21haW4vbWFpbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB3aWR0aDogMTAwJTtcbiAgbWluLWhlaWdodDogMTAwJTtcbiAgYmFja2dyb3VuZC1jb2xvcjogI0VFRTtcbn1cblxuLnN0ZXBzLWVkaXRvciB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cblxuLmJhY2t7XG4gIHBvc2l0aW9uOmFic29sdXRlO1xufVxuIiwiOmhvc3Qge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHdpZHRoOiAxMDAlO1xuICBtaW4taGVpZ2h0OiAxMDAlO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjRUVFO1xufVxuXG4uc3RlcHMtZWRpdG9yIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuXG4uYmFjayB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbn0iXX0= */"
+module.exports = ":host {\n  position: absolute;\n  width: 100%;\n  min-height: 100%;\n  background-color: #EEE;\n}\n\n.steps-editor {\n  position: relative;\n}\n\n.back {\n  position: absolute;\n}\n\n.indented-card-body {\n  margin-left: 50px;\n  margin-right: 8px;\n}\n\n.indented-card-body.after-title {\n  padding-top: 0px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWFpbi9DOlxccFxcc3dpc3Mtc3RyaW5nL3NyY1xcYXBwXFxtYWluXFxtYWluLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9tYWluL21haW4uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxnQkFBQTtFQUNBLHNCQUFBO0FDQ0Y7O0FERUE7RUFDRSxrQkFBQTtBQ0NGOztBREVBO0VBQ0Usa0JBQUE7QUNDRjs7QURHQTtFQUNFLGlCQUFBO0VBQ0EsaUJBQUE7QUNBRjs7QURFRTtFQUNFLGdCQUFBO0FDQUoiLCJmaWxlIjoic3JjL2FwcC9tYWluL21haW4uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgd2lkdGg6IDEwMCU7XG4gIG1pbi1oZWlnaHQ6IDEwMCU7XG4gIGJhY2tncm91bmQtY29sb3I6ICNFRUU7XG59XG5cbi5zdGVwcy1lZGl0b3Ige1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG5cbi5iYWNre1xuICBwb3NpdGlvbjphYnNvbHV0ZTtcbn1cblxuXG4uaW5kZW50ZWQtY2FyZC1ib2R5IHtcbiAgbWFyZ2luLWxlZnQ6IDUwcHg7XG4gIG1hcmdpbi1yaWdodDogOHB4O1xuXG4gICYuYWZ0ZXItdGl0bGUge1xuICAgIHBhZGRpbmctdG9wOiAwcHg7XG4gIH1cbn1cbiIsIjpob3N0IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB3aWR0aDogMTAwJTtcbiAgbWluLWhlaWdodDogMTAwJTtcbiAgYmFja2dyb3VuZC1jb2xvcjogI0VFRTtcbn1cblxuLnN0ZXBzLWVkaXRvciB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cblxuLmJhY2sge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG59XG5cbi5pbmRlbnRlZC1jYXJkLWJvZHkge1xuICBtYXJnaW4tbGVmdDogNTBweDtcbiAgbWFyZ2luLXJpZ2h0OiA4cHg7XG59XG4uaW5kZW50ZWQtY2FyZC1ib2R5LmFmdGVyLXRpdGxlIHtcbiAgcGFkZGluZy10b3A6IDBweDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -564,10 +564,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var src_media__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/media */ "./src/media.ts");
-/* harmony import */ var src_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/utils */ "./src/utils.ts");
-/* harmony import */ var _s_steps_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../s/steps.service */ "./src/app/s/steps.service.ts");
-/* harmony import */ var src_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/constants */ "./src/constants.ts");
+/* harmony import */ var src_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/constants */ "./src/constants.ts");
+/* harmony import */ var src_media__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/media */ "./src/media.ts");
+/* harmony import */ var src_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/utils */ "./src/utils.ts");
+/* harmony import */ var _s_steps_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../s/steps.service */ "./src/app/s/steps.service.ts");
 
 
 
@@ -587,6 +587,8 @@ let MainComponent = class MainComponent {
         this.stepsService.steps$.subscribe((steps) => {
             this.steps = steps;
             this.stepsJSON = JSON.stringify(steps, null, 4);
+            // console.log(this.stepsService.contexts);
+            // console.log(this.stepsService.contextHolders);
         });
     }
     ngOnInit() {
@@ -620,9 +622,9 @@ let MainComponent = class MainComponent {
         const svg = this.createSVG(this.backElement.nativeElement);
         const backBB = this.backElement.nativeElement.getBoundingClientRect();
         // draw lines
-        this.stepsService.contexts.forEach((context, afterStepIndex) => {
-            const { afterStepID, keys } = context;
-            keys.forEach(({ fromID, toID, name, destStepIndex }, keyIndex) => {
+        this.stepsService.contexts.forEach((context, beforeStepIndex) => {
+            const { beforeStepID, keys } = context;
+            keys.forEach(({ fromID, toID, name, fromStepIndex }, keyIndex) => {
                 const fromWidgetElement = document.querySelector(`[data-entity-id="${fromID}"]`);
                 const toWidgetElement = document.querySelector(`[data-entity-id="${toID}"]`);
                 if (!fromWidgetElement || !toWidgetElement) {
@@ -630,7 +632,6 @@ let MainComponent = class MainComponent {
                 }
                 const fromBB = fromWidgetElement.getBoundingClientRect();
                 const toBB = toWidgetElement.getBoundingClientRect();
-                const _destStepIndex = destStepIndex || -1;
                 if (fromBB.top === 0 && fromBB.left === 0) {
                     return;
                 }
@@ -653,34 +654,34 @@ let MainComponent = class MainComponent {
                 }
                 // console.log(fromWidgetElement, toWidgetElement);
                 const line = (() => {
-                    if (_destStepIndex - afterStepIndex <= 1) {
+                    if (beforeStepIndex - fromStepIndex <= 1) {
                         return [
                             `M`,
                             `${fromPoint.x} ${fromPoint.y}`,
                             `C`,
                             [
-                                `${fromPoint.x} ${fromPoint.y + src_constants__WEBPACK_IMPORTED_MODULE_6__["SIDEBAR_CROSSING_CONNECTOR_MOMENTUM"]}`,
-                                `${toPoint.x} ${toPoint.y - src_constants__WEBPACK_IMPORTED_MODULE_6__["SIDEBAR_CROSSING_CONNECTOR_MOMENTUM"]}`,
+                                `${fromPoint.x} ${fromPoint.y + src_constants__WEBPACK_IMPORTED_MODULE_3__["SIDEBAR_CROSSING_CONNECTOR_MOMENTUM"]}`,
+                                `${toPoint.x} ${toPoint.y - src_constants__WEBPACK_IMPORTED_MODULE_3__["SIDEBAR_CROSSING_CONNECTOR_MOMENTUM"]}`,
                                 `${toPoint.x} ${toPoint.y}`,
                             ].join(', '),
                         ].join(' ');
                     }
                     else {
-                        const escapeX = src_constants__WEBPACK_IMPORTED_MODULE_6__["SIDEBAR_X"] + Object(src_utils__WEBPACK_IMPORTED_MODULE_4__["hashStringToNumber"])(name) * src_constants__WEBPACK_IMPORTED_MODULE_6__["SIDEBAR_WIDTH"];
+                        const escapeX = src_constants__WEBPACK_IMPORTED_MODULE_3__["SIDEBAR_X"] + Object(src_utils__WEBPACK_IMPORTED_MODULE_5__["hashStringToNumber"])(name) * src_constants__WEBPACK_IMPORTED_MODULE_3__["SIDEBAR_WIDTH"];
                         const curve1 = [
-                            `${fromPoint.x} ${fromPoint.y + src_constants__WEBPACK_IMPORTED_MODULE_6__["SIDEBAR_CROSSING_CONNECTOR_MOMENTUM"]}`,
-                            `${escapeX} ${fromPoint.y + src_constants__WEBPACK_IMPORTED_MODULE_6__["SIDEBAR_LEAD"] - src_constants__WEBPACK_IMPORTED_MODULE_6__["SIDEBAR_CROSSING_CONNECTOR_MOMENTUM"]}`,
-                            `${escapeX} ${fromPoint.y + src_constants__WEBPACK_IMPORTED_MODULE_6__["SIDEBAR_LEAD"]}`,
+                            `${fromPoint.x} ${fromPoint.y + src_constants__WEBPACK_IMPORTED_MODULE_3__["SIDEBAR_CROSSING_CONNECTOR_MOMENTUM"]}`,
+                            `${escapeX} ${fromPoint.y + src_constants__WEBPACK_IMPORTED_MODULE_3__["SIDEBAR_LEAD"] - src_constants__WEBPACK_IMPORTED_MODULE_3__["SIDEBAR_CROSSING_CONNECTOR_MOMENTUM"]}`,
+                            `${escapeX} ${fromPoint.y + src_constants__WEBPACK_IMPORTED_MODULE_3__["SIDEBAR_LEAD"]}`,
                         ].join(', ');
                         const curve2 = [
-                            `${escapeX} ${toPoint.y - src_constants__WEBPACK_IMPORTED_MODULE_6__["SIDEBAR_LEAD"] + src_constants__WEBPACK_IMPORTED_MODULE_6__["SIDEBAR_CROSSING_CONNECTOR_MOMENTUM"]}`,
-                            `${toPoint.x} ${toPoint.y - src_constants__WEBPACK_IMPORTED_MODULE_6__["SIDEBAR_CROSSING_CONNECTOR_MOMENTUM"]}`,
+                            `${escapeX} ${toPoint.y - src_constants__WEBPACK_IMPORTED_MODULE_3__["SIDEBAR_LEAD"] + src_constants__WEBPACK_IMPORTED_MODULE_3__["SIDEBAR_CROSSING_CONNECTOR_MOMENTUM"]}`,
+                            `${toPoint.x} ${toPoint.y - src_constants__WEBPACK_IMPORTED_MODULE_3__["SIDEBAR_CROSSING_CONNECTOR_MOMENTUM"]}`,
                             `${toPoint.x} ${toPoint.y}`,
                         ].join(', ');
                         return [
                             `M`, `${fromPoint.x} ${fromPoint.y}`,
                             `C`, curve1,
-                            `L`, `${escapeX} ${toPoint.y - src_constants__WEBPACK_IMPORTED_MODULE_6__["SIDEBAR_LEAD"]}`,
+                            `L`, `${escapeX} ${toPoint.y - src_constants__WEBPACK_IMPORTED_MODULE_3__["SIDEBAR_LEAD"]}`,
                             `C`, curve2,
                         ].join(' ');
                     }
@@ -690,15 +691,15 @@ let MainComponent = class MainComponent {
                 pathBG.setAttributeNS(null, 'stroke-width', '6');
                 pathBG.setAttributeNS(null, 'd', line);
                 const path = this.createPath(svg);
-                path.setAttributeNS(null, 'stroke', Object(src_utils__WEBPACK_IMPORTED_MODULE_4__["hashStringToColor"])(name));
+                path.setAttributeNS(null, 'stroke', Object(src_utils__WEBPACK_IMPORTED_MODULE_5__["hashStringToColor"])(name));
                 path.setAttributeNS(null, 'stroke-width', '3');
                 path.setAttributeNS(null, 'd', line);
                 const circleIn = this.createPoint(svg);
-                circleIn.setAttributeNS(null, 'fill', Object(src_utils__WEBPACK_IMPORTED_MODULE_4__["hashStringToColor"])(name));
+                circleIn.setAttributeNS(null, 'fill', Object(src_utils__WEBPACK_IMPORTED_MODULE_5__["hashStringToColor"])(name));
                 circleIn.setAttributeNS(null, 'cx', '' + fromPoint.x);
                 circleIn.setAttributeNS(null, 'cy', '' + fromPoint.y);
                 const circleOut = this.createPoint(svg);
-                circleOut.setAttributeNS(null, 'fill', Object(src_utils__WEBPACK_IMPORTED_MODULE_4__["hashStringToColor"])(name));
+                circleOut.setAttributeNS(null, 'fill', Object(src_utils__WEBPACK_IMPORTED_MODULE_5__["hashStringToColor"])(name));
                 circleOut.setAttributeNS(null, 'cx', '' + toPoint.x);
                 circleOut.setAttributeNS(null, 'cy', '' + toPoint.y);
             });
@@ -744,16 +745,22 @@ let MainComponent = class MainComponent {
         svg.appendChild(rect);
         return rect;
     }
+    createText(svg) {
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        rect.setAttributeNS(null, 'class', '#EEE');
+        svg.appendChild(rect);
+        return rect;
+    }
     onResize(event) {
         this.updateDeviceWidth();
     }
     updateDeviceWidth() {
         const innerWidth = window.innerWidth;
-        this.isMobile = (innerWidth < src_media__WEBPACK_IMPORTED_MODULE_3__["TABLET_PORTRAIT"]);
+        this.isMobile = (innerWidth < src_media__WEBPACK_IMPORTED_MODULE_4__["TABLET_PORTRAIT"]);
     }
 };
 MainComponent.ctorParameters = () => [
-    { type: _s_steps_service__WEBPACK_IMPORTED_MODULE_5__["StepsService"] }
+    { type: _s_steps_service__WEBPACK_IMPORTED_MODULE_6__["StepsService"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('graph', { static: false })
@@ -786,7 +793,7 @@ MainComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "h3 {\n  margin-top: 0.5rem;\n  margin-bottom: 0.5rem;\n}\n\n.operator {\n  background-color: white;\n  text-align: center;\n}\n\n.operator-parameter-container {\n  display: -webkit-box;\n  display: flex;\n}\n\n.operator-parameter {\n  width: 100%;\n  text-align: center;\n  margin: 8px;\n  padding: 2px 6px;\n  background-color: #DDD;\n  border-radius: 10000px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvb3BlcmF0b3Itd2lkZ2V0L0M6XFxwXFxzd2lzcy1zdHJpbmcvc3JjXFxhcHBcXG9wZXJhdG9yLXdpZGdldFxcb3BlcmF0b3Itd2lkZ2V0LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9vcGVyYXRvci13aWRnZXQvb3BlcmF0b3Itd2lkZ2V0LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQUE7RUFDQSxxQkFBQTtBQ0NGOztBRENBO0VBRUUsdUJBQUE7RUFDQSxrQkFBQTtBQ0NGOztBREVBO0VBQ0Usb0JBQUE7RUFBQSxhQUFBO0FDQ0Y7O0FERUE7RUFDRSxXQUFBO0VBQ0Esa0JBQUE7RUFDQSxXQUFBO0VBQ0EsZ0JBQUE7RUFHQSxzQkFBQTtFQUNBLHNCQUFBO0FDREYiLCJmaWxlIjoic3JjL2FwcC9vcGVyYXRvci13aWRnZXQvb3BlcmF0b3Itd2lkZ2V0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaDN7XG4gIG1hcmdpbi10b3A6IC41cmVtO1xuICBtYXJnaW4tYm90dG9tOiAuNXJlbTtcbn1cbi5vcGVyYXRvciB7XG4gIC8vIGJvcmRlcjogMXB4IHNvbGlkICM4ODg7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi5vcGVyYXRvci1wYXJhbWV0ZXItY29udGFpbmVyIHtcbiAgZGlzcGxheTogZmxleDtcbn1cblxuLm9wZXJhdG9yLXBhcmFtZXRlciB7XG4gIHdpZHRoOiAxMDAlO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIG1hcmdpbjogOHB4O1xuICBwYWRkaW5nOiAycHggNnB4O1xuICAvLyBib3JkZXI6IDFweCBzb2xpZCAjODg4O1xuICAvLyBib3JkZXItbGVmdDogbm9uZTtcbiAgYmFja2dyb3VuZC1jb2xvcjogI0RERDtcbiAgYm9yZGVyLXJhZGl1czogMTAwMDBweDtcbn1cbi5vcGVyYXRvci1wYXJhbWV0ZXI6Zmlyc3QtY2hpbGQge1xuICAvLyBib3JkZXItbGVmdDogMXB4IHNvbGlkICM4ODg7XG59XG4iLCJoMyB7XG4gIG1hcmdpbi10b3A6IDAuNXJlbTtcbiAgbWFyZ2luLWJvdHRvbTogMC41cmVtO1xufVxuXG4ub3BlcmF0b3Ige1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuXG4ub3BlcmF0b3ItcGFyYW1ldGVyLWNvbnRhaW5lciB7XG4gIGRpc3BsYXk6IGZsZXg7XG59XG5cbi5vcGVyYXRvci1wYXJhbWV0ZXIge1xuICB3aWR0aDogMTAwJTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBtYXJnaW46IDhweDtcbiAgcGFkZGluZzogMnB4IDZweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogI0RERDtcbiAgYm9yZGVyLXJhZGl1czogMTAwMDBweDtcbn0iXX0= */"
+module.exports = "h3 {\n  margin-top: 0.5rem;\n  margin-bottom: 0.5rem;\n}\n\n.operator .operator-title {\n  border: 1px solid #888;\n  background-color: white;\n  text-align: center;\n}\n\n.operator .operator-parameter-container {\n  display: -webkit-box;\n  display: flex;\n}\n\n.operator .operator-parameter {\n  width: 100%;\n  text-align: center;\n  margin: 6px;\n  padding: 2px 6px;\n  background-color: #DDD;\n  border-radius: 10000px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvb3BlcmF0b3Itd2lkZ2V0L0M6XFxwXFxzd2lzcy1zdHJpbmcvc3JjXFxhcHBcXG9wZXJhdG9yLXdpZGdldFxcb3BlcmF0b3Itd2lkZ2V0LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9vcGVyYXRvci13aWRnZXQvb3BlcmF0b3Itd2lkZ2V0LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQUE7RUFDQSxxQkFBQTtBQ0NGOztBREdFO0VBQ0Usc0JBQUE7RUFDQSx1QkFBQTtFQUNBLGtCQUFBO0FDQUo7O0FER0U7RUFDRSxvQkFBQTtFQUFBLGFBQUE7QUNESjs7QURJRTtFQUNFLFdBQUE7RUFDQSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxnQkFBQTtFQUdBLHNCQUFBO0VBQ0Esc0JBQUE7QUNKSiIsImZpbGUiOiJzcmMvYXBwL29wZXJhdG9yLXdpZGdldC9vcGVyYXRvci13aWRnZXQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJoMyB7XG4gIG1hcmdpbi10b3A6IC41cmVtO1xuICBtYXJnaW4tYm90dG9tOiAuNXJlbTtcbn1cblxuLm9wZXJhdG9yIHtcbiAgLm9wZXJhdG9yLXRpdGxlIHtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjODg4O1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgfVxuXG4gIC5vcGVyYXRvci1wYXJhbWV0ZXItY29udGFpbmVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICB9XG5cbiAgLm9wZXJhdG9yLXBhcmFtZXRlciB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIG1hcmdpbjogNnB4O1xuICAgIHBhZGRpbmc6IDJweCA2cHg7XG4gICAgLy8gYm9yZGVyOiAxcHggc29saWQgIzg4ODtcbiAgICAvLyBib3JkZXItbGVmdDogbm9uZTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjREREO1xuICAgIGJvcmRlci1yYWRpdXM6IDEwMDAwcHg7XG4gIH1cblxuICAub3BlcmF0b3ItcGFyYW1ldGVyOmZpcnN0LWNoaWxkIHtcbiAgICAvLyBib3JkZXItbGVmdDogMXB4IHNvbGlkICM4ODg7XG4gIH1cbn1cbiIsImgzIHtcbiAgbWFyZ2luLXRvcDogMC41cmVtO1xuICBtYXJnaW4tYm90dG9tOiAwLjVyZW07XG59XG5cbi5vcGVyYXRvciAub3BlcmF0b3ItdGl0bGUge1xuICBib3JkZXI6IDFweCBzb2xpZCAjODg4O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuLm9wZXJhdG9yIC5vcGVyYXRvci1wYXJhbWV0ZXItY29udGFpbmVyIHtcbiAgZGlzcGxheTogZmxleDtcbn1cbi5vcGVyYXRvciAub3BlcmF0b3ItcGFyYW1ldGVyIHtcbiAgd2lkdGg6IDEwMCU7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgbWFyZ2luOiA2cHg7XG4gIHBhZGRpbmc6IDJweCA2cHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICNEREQ7XG4gIGJvcmRlci1yYWRpdXM6IDEwMDAwcHg7XG59Il19 */"
 
 /***/ }),
 
@@ -972,7 +979,7 @@ let StepsService = class StepsService {
     updateContexts(steps) {
         this.entities = [];
         const newContexts = [];
-        const contextHolder = {}; // holds keys and last-seen widgetID
+        const contextHolders = [{}]; // holds keys and last-seen widgetID
         for (let stepIndex = 0; stepIndex < steps.length; stepIndex++) {
             const step = steps[stepIndex];
             // const nextStep = steps[i + 1];
@@ -985,14 +992,14 @@ let StepsService = class StepsService {
             switch (type) {
                 case _Step__WEBPACK_IMPORTED_MODULE_5__["WidgetType"].VIEW:
                     {
-                        const afterContext = this.updateViewWidgetContext(stepIndex, stepID, columns, contextHolder, newContexts);
-                        newContexts.push(afterContext);
+                        const beforeContext = this.updateViewWidgetContext(stepIndex, stepID, columns, contextHolders, newContexts);
+                        newContexts.push(beforeContext);
                     }
                     break;
                 case _Step__WEBPACK_IMPORTED_MODULE_5__["WidgetType"].OPERATOR:
                     {
-                        const afterContext = this.updateOperatorWidgetContext(stepIndex, stepID, columns, contextHolder, newContexts);
-                        newContexts.push(afterContext);
+                        const beforeContext = this.updateOperatorWidgetContext(stepIndex, stepID, columns, contextHolders, newContexts);
+                        newContexts.push(beforeContext);
                     }
                     break;
             }
@@ -1000,43 +1007,39 @@ let StepsService = class StepsService {
         }
         // console.log('newContexts', JSON.stringify(newContexts, null, 4));
         this.contexts = newContexts;
+        this.contextHolders = contextHolders;
     }
-    updateViewWidgetContext(stepIndex, stepID, columns, contextHolder, newContexts) {
+    updateViewWidgetContext(stepIndex, stepID, columns, contextHolders, newContexts) {
         // mutates contextHolder and newContexts in place
-        const afterContext = {
-            afterStepID: stepID,
+        const beforeContext = {
+            beforeStepID: stepID,
             keys: [],
         };
+        const contextHolder = Object.assign({}, contextHolders[contextHolders.length - 1]);
         columns.forEach((column) => {
             const { id: columnID, type: columnType } = column;
             const viewWidget = column.view;
             const { name, title } = viewWidget;
             // console.log('view', name, columnID);
             if (contextHolder[name]) {
-                const { lastSeenColumnID: lastSeenID } = contextHolder[name];
-                for (const context of newContexts) {
-                    for (const key of context.keys) {
-                        if (key.fromID === lastSeenID) {
-                            key.toID = columnID;
-                            key.destStepIndex = stepIndex;
-                        }
-                    }
-                }
+                const { lastSeenColumnID: lastSeenID, lastSeenStepIndex } = contextHolder[name];
+                beforeContext.keys.push({
+                    name, fromStepIndex: lastSeenStepIndex,
+                    fromID: lastSeenID, toID: columnID, type: null,
+                });
             }
             contextHolder[name] = { lastSeenColumnID: columnID, lastSeenStepIndex: stepIndex };
-            afterContext.keys.push({
-                name, destStepIndex: stepIndex,
-                fromID: columnID, toID: null, type: null,
-            });
         });
-        return afterContext;
+        contextHolders.push(contextHolder);
+        return beforeContext;
     }
-    updateOperatorWidgetContext(stepIndex, stepID, columns, contextHolder, newContexts) {
+    updateOperatorWidgetContext(stepIndex, stepID, columns, contextHolders, newContexts) {
         // mutates contextHolder and newContexts in place
-        const afterContext = {
-            afterStepID: stepID,
+        const beforeContext = {
+            beforeStepID: stepID,
             keys: [],
         };
+        const contextHolder = Object.assign({}, contextHolders[contextHolders.length - 1]);
         columns.forEach((column) => {
             const { id: columnID, type: columnType } = column;
             const operatorWidget = column.operator;
@@ -1044,28 +1047,21 @@ let StepsService = class StepsService {
             Object.entries(inputs).forEach(([inputKey, { id: connectorID, contextName }]) => {
                 // console.log('operator', contextName, connectorID);
                 if (contextHolder[contextName]) {
-                    const { lastSeenColumnID: lastSeenID } = contextHolder[contextName];
-                    for (const context of newContexts) {
-                        for (const key of context.keys) {
-                            if (key.fromID === lastSeenID) {
-                                key.toID = connectorID;
-                                key.destStepIndex = stepIndex;
-                            }
-                        }
-                    }
+                    const { lastSeenColumnID: lastSeenID, lastSeenStepIndex } = contextHolder[contextName];
+                    beforeContext.keys.push({
+                        name: contextName, fromStepIndex: lastSeenStepIndex,
+                        fromID: lastSeenID, toID: connectorID, type: null,
+                    });
                 }
                 // contextHolder[inputKey] = columnID;
-                // afterContext.keys.push({ name:inputKey, fromID: columnID, toID: null, type: null });
+                // beforeContext.keys.push({ name:inputKey, fromID: columnID, toID: null, type: null });
             });
             Object.entries(outputs).forEach(([outputKey, { id: connectorID, contextName }]) => {
                 contextHolder[contextName] = { lastSeenColumnID: connectorID, lastSeenStepIndex: stepIndex };
-                afterContext.keys.push({
-                    name: contextName, destStepIndex: null,
-                    fromID: connectorID, toID: null, type: null,
-                });
             });
         });
-        return afterContext;
+        contextHolders.push(contextHolder);
+        return beforeContext;
     }
 };
 StepsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1085,7 +1081,7 @@ StepsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".card {\n  background-color: rgba(255, 255, 255, 0.7);\n}\n\n.expand-button {\n  width: 30px;\n  margin-right: 20px;\n}\n\n.card-title {\n  margin-bottom: 0;\n  color: black;\n}\n\n.card-subtitle {\n  margin-bottom: 0;\n  margin-left: 40px;\n}\n\n.card {\n  margin-top: 4px;\n  margin-bottom: 4px;\n}\n\n.step-body {\n  overflow: auto;\n}\n\n.step-body .column-row {\n  display: -webkit-box;\n  display: flex;\n  width: 100%;\n  margin-left: -4px;\n  margin-right: -4px;\n}\n\n.step-body .column-row.isMobile {\n  display: block;\n  margin-left: 0;\n  margin-right: 0;\n}\n\n.step-body .column {\n  margin: 4px;\n  width: 100%;\n}\n\n.indented-body {\n  margin-left: 50px;\n  margin-right: 8px;\n}\n\n.indented-body.after-title {\n  padding-top: 0px;\n}\n\n.step-buttons {\n  margin-left: calc(50px - 0.75rem);\n  padding-top: 0;\n}\n\n.step-type {\n  font-size: 0.8em;\n  font-style: italic;\n}\n\n.step-type-selector {\n  margin-left: -4px;\n  margin-right: -4px;\n}\n\n.step-type-selector button {\n  width: calc(50% - 8px);\n  margin: 4px;\n  height: 100px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc3RlcC9DOlxccFxcc3dpc3Mtc3RyaW5nL3NyY1xcYXBwXFxzdGVwXFxzdGVwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9zdGVwL3N0ZXAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSwwQ0FBQTtBQ0NGOztBREVBO0VBQ0UsV0FBQTtFQUNBLGtCQUFBO0FDQ0Y7O0FERUE7RUFDRSxnQkFBQTtFQUNBLFlBQUE7QUNDRjs7QURFQTtFQUNFLGdCQUFBO0VBQ0EsaUJBQUE7QUNDRjs7QURFQTtFQUNFLGVBQUE7RUFDQSxrQkFBQTtBQ0NGOztBREVBO0VBQ0UsY0FBQTtBQ0NGOztBRENFO0VBQ0Usb0JBQUE7RUFBQSxhQUFBO0VBQ0EsV0FBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7QUNDSjs7QURDSTtFQUNFLGNBQUE7RUFDQSxjQUFBO0VBQ0EsZUFBQTtBQ0NOOztBREdFO0VBQ0UsV0FBQTtFQUNBLFdBQUE7QUNESjs7QURLQTtFQUNFLGlCQUFBO0VBQ0EsaUJBQUE7QUNGRjs7QURJRTtFQUNFLGdCQUFBO0FDRko7O0FETUE7RUFDRSxpQ0FBQTtFQUNBLGNBQUE7QUNIRjs7QURVQTtFQUNFLGdCQUFBO0VBQ0Esa0JBQUE7QUNQRjs7QURVQTtFQUNFLGlCQUFBO0VBQ0Esa0JBQUE7QUNQRjs7QURTRTtFQUNFLHNCQUFBO0VBQ0EsV0FBQTtFQUNBLGFBQUE7QUNQSiIsImZpbGUiOiJzcmMvYXBwL3N0ZXAvc3RlcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jYXJkIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjcpOyAvL3JnYmEoMCwgMCwgMCwgMC4zKTtcbn1cblxuLmV4cGFuZC1idXR0b24ge1xuICB3aWR0aDogMzBweDtcbiAgbWFyZ2luLXJpZ2h0OiAyMHB4O1xufVxuXG4uY2FyZC10aXRsZSB7XG4gIG1hcmdpbi1ib3R0b206IDA7XG4gIGNvbG9yOiBibGFjaztcbn1cblxuLmNhcmQtc3VidGl0bGUge1xuICBtYXJnaW4tYm90dG9tOiAwO1xuICBtYXJnaW4tbGVmdDogNDBweDtcbn1cblxuLmNhcmQge1xuICBtYXJnaW4tdG9wOiA0cHg7XG4gIG1hcmdpbi1ib3R0b206IDRweDtcbn1cblxuLnN0ZXAtYm9keSB7XG4gIG92ZXJmbG93OiBhdXRvO1xuXG4gIC5jb2x1bW4tcm93IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIG1hcmdpbi1sZWZ0OiAtNHB4O1xuICAgIG1hcmdpbi1yaWdodDogLTRweDtcblxuICAgICYuaXNNb2JpbGUge1xuICAgICAgZGlzcGxheTogYmxvY2s7XG4gICAgICBtYXJnaW4tbGVmdDogMDtcbiAgICAgIG1hcmdpbi1yaWdodDogMDtcbiAgICB9XG4gIH1cblxuICAuY29sdW1uIHtcbiAgICBtYXJnaW46IDRweDtcbiAgICB3aWR0aDogMTAwJTtcbiAgfVxufVxuXG4uaW5kZW50ZWQtYm9keSB7XG4gIG1hcmdpbi1sZWZ0OiA1MHB4O1xuICBtYXJnaW4tcmlnaHQ6IDhweDtcblxuICAmLmFmdGVyLXRpdGxlIHtcbiAgICBwYWRkaW5nLXRvcDogMHB4O1xuICB9XG59XG5cbi5zdGVwLWJ1dHRvbnMge1xuICBtYXJnaW4tbGVmdDogY2FsYyg1MHB4IC0gMC43NXJlbSk7XG4gIHBhZGRpbmctdG9wOiAwO1xuXG4gIC8vIC5idG4tbGlnaHQ6Zmlyc3QtY2hpbGQge1xuICAvLyAgIHBhZGRpbmctbGVmdDogMDtcbiAgLy8gfVxufVxuXG4uc3RlcC10eXBlIHtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgZm9udC1zdHlsZTogaXRhbGljO1xufVxuXG4uc3RlcC10eXBlLXNlbGVjdG9yIHtcbiAgbWFyZ2luLWxlZnQ6IC00cHg7XG4gIG1hcmdpbi1yaWdodDogLTRweDtcblxuICBidXR0b24ge1xuICAgIHdpZHRoOiBjYWxjKDUwJSAtIDhweCk7XG4gICAgbWFyZ2luOiA0cHg7XG4gICAgaGVpZ2h0OiAxMDBweDtcbiAgfVxufVxuIiwiLmNhcmQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNyk7XG59XG5cbi5leHBhbmQtYnV0dG9uIHtcbiAgd2lkdGg6IDMwcHg7XG4gIG1hcmdpbi1yaWdodDogMjBweDtcbn1cblxuLmNhcmQtdGl0bGUge1xuICBtYXJnaW4tYm90dG9tOiAwO1xuICBjb2xvcjogYmxhY2s7XG59XG5cbi5jYXJkLXN1YnRpdGxlIHtcbiAgbWFyZ2luLWJvdHRvbTogMDtcbiAgbWFyZ2luLWxlZnQ6IDQwcHg7XG59XG5cbi5jYXJkIHtcbiAgbWFyZ2luLXRvcDogNHB4O1xuICBtYXJnaW4tYm90dG9tOiA0cHg7XG59XG5cbi5zdGVwLWJvZHkge1xuICBvdmVyZmxvdzogYXV0bztcbn1cbi5zdGVwLWJvZHkgLmNvbHVtbi1yb3cge1xuICBkaXNwbGF5OiBmbGV4O1xuICB3aWR0aDogMTAwJTtcbiAgbWFyZ2luLWxlZnQ6IC00cHg7XG4gIG1hcmdpbi1yaWdodDogLTRweDtcbn1cbi5zdGVwLWJvZHkgLmNvbHVtbi1yb3cuaXNNb2JpbGUge1xuICBkaXNwbGF5OiBibG9jaztcbiAgbWFyZ2luLWxlZnQ6IDA7XG4gIG1hcmdpbi1yaWdodDogMDtcbn1cbi5zdGVwLWJvZHkgLmNvbHVtbiB7XG4gIG1hcmdpbjogNHB4O1xuICB3aWR0aDogMTAwJTtcbn1cblxuLmluZGVudGVkLWJvZHkge1xuICBtYXJnaW4tbGVmdDogNTBweDtcbiAgbWFyZ2luLXJpZ2h0OiA4cHg7XG59XG4uaW5kZW50ZWQtYm9keS5hZnRlci10aXRsZSB7XG4gIHBhZGRpbmctdG9wOiAwcHg7XG59XG5cbi5zdGVwLWJ1dHRvbnMge1xuICBtYXJnaW4tbGVmdDogY2FsYyg1MHB4IC0gMC43NXJlbSk7XG4gIHBhZGRpbmctdG9wOiAwO1xufVxuXG4uc3RlcC10eXBlIHtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgZm9udC1zdHlsZTogaXRhbGljO1xufVxuXG4uc3RlcC10eXBlLXNlbGVjdG9yIHtcbiAgbWFyZ2luLWxlZnQ6IC00cHg7XG4gIG1hcmdpbi1yaWdodDogLTRweDtcbn1cbi5zdGVwLXR5cGUtc2VsZWN0b3IgYnV0dG9uIHtcbiAgd2lkdGg6IGNhbGMoNTAlIC0gOHB4KTtcbiAgbWFyZ2luOiA0cHg7XG4gIGhlaWdodDogMTAwcHg7XG59Il19 */"
+module.exports = ".card {\n  background-color: rgba(255, 255, 255, 0.7);\n}\n\n.expand-button {\n  width: 30px;\n  margin-right: 20px;\n}\n\n.card-title {\n  margin-bottom: 0;\n  color: black;\n}\n\n.card-subtitle {\n  margin-bottom: 0;\n  margin-left: 40px;\n}\n\n.card {\n  margin-top: 4px;\n  margin-bottom: 4px;\n}\n\n.step-body {\n  overflow: auto;\n}\n\n.step-body .column-row {\n  display: -webkit-box;\n  display: flex;\n  width: 100%;\n  margin-left: -4px;\n  margin-right: -4px;\n}\n\n.step-body .column-row.isMobile {\n  display: block;\n  margin-left: 0;\n  margin-right: 0;\n}\n\n.step-body .column {\n  margin: 4px;\n  width: 100%;\n}\n\n.indented-card-body {\n  margin-left: 50px;\n  margin-right: 8px;\n}\n\n.indented-card-body.after-title {\n  padding-top: 0px;\n}\n\n.step-buttons {\n  margin-left: calc(50px - 0.75rem);\n  padding-top: 0;\n}\n\n.step-type {\n  font-size: 0.8em;\n  font-style: italic;\n}\n\n.step-type-selector {\n  margin-left: -4px;\n  margin-right: -4px;\n}\n\n.step-type-selector button {\n  width: calc(50% - 8px);\n  margin: 4px;\n  height: 100px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc3RlcC9DOlxccFxcc3dpc3Mtc3RyaW5nL3NyY1xcYXBwXFxzdGVwXFxzdGVwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9zdGVwL3N0ZXAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSwwQ0FBQTtBQ0NGOztBREVBO0VBQ0UsV0FBQTtFQUNBLGtCQUFBO0FDQ0Y7O0FERUE7RUFDRSxnQkFBQTtFQUNBLFlBQUE7QUNDRjs7QURFQTtFQUNFLGdCQUFBO0VBQ0EsaUJBQUE7QUNDRjs7QURFQTtFQUNFLGVBQUE7RUFDQSxrQkFBQTtBQ0NGOztBREVBO0VBQ0UsY0FBQTtBQ0NGOztBRENFO0VBQ0Usb0JBQUE7RUFBQSxhQUFBO0VBQ0EsV0FBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7QUNDSjs7QURDSTtFQUNFLGNBQUE7RUFDQSxjQUFBO0VBQ0EsZUFBQTtBQ0NOOztBREdFO0VBQ0UsV0FBQTtFQUNBLFdBQUE7QUNESjs7QURLQTtFQUNFLGlCQUFBO0VBQ0EsaUJBQUE7QUNGRjs7QURJRTtFQUNFLGdCQUFBO0FDRko7O0FETUE7RUFDRSxpQ0FBQTtFQUNBLGNBQUE7QUNIRjs7QURVQTtFQUNFLGdCQUFBO0VBQ0Esa0JBQUE7QUNQRjs7QURVQTtFQUNFLGlCQUFBO0VBQ0Esa0JBQUE7QUNQRjs7QURTRTtFQUNFLHNCQUFBO0VBQ0EsV0FBQTtFQUNBLGFBQUE7QUNQSiIsImZpbGUiOiJzcmMvYXBwL3N0ZXAvc3RlcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jYXJkIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjcpOyAvL3JnYmEoMCwgMCwgMCwgMC4zKTtcbn1cblxuLmV4cGFuZC1idXR0b24ge1xuICB3aWR0aDogMzBweDtcbiAgbWFyZ2luLXJpZ2h0OiAyMHB4O1xufVxuXG4uY2FyZC10aXRsZSB7XG4gIG1hcmdpbi1ib3R0b206IDA7XG4gIGNvbG9yOiBibGFjaztcbn1cblxuLmNhcmQtc3VidGl0bGUge1xuICBtYXJnaW4tYm90dG9tOiAwO1xuICBtYXJnaW4tbGVmdDogNDBweDtcbn1cblxuLmNhcmQge1xuICBtYXJnaW4tdG9wOiA0cHg7XG4gIG1hcmdpbi1ib3R0b206IDRweDtcbn1cblxuLnN0ZXAtYm9keSB7XG4gIG92ZXJmbG93OiBhdXRvO1xuXG4gIC5jb2x1bW4tcm93IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIG1hcmdpbi1sZWZ0OiAtNHB4O1xuICAgIG1hcmdpbi1yaWdodDogLTRweDtcblxuICAgICYuaXNNb2JpbGUge1xuICAgICAgZGlzcGxheTogYmxvY2s7XG4gICAgICBtYXJnaW4tbGVmdDogMDtcbiAgICAgIG1hcmdpbi1yaWdodDogMDtcbiAgICB9XG4gIH1cblxuICAuY29sdW1uIHtcbiAgICBtYXJnaW46IDRweDtcbiAgICB3aWR0aDogMTAwJTtcbiAgfVxufVxuXG4uaW5kZW50ZWQtY2FyZC1ib2R5IHtcbiAgbWFyZ2luLWxlZnQ6IDUwcHg7XG4gIG1hcmdpbi1yaWdodDogOHB4O1xuXG4gICYuYWZ0ZXItdGl0bGUge1xuICAgIHBhZGRpbmctdG9wOiAwcHg7XG4gIH1cbn1cblxuLnN0ZXAtYnV0dG9ucyB7XG4gIG1hcmdpbi1sZWZ0OiBjYWxjKDUwcHggLSAwLjc1cmVtKTtcbiAgcGFkZGluZy10b3A6IDA7XG5cbiAgLy8gLmJ0bi1saWdodDpmaXJzdC1jaGlsZCB7XG4gIC8vICAgcGFkZGluZy1sZWZ0OiAwO1xuICAvLyB9XG59XG5cbi5zdGVwLXR5cGUge1xuICBmb250LXNpemU6IDAuOGVtO1xuICBmb250LXN0eWxlOiBpdGFsaWM7XG59XG5cbi5zdGVwLXR5cGUtc2VsZWN0b3Ige1xuICBtYXJnaW4tbGVmdDogLTRweDtcbiAgbWFyZ2luLXJpZ2h0OiAtNHB4O1xuXG4gIGJ1dHRvbiB7XG4gICAgd2lkdGg6IGNhbGMoNTAlIC0gOHB4KTtcbiAgICBtYXJnaW46IDRweDtcbiAgICBoZWlnaHQ6IDEwMHB4O1xuICB9XG59XG4iLCIuY2FyZCB7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LCAyNTUsIDI1NSwgMC43KTtcbn1cblxuLmV4cGFuZC1idXR0b24ge1xuICB3aWR0aDogMzBweDtcbiAgbWFyZ2luLXJpZ2h0OiAyMHB4O1xufVxuXG4uY2FyZC10aXRsZSB7XG4gIG1hcmdpbi1ib3R0b206IDA7XG4gIGNvbG9yOiBibGFjaztcbn1cblxuLmNhcmQtc3VidGl0bGUge1xuICBtYXJnaW4tYm90dG9tOiAwO1xuICBtYXJnaW4tbGVmdDogNDBweDtcbn1cblxuLmNhcmQge1xuICBtYXJnaW4tdG9wOiA0cHg7XG4gIG1hcmdpbi1ib3R0b206IDRweDtcbn1cblxuLnN0ZXAtYm9keSB7XG4gIG92ZXJmbG93OiBhdXRvO1xufVxuLnN0ZXAtYm9keSAuY29sdW1uLXJvdyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIHdpZHRoOiAxMDAlO1xuICBtYXJnaW4tbGVmdDogLTRweDtcbiAgbWFyZ2luLXJpZ2h0OiAtNHB4O1xufVxuLnN0ZXAtYm9keSAuY29sdW1uLXJvdy5pc01vYmlsZSB7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBtYXJnaW4tbGVmdDogMDtcbiAgbWFyZ2luLXJpZ2h0OiAwO1xufVxuLnN0ZXAtYm9keSAuY29sdW1uIHtcbiAgbWFyZ2luOiA0cHg7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG4uaW5kZW50ZWQtY2FyZC1ib2R5IHtcbiAgbWFyZ2luLWxlZnQ6IDUwcHg7XG4gIG1hcmdpbi1yaWdodDogOHB4O1xufVxuLmluZGVudGVkLWNhcmQtYm9keS5hZnRlci10aXRsZSB7XG4gIHBhZGRpbmctdG9wOiAwcHg7XG59XG5cbi5zdGVwLWJ1dHRvbnMge1xuICBtYXJnaW4tbGVmdDogY2FsYyg1MHB4IC0gMC43NXJlbSk7XG4gIHBhZGRpbmctdG9wOiAwO1xufVxuXG4uc3RlcC10eXBlIHtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgZm9udC1zdHlsZTogaXRhbGljO1xufVxuXG4uc3RlcC10eXBlLXNlbGVjdG9yIHtcbiAgbWFyZ2luLWxlZnQ6IC00cHg7XG4gIG1hcmdpbi1yaWdodDogLTRweDtcbn1cbi5zdGVwLXR5cGUtc2VsZWN0b3IgYnV0dG9uIHtcbiAgd2lkdGg6IGNhbGMoNTAlIC0gOHB4KTtcbiAgbWFyZ2luOiA0cHg7XG4gIGhlaWdodDogMTAwcHg7XG59Il19 */"
 
 /***/ }),
 
