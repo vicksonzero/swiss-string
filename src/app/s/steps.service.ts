@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { shareReplay, tap } from 'rxjs/operators';
-import { ContextDef } from './Context';
+import { ContextDef, ContextHolder } from './Context';
 import { mockSteps } from './mockSteps';
 import { OperatorWidget, Step, StepFactory, ViewWidget, WidgetConfig, WidgetType } from './Step';
 
-export interface ContextHolder {
-  [x: string]: { lastSeenColumnID: number, lastSeenStepIndex: number };
-}
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +16,7 @@ export class StepsService {
 
   latestStepID = mockSteps.map(s => s.id).reduce((a, v) => Math.max(a, v), 0);
   contexts: ContextDef[];
+  contextHolders: ContextHolder[];
 
   constructor() {
     this.steps$ = this.stepsSource.pipe(
@@ -66,7 +64,7 @@ export class StepsService {
   updateContexts(steps: Step[]) {
     this.entities = [];
     const newContexts: ContextDef[] = [];
-    const contextHolder: ContextHolder = {}; // holds keys and last-seen widgetID
+    const contextHolders: ContextHolder[] = [{}]; // holds keys and last-seen widgetID
     for (let stepIndex = 0; stepIndex < steps.length; stepIndex++) {
       const step = steps[stepIndex];
       // const nextStep = steps[i + 1];
@@ -82,7 +80,7 @@ export class StepsService {
         case WidgetType.VIEW:
           {
             const beforeContext = this.updateViewWidgetContext(
-              stepIndex, stepID, columns as ViewWidget[], contextHolder, newContexts
+              stepIndex, stepID, columns as ViewWidget[], contextHolders, newContexts
             );
             newContexts.push(beforeContext);
           }
@@ -90,7 +88,7 @@ export class StepsService {
         case WidgetType.OPERATOR:
           {
             const beforeContext = this.updateOperatorWidgetContext(
-              stepIndex, stepID, columns as OperatorWidget[], contextHolder, newContexts
+              stepIndex, stepID, columns as OperatorWidget[], contextHolders, newContexts
             );
             newContexts.push(beforeContext);
           }
@@ -100,17 +98,19 @@ export class StepsService {
     }
     // console.log('newContexts', JSON.stringify(newContexts, null, 4));
     this.contexts = newContexts;
+    this.contextHolders = contextHolders;
   }
 
   updateViewWidgetContext(
     stepIndex: number, stepID: number,
-    columns: ViewWidget[], contextHolder: ContextHolder, newContexts: ContextDef[]
+    columns: ViewWidget[], contextHolders: ContextHolder[], newContexts: ContextDef[]
   ) {
     // mutates contextHolder and newContexts in place
     const beforeContext: ContextDef = {
       beforeStepID: stepID,
       keys: [],
     };
+    const contextHolder = { ...contextHolders[contextHolders.length - 1] };
 
     columns.forEach((column) => {
       const { id: columnID, type: columnType } = column;
@@ -129,19 +129,20 @@ export class StepsService {
       contextHolder[name] = { lastSeenColumnID: columnID, lastSeenStepIndex: stepIndex };
     });
 
-
+    contextHolders.push(contextHolder);
     return beforeContext;
   }
 
   updateOperatorWidgetContext(
     stepIndex: number, stepID: number,
-    columns: OperatorWidget[], contextHolder: ContextHolder, newContexts: ContextDef[]
+    columns: OperatorWidget[], contextHolders: ContextHolder[], newContexts: ContextDef[]
   ) {
     // mutates contextHolder and newContexts in place
     const beforeContext: ContextDef = {
       beforeStepID: stepID,
       keys: [],
     };
+    const contextHolder = { ...contextHolders[contextHolders.length - 1] };
 
     columns.forEach((column) => {
       const { id: columnID, type: columnType } = column;
@@ -167,6 +168,7 @@ export class StepsService {
       });
     });
 
+    contextHolders.push(contextHolder);
     return beforeContext;
   }
 }

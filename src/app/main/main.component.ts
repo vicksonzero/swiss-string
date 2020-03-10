@@ -30,7 +30,8 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
     this.stepsService.steps$.subscribe((steps) => {
       this.steps = steps;
       this.stepsJSON = JSON.stringify(steps, null, 4);
-      console.log(this.stepsService.contexts);
+      // console.log(this.stepsService.contexts);
+      // console.log(this.stepsService.contextHolders);
     });
   }
 
@@ -152,7 +153,6 @@ export class MainComponent implements OnInit, OnDestroy, AfterContentChecked {
         circleOut.setAttributeNS(null, 'fill', hashStringToColor(name));
         circleOut.setAttributeNS(null, 'cx', '' + toPoint.x);
         circleOut.setAttributeNS(null, 'cy', '' + toPoint.y);
-
       });
     });
   }
