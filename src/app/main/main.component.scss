@@ -12,3 +12,13 @@
 .back{
   position:absolute;
 }
+
+
+.indented-card-body {
+  margin-left: 50px;
+  margin-right: 8px;
+
+  &.after-title {
+    padding-top: 0px;
+  }
+}

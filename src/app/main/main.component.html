@@ -15,11 +15,15 @@
     </div>
   </div>
 </div>
-<div>
-  <app-button (click)="onClickAddStep()">Add step</app-button>
+<div class="card">
+  <div class="card-body indented-card-body">
+    <app-button (click)="onClickAddStep()">Add step</app-button>
+  </div>
 </div>
 
-<div>
-  <p>stepsJSON</p>
-  <textarea style="width:100%; max-width:500px; height: 200px;">{{stepsJSON}}</textarea>
+<div class="card">
+  <div class="card-body">
+    <h5>stepsJSON</h5>
+    <textarea style="width:100%; max-width:500px; height: 200px;">{{stepsJSON}}</textarea>
+  </div>
 </div>
