@@ -17,6 +17,6 @@
   </h6>
 </div>
 <div class="view">
-  <textarea [style.height]="height+'px'">{{viewWidget.view.default}}</textarea>
+  <textarea [style.height]="height+'px'" (blur)="onContentUpdated($event)">{{content}}</textarea>
 </div>
 <div class="column-output"></div>

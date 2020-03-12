@@ -3,14 +3,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { shareReplay, tap } from 'rxjs/operators';
 import { ContextDef, ContextHolder } from './Context';
 import { mockSteps } from './mockSteps';
-import { OperatorWidget, Step, StepFactory, ViewWidget, WidgetConfig, WidgetType } from './Step';
+import { OperatorWidget, Step, StepUtils, ViewWidget, WidgetConfig, WidgetType } from './Step';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class StepsService {
-  stepsSource = new BehaviorSubject<Step[]>(mockSteps);
+  private stepsSource = new BehaviorSubject<Step[]>(mockSteps);
   steps$: Observable<Step[]>;
   entities: (WidgetConfig | Step)[] = [];
 
@@ -22,6 +22,7 @@ export class StepsService {
     this.steps$ = this.stepsSource.pipe(
       tap((steps) => this.updateContexts(steps)),
       shareReplay(1),
+      // tap((steps) => console.log('steps', steps, this.contexts)),
     );
   }
 
@@ -29,15 +30,15 @@ export class StepsService {
     const oldSteps = [...this.stepsSource.getValue()];
 
     this.latestStepID += 1;
-    oldSteps.push(StepFactory.createStep({ id: this.latestStepID, title: 'New Step' }));
+    oldSteps.push(StepUtils.createStep({ id: this.latestStepID, title: 'New Step' }));
     this.stepsSource.next(oldSteps);
   }
 
   updateStep(stepID: number, newValue: Step) {
     const oldSteps = [...this.stepsSource.getValue()];
     const positionID = oldSteps.findIndex(step => step.id === stepID);
-    oldSteps[positionID] = StepFactory.createStep(newValue);
-    console.log('updateStep', stepID, oldSteps[positionID]);
+    oldSteps[positionID] = StepUtils.createStep(newValue);
+    // console.log('updateStep', stepID, oldSteps[positionID]);
     this.stepsSource.next(oldSteps);
   }
   removeStep(stepID: number) {

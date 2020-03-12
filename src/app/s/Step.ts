@@ -38,7 +38,7 @@ export interface OperatorWidget extends WidgetConfig {
   operator: Operator;
 }
 
-export class StepFactory {
+export class StepUtils {
   static createStep(config: Partial<Step>): Step {
     let result: Step = {
       id: 0,
@@ -50,5 +50,28 @@ export class StepFactory {
     result = { ...result, ...config };
 
     return result;
+  }
+
+  static iterateOperators(args: {
+    steps: Step[],
+    viewCallback: (viewWidget: ViewWidget) => void,
+    operatorCallback: (operatorWidget: OperatorWidget) => void
+  }) {
+    args.steps.forEach((step) => {
+      step.columns.forEach((column) => {
+        switch (column.type) {
+          case WidgetType.VIEW:
+            {
+              args.viewCallback(column as ViewWidget);
+            }
+            break;
+          case WidgetType.OPERATOR:
+            {
+              args.operatorCallback(column as OperatorWidget);
+            }
+            break;
+        }
+      });
+    });
   }
 }
