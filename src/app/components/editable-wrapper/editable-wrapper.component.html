@@ -1,5 +1,8 @@
 <input type="text" *ngIf="isEdit" [value]="value" (blur)="onEditorBlur()" #editor
   (keyup.enter)="onEditorEnter()">
 <span *ngIf="!isEdit" (click)="onContentClicked()" (mouseenter)="onMouseEnterLabel()"
-  (mouseleave)="onMouseLeaveLabel()">{{value}}</span>
-<fa-icon [icon]="faEdit" *ngIf="isLabelOver"></fa-icon>
+  (mouseleave)="onMouseLeaveLabel()">
+  {{value}}
+  <fa-icon [icon]="faEdit" *ngIf="isLabelOver"></fa-icon>
+</span>
+

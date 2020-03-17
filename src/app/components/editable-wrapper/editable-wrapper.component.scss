@@ -1,5 +1,28 @@
 :host {
-  display: inline-block;
+  display: block;
+  // width: 100%;
+  background: none;
+  flex-grow: 1;
+
+  &:hover {
+    background-color: #EEE;
+  }
+
+  &:active {
+    background-color: #DDD;
+
+  }
+}
+
+span {
+  display: block;
+  width: 100%;
+  padding: 2px 1px;
+}
+
+input {
+  display: block;
+  width: 100%;
 }
 
 

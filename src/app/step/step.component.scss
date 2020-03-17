@@ -10,6 +10,12 @@
 .card-title {
   margin-bottom: 0;
   color: black;
+  display: flex;
+
+  span {
+    display: block;
+    padding-right: 4px;
+  }
 }
 
 .card-subtitle {

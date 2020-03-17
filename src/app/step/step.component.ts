@@ -95,7 +95,7 @@ export class StepComponent implements OnInit, AfterContentChecked {
     this.changeToEditMode(StepEditMode.ORGANIZE);
   }
 
-  onClickEndOrganize(){
+  onClickEndOrganize() {
     this.changeToEditMode(StepEditMode.DEFAULT);
   }
 }
