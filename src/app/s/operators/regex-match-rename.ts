@@ -21,7 +21,7 @@ export const operator = {
       tokenRegex = new RegExp(regex, 'm'); // multiline
     } catch (error) {
       return {
-        result: [],
+        result: '',
         residue: '',
         err: error.toString(),
       };
@@ -39,7 +39,7 @@ export const operator = {
 
     if (!matchResults || matchResults.length <= 0) {
       return {
-        result: [],
+        result: '',
         residue: '',
         err: matchResultSummary,
       };
@@ -61,7 +61,7 @@ export const operator = {
     );
 
     return {
-      result: tokensList,
+      result: JSON.stringify(tokensList, null, 4),
       residue,
       err: matchResultSummary,
     };

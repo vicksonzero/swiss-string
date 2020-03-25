@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, EMPTY, merge, Observable, ReplaySubject, Subject } from 'rxjs';
 import { map, shareReplay, startWith, tap } from 'rxjs/operators';
 import { ContextDef, ContextSubjectHolder } from './Context';
+import { operators } from './operators';
 import { OperatorWidget, Step, StepUtils, ViewWidget } from './Step';
 import { StepsService } from './steps.service';
 
@@ -30,6 +31,8 @@ export class RuntimeService {
   // entitiesUpdatesSource$ = new BehaviorSubject<EntityDataChange[]>([]);
   entitiesChanged$: Observable<{ [x: number]: EntityData }>;
   entitySubjects: { [x: number]: EntityData } = {} as any;
+
+  operators = operators;
 
   constructor(private stepsService: StepsService) {
     this.entitiesChanged$ = this.stepsService.steps$.pipe(
@@ -121,9 +124,10 @@ export class RuntimeService {
         ); // TODO: typescript types
 
         // const input$ = stepIndex === 0 ? of(view.default) : this.entitySubjects[];
-        const process$ = input$.pipe(
+        const process$: Observable<{ [x: string]: any }> = input$.pipe(
           tap((args) => console.log(`${columnID} operator ${type} process$ triggered`, args)),
-          // map() // do something about the operators
+          map((args) => this.operators[type].run(args)),
+          tap((args) => console.log(`${columnID} operator ${type} process$ completed`, args)),
         );
         const output$: Observable<{ [x: string]: any }> = process$.pipe(
           map((val) => {
@@ -131,7 +135,7 @@ export class RuntimeService {
               .reduce((obj, [outputKey, { id: widgetID, contextName }]) => {
                 return {
                   ...obj,
-                  [contextName]: val[contextName] == null ? '' : val[contextName],
+                  [contextName]: val[outputKey] == null ? '' : val[outputKey],
                 };
               }, {});
           }),
