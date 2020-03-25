@@ -1,10 +1,10 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { faMinus, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { merge, Observable } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { RuntimeService } from '../s/runtime.service';
 import { ViewWidget } from '../s/Step';
 import { StepsService } from '../s/steps.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-view-widget',
@@ -32,15 +32,20 @@ export class ViewWidgetComponent implements OnInit {
   }
 
   ngOnInit() {
-    merge(
-      this.runtimeService.entitiesChanged$.pipe(
-        // tap((a) => console.log('entityRuntimeData', [...a], this.viewWidget.id)),
-        filter((changedIndexes) => changedIndexes.some(index => index === this.viewWidget.id)),
-      ),
-      this.stepsService.steps$.pipe(take(1)),
-    ).subscribe(() => {
-      // console.log('entityRuntimeData', this.viewWidget.id)),
-      this.content = this.runtimeService.entities[this.viewWidget.id].content;
+    // merge(
+    //   this.runtimeService.entitiesChanged$.pipe(
+    //     // tap((a) => console.log('entityRuntimeData', [...a], this.viewWidget.id)),
+    //     filter((changedIndexes) => changedIndexes.some(index => index === this.viewWidget.id)),
+    //   ),
+    //   this.stepsService.steps$.pipe(take(1)),
+    // ).subscribe(() => {
+    //   // console.log('entityRuntimeData', this.viewWidget.id)),
+    //   this.content = this.runtimeService.entities[this.viewWidget.id].content;
+    // });
+    this.runtimeService.entitiesChanged$.subscribe((entitySubjects) => {
+      entitySubjects[this.viewWidget.id].input$.subscribe((content) => {
+        this.content = content;
+      });
     });
   }
 

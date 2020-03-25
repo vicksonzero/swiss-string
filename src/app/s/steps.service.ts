@@ -22,7 +22,7 @@ export class StepsService {
     this.steps$ = this.stepsSource.pipe(
       tap((steps) => this.updateContexts(steps)),
       shareReplay(1),
-      // tap((steps) => console.log('steps', steps, this.contexts)),
+      tap((steps) => console.log('steps', steps, this.contexts)),
     );
   }
 
@@ -122,8 +122,10 @@ export class StepsService {
       if (contextHolder[name]) {
         const { lastSeenColumnID: lastSeenID, lastSeenStepIndex } = contextHolder[name];
         beforeContext.keys.push({
-          name, fromStepIndex: lastSeenStepIndex,
-          fromID: lastSeenID, toID: columnID, type: null,
+          name,
+          fromStepIndex: lastSeenStepIndex,
+          type: null,
+          fromID: lastSeenID, toID: columnID,
         });
       }
 
@@ -156,8 +158,10 @@ export class StepsService {
         if (contextHolder[contextName]) {
           const { lastSeenColumnID: lastSeenID, lastSeenStepIndex } = contextHolder[contextName];
           beforeContext.keys.push({
-            name: contextName, fromStepIndex: lastSeenStepIndex,
-            fromID: lastSeenID, toID: connectorID, type: null,
+            name: contextName,
+            fromStepIndex: lastSeenStepIndex,
+            type: null,
+            fromID: lastSeenID, toID: connectorID,
           });
         }
         // contextHolder[inputKey] = columnID;

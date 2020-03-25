@@ -465,7 +465,7 @@ console.log(
     ...a.split('\n'),
   ]
     .map((line) => {
-      return operator.run(line, ' ', '\\"');
+      return operator.run({ str: line, separatorRegex: ' ', quotesRegex: '\\"' });
     })
     .map(result => result.tokens || [])
     .map(tokens => tokens.join('\t'))

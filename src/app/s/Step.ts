@@ -54,24 +54,47 @@ export class StepUtils {
 
   static iterateOperators(args: {
     steps: Step[],
-    viewCallback: (viewWidget: ViewWidget) => void,
-    operatorCallback: (operatorWidget: OperatorWidget) => void
+    viewCallback: (viewWidget: ViewWidget, stepID: number, stepIndex: number) => void,
+    operatorCallback: (operatorWidget: OperatorWidget, stepID: number, stepIndex: number) => void
   }) {
-    args.steps.forEach((step) => {
-      step.columns.forEach((column) => {
+    args.steps.forEach((step, stepIndex) => {
+      const { columns, id: stepID } = step;
+      columns.forEach((column) => {
         switch (column.type) {
           case WidgetType.VIEW:
             {
-              args.viewCallback(column as ViewWidget);
+              args.viewCallback(column as ViewWidget, stepID, stepIndex);
             }
             break;
           case WidgetType.OPERATOR:
             {
-              args.operatorCallback(column as OperatorWidget);
+              args.operatorCallback(column as OperatorWidget, stepID, stepIndex);
             }
             break;
         }
       });
+    });
+  }
+  static iterateOperatorsOfStep(args: {
+    step: Step, stepID: number, stepIndex: number,
+    viewCallback: (viewWidget: ViewWidget, stepID: number, stepIndex: number) => void,
+    operatorCallback: (operatorWidget: OperatorWidget, stepID: number, stepIndex: number) => void
+  }) {
+    const { step, stepID, stepIndex } = args;
+    const { columns } = step;
+    columns.forEach((column) => {
+      switch (column.type) {
+        case WidgetType.VIEW:
+          {
+            args.viewCallback(column as ViewWidget, stepID, stepIndex);
+          }
+          break;
+        case WidgetType.OPERATOR:
+          {
+            args.operatorCallback(column as OperatorWidget, stepID, stepIndex);
+          }
+          break;
+      }
     });
   }
 }

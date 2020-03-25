@@ -5,7 +5,7 @@ export const operator = {
   description: 'Generates text by applying a handlebars template to "data"',
   inputs: ['template', 'data'],
   outputs: ['result', 'err'],
-  run: (template: string, data: object) => {
+  run: ({ template, data }: { template: string, data: object }) => {
     try {
       const handlebarDelegate = compile(template);
       const result = handlebarDelegate(data);
