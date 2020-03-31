@@ -5,6 +5,7 @@ import { ContextDef, ContextHolder } from './Context';
 import { mockSteps } from './mockSteps';
 import { OperatorConnectors } from './Operator';
 import { OperatorWidget, Step, StepUtils, ViewWidget, WidgetConfig, WidgetType } from './Step';
+import { ViewWidgetType } from './View';
 
 
 @Injectable({
@@ -65,7 +66,7 @@ export class StepsService {
             default: 'view',
             name: 'view',
             title: 'View',
-            type: 'textarea',
+            type: 'textarea' as ViewWidgetType,
           };
         }
         break;

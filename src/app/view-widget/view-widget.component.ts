@@ -2,9 +2,10 @@ import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { faMinus, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { RuntimeService } from '../s/runtime.service';
-import { ViewWidget } from '../s/Step';
+import { ViewWidget, WidgetType } from '../s/Step';
 import { StepsService } from '../s/steps.service';
 import { map } from 'rxjs/operators';
+import { ViewWidgetType } from '../s/View';
 
 @Component({
   selector: 'app-view-widget',
@@ -16,6 +17,7 @@ export class ViewWidgetComponent implements OnInit {
   public faPlus = faPlus;
   public faMinus = faMinus;
   public faTrashAlt = faTrashAlt;
+  public ViewWidgetType = ViewWidgetType;
 
   @Input() stepID: number;
   @Input() viewWidget: ViewWidget;

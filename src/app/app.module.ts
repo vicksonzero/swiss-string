@@ -13,6 +13,7 @@ import { ViewWidgetComponent } from './view-widget/view-widget.component';
 import { OperatorWidgetComponent } from './operator-widget/operator-widget.component';
 import { CircleComponent } from './components/circle/circle.component';
 import { TextareaViewComponent } from './view-widget/textarea-view/textarea-view.component';
+import { JsonViewComponent } from './view-widget/json-view/json-view.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TextareaViewComponent } from './view-widget/textarea-view/textarea-view
     ViewWidgetComponent,
     OperatorWidgetComponent,
     CircleComponent,
-    TextareaViewComponent
+    TextareaViewComponent,
+    JsonViewComponent
   ],
   imports: [
     BrowserModule,

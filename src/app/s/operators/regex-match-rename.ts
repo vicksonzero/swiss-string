@@ -61,7 +61,7 @@ export const operator = {
     );
 
     return {
-      result: JSON.stringify(tokensList, null, 4),
+      result: tokensList,
       residue,
       err: matchResultSummary,
     };

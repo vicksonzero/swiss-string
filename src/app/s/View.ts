@@ -1,5 +1,12 @@
+export enum ViewWidgetType {
+  TEXTAREA = 'textarea',
+  LIST = 'list',
+  TUPLE_TEXT = 'tupleText',
+  JSON = 'json',
+}
+
 export interface View {
-  type: 'textarea' | 'list' | 'tupleText';
+  type: ViewWidgetType;
   title: string;
   name: string;
   default: any;

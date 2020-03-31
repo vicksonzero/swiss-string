@@ -18,6 +18,9 @@
 </div>
 <div class="view">
   <!-- <textarea [style.height]="height+'px'" (blur)="onContentUpdated($event)">{{content}}</textarea> -->
-  <app-textarea-view [style.height]="height+'px'" (valueChange)="onContentUpdated($event)" [content]="content"></app-textarea-view>
+  <app-textarea-view *ngIf="viewWidget.view.type === ViewWidgetType.TEXTAREA" [style.height]="height+'px'"
+    (valueChange)="onContentUpdated($event)" [content]="content"></app-textarea-view>
+  <app-json-view *ngIf="viewWidget.view.type === ViewWidgetType.JSON" [style.height]="height+'px'"
+    (valueChange)="onContentUpdated($event)" [content]="content"></app-json-view>
 </div>
 <div class="column-output"></div>
