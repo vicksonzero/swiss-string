@@ -41,11 +41,13 @@ export class StepComponent implements OnInit, AfterContentChecked {
     switch (this.step.type) {
       case WidgetType.VIEW:
         this.summary = this.step.columns.map(c => {
+          if (c.type !== WidgetType.VIEW) { return ''; }
           return (c as ViewWidget).view.title;
         }).join(', ');
         break;
       case WidgetType.OPERATOR:
         this.summary = '[' + this.step.columns.map(c => {
+          if (c.type !== WidgetType.OPERATOR) { return ''; }
           return (c as OperatorWidget).operator.title || (c as OperatorWidget).operator.type;
         }).join(', ') + ']';
         break;
@@ -97,5 +99,9 @@ export class StepComponent implements OnInit, AfterContentChecked {
 
   onClickEndOrganize() {
     this.changeToEditMode(StepEditMode.DEFAULT);
+  }
+
+  onClickAddColumn() {
+    this.stepsService.addWidget(this.step.id, this.step.type);
   }
 }

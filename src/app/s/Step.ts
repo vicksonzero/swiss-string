@@ -8,6 +8,7 @@ export interface DataType {
 export enum WidthUnit {
   PIXEL = 'px',
   PERCENTAGE = '%',
+  flex = 'flex',
 }
 
 export interface WidgetConfig {

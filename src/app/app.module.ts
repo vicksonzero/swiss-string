@@ -12,6 +12,7 @@ import { ColumnComponent } from './column/column.component';
 import { ViewWidgetComponent } from './view-widget/view-widget.component';
 import { OperatorWidgetComponent } from './operator-widget/operator-widget.component';
 import { CircleComponent } from './components/circle/circle.component';
+import { TextareaViewComponent } from './view-widget/textarea-view/textarea-view.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CircleComponent } from './components/circle/circle.component';
     ColumnComponent,
     ViewWidgetComponent,
     OperatorWidgetComponent,
-    CircleComponent
+    CircleComponent,
+    TextareaViewComponent
   ],
   imports: [
     BrowserModule,

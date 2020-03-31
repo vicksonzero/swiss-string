@@ -17,6 +17,7 @@
   </h6>
 </div>
 <div class="view">
-  <textarea [style.height]="height+'px'" (blur)="onContentUpdated($event)">{{content}}</textarea>
+  <!-- <textarea [style.height]="height+'px'" (blur)="onContentUpdated($event)">{{content}}</textarea> -->
+  <app-textarea-view [style.height]="height+'px'" (valueChange)="onContentUpdated($event)" [content]="content"></app-textarea-view>
 </div>
 <div class="column-output"></div>

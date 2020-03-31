@@ -1,0 +1,10 @@
+{
+  "steps": [
+    {
+      "id": 1,
+      "title": "New Step",
+      "type": "view",
+      "columns": []
+    }
+  ]
+}
