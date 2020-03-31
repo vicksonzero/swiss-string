@@ -5,11 +5,11 @@
         <fa-icon *ngIf="isExpanded" [icon]="faMinus"></fa-icon>
         <fa-icon *ngIf="!isExpanded" [icon]="faPlus"></fa-icon>
       </button>
-      <span class="app-text-secondary">{{itemIndex+1}}.{{ ' ' }}</span>
-      <span class="debug-entity-id">[{{step.id}}]{{' '}}</span>
+      <div class="app-text-secondary">{{itemIndex+1}}.{{ ' ' }}</div>
+      <div class="debug-entity-id">[{{step.id}}]{{' '}}</div>
       <app-editable-wrapper [value]="step.title" (valueChange)="onTitleUpdated($event)"></app-editable-wrapper>{{ ' ' }}
-      <span style="display:inline-block;width:4px;"></span>
-      <span class="app-text-secondary step-type" [hidden]="isExpanded">{{summary}}</span>
+      <div style="display:inline-block;width:4px;"></div>
+      <div class="app-text-secondary step-type" [hidden]="isExpanded">{{summary}}</div>
     </h5>
     <div class="indented-card-body after-title" [hidden]="!isExpanded">
       <div class="step-body" *ngIf="step.type!=='basic'">

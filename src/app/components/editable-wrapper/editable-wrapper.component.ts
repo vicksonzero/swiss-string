@@ -12,6 +12,7 @@ export class EditableWrapperComponent implements OnInit {
 
   isEdit = false;
   isLabelOver = false;
+  @Input() wide = false;
   @Input() value = '';
   @Output() valueChange = new EventEmitter<string>();
 
