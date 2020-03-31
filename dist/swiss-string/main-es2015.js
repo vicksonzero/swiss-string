@@ -74,7 +74,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<input type=\"text\" *ngIf=\"isEdit\" [value]=\"value\" (blur)=\"onEditorBlur()\" #editor\n  (keyup.enter)=\"onEditorEnter()\">\n<span *ngIf=\"!isEdit\" (click)=\"onContentClicked()\" (mouseenter)=\"onMouseEnterLabel()\"\n  (mouseleave)=\"onMouseLeaveLabel()\">{{value}}</span>\n<fa-icon [icon]=\"faEdit\" *ngIf=\"isLabelOver\"></fa-icon>\n"
+module.exports = "<input type=\"text\" *ngIf=\"isEdit\" [value]=\"value\" (blur)=\"onEditorBlur()\" #editor\n  (keyup.enter)=\"onEditorEnter()\">\n<span *ngIf=\"!isEdit\" (click)=\"onContentClicked()\" (mouseenter)=\"onMouseEnterLabel()\"\n  (mouseleave)=\"onMouseLeaveLabel()\">\n  {{value}}\n  <fa-icon [icon]=\"faEdit\" *ngIf=\"isLabelOver\"></fa-icon>\n</span>\n\n"
 
 /***/ }),
 
@@ -85,7 +85,7 @@ module.exports = "<input type=\"text\" *ngIf=\"isEdit\" [value]=\"value\" (blur)
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"steps-editor\">\n  <div class=\"back\" #back>\n    <!-- <svg width=\"200\" height=\"200\" #graph>\n      <circle cx=\"50\" cy=\"50\" r=\"5\" fill=\"green\" />\n    </svg> -->\n  </div>\n  <div class=\"front\" #front>\n    <app-step *ngFor=\"let step of steps; let i = index; trackBy: trackItem\" [step]=\"step\" [itemIndex]=\"i\"\n      [isNextStop]=\"(step.type==='view' && i+1 < steps.length && steps[i+1].type !==step.type)\"></app-step>\n    <div *ngIf=\"steps.length <= 0\">\n      <div class=\"alert alert-primary\" role=\"alert\">\n        <fa-icon [icon]=\"faInfoCircle\"></fa-icon>\n        Start by pressing \"Add step\"\n      </div>\n    </div>\n  </div>\n</div>\n<div class=\"card\">\n  <div class=\"card-body indented-card-body\">\n    <app-button (click)=\"onClickAddStep()\">Add step</app-button>\n  </div>\n</div>\n\n<div class=\"card\">\n  <div class=\"card-body\">\n    <h5>stepsJSON</h5>\n    <textarea style=\"width:100%; max-width:500px; height: 200px;\">{{stepsJSON}}</textarea>\n  </div>\n</div>\n"
+module.exports = "<div class=\"steps-editor\">\n  <div class=\"back\" #back>\n    <!-- <svg width=\"200\" height=\"200\" #graph>\n      <circle cx=\"50\" cy=\"50\" r=\"5\" fill=\"green\" />\n    </svg> -->\n  </div>\n  <div class=\"front\" #front>\n    <app-step *ngFor=\"let step of steps; let i = index; trackBy: trackItem\" [step]=\"step\" [itemIndex]=\"i\"\n      [isNextStop]=\"(step.type==='view' && i+1 < steps.length && steps[i+1].type !==step.type)\"></app-step>\n    <div *ngIf=\"steps.length <= 0\">\n      <div class=\"alert alert-primary\" role=\"alert\">\n        <fa-icon [icon]=\"faInfoCircle\"></fa-icon>\n        Start by pressing \"Add step\", or press \"Load\" from the corner.\n      </div>\n    </div>\n  </div>\n</div>\n<div class=\"card\">\n  <div class=\"card-body indented-card-body\">\n    <app-button (click)=\"onClickAddStep()\">Add step</app-button>\n  </div>\n</div>\n\n<div class=\"card\">\n  <div class=\"card-body\">\n    <h5>stepsJSON</h5>\n    <textarea style=\"width:100%; max-width:500px; height: 200px;\">{{stepsJSON}}</textarea>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -96,7 +96,7 @@ module.exports = "<div class=\"steps-editor\">\n  <div class=\"back\" #back>\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"operator\">\n  <div class=\"column-input operator-parameter-container\">\n    <div class=\"operator-parameter\" *ngFor=\"let input of inputs\" [attr.data-entity-id]=\"input.id\"\n      [attr.data-entity-name]=\"input.contextName\">\n      <span class=\"debug-entity-id\">[{{input.id}}]{{' '}}</span>\n      {{input.contextName}}\n    </div>\n  </div>\n  <div class=\"operator-title\">\n    <h3 class=\"text-secondary\">{{operatorWidget.operator.title || operatorWidget.operator.type}}</h3>\n  </div>\n  <div class=\"column-output operator-parameter-container\">\n    <div class=\"operator-parameter\" *ngFor=\"let output of outputs\" [attr.data-entity-id]=\"output.id\"\n      [attr.data-entity-name]=\"output.contextName\">\n      <span class=\"debug-entity-id\">[{{output.id}}]{{' '}}</span>\n      {{output.contextName}}\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"operator\">\n  <div class=\"column-input operator-parameter-container\">\n    <div class=\"operator-parameter\" *ngFor=\"let input of inputs\" [attr.data-entity-id]=\"input.id\"\n      [attr.data-entity-name]=\"input.contextName\">\n      <span class=\"debug-entity-id\">[{{input.id}}]{{' '}}</span>\n      {{input.contextName}}\n    </div>\n  </div>\n  <div class=\"operator-title\">\n    <h3 class=\"text-secondary\">\n      <span class=\"debug-entity-id\">[{{operatorWidget.id}}]{{' '}}</span>\n      {{operatorWidget.operator.title || operatorWidget.operator.type}}</h3>\n  </div>\n  <div class=\"column-output operator-parameter-container\">\n    <div class=\"operator-parameter\" *ngFor=\"let output of outputs\" [attr.data-entity-id]=\"output.id\"\n      [attr.data-entity-name]=\"output.contextName\">\n      <span class=\"debug-entity-id\">[{{output.id}}]{{' '}}</span>\n      {{output.contextName}}\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -107,7 +107,29 @@ module.exports = "<div class=\"operator\">\n  <div class=\"column-input operator
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\n  <div class=\"card-body\">\n    <h5 class=\"card-title\">\n      <button class=\"expand-button btn btn-secondary btn-sm\" (click)=\"onExpandButtonClick()\">\n        <fa-icon *ngIf=\"isExpanded\" [icon]=\"faMinus\"></fa-icon>\n        <fa-icon *ngIf=\"!isExpanded\" [icon]=\"faPlus\"></fa-icon>\n      </button>\n      <span class=\"app-text-secondary\">{{itemIndex+1}}.{{ ' ' }}</span>\n      <span class=\"debug-entity-id\">[{{step.id}}]{{' '}}</span>\n      <app-editable-wrapper [value]=\"step.title\" (valueChange)=\"onTitleUpdated($event)\"></app-editable-wrapper>{{ ' ' }}\n      <span style=\"display:inline-block;width:4px;\"></span>\n      <span class=\"app-text-secondary step-type\" [hidden]=\"isExpanded\">{{summary}}</span>\n    </h5>\n    <div class=\"indented-card-body after-title\" [hidden]=\"!isExpanded\">\n      <div class=\"step-body\" *ngIf=\"step.type!=='basic'\">\n        <div class=\"column-row\" [class.isMobile]=\"isMobile\">\n          <app-column class=\"column\" [stepID]=\"step.id\"\n            *ngFor=\"let column of step.columns; let i = index; trackBy: trackColumn\"\n            [style.width]=\"isMobile ? '' : (column.width+column.widthUnit)\" [column]=\"column\" [index]=\"i\"\n            [editMode]=\"editMode\">\n          </app-column>\n          <div *ngIf=\"step.columns.length <= 0\" class=\"column\" [class.isMobile]=\"isMobile\">\n            <div class=\"alert alert-primary\" role=\"alert\">\n              <fa-icon [icon]=\"faInfoCircle\"></fa-icon>\n              Start by pressing \"Add {{this.step.type}}\"\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div *ngIf=\"step.type==='basic'\" [class.isMobile]=\"isMobile\">\n        <h6>Select step type:</h6>\n        <div class=\"column step-type-selector\" [class.isMobile]=\"isMobile\" [style.width]=\"'100%'\">\n          <button class=\"btn btn-secondary\" (click)=\"onClickTypeSelector('view')\">View</button>\n          <button class=\"btn btn-secondary\" (click)=\"onClickTypeSelector('operator')\">Operator</button>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"step-buttons toolbar\" [hidden]=\"!isExpanded\">\n      <div class=\"toolbar-default\" *ngIf=\"editMode === StepEditMode.DEFAULT\">\n        <button class=\"btn btn-light\" *ngIf=\"step.type!=='basic'\">Add {{this.step.type}}</button>{{ ' ' }}\n        <button class=\"btn btn-light\" *ngIf=\"step.type!=='basic'\" (click)=\"onClickOrganize()\">Organize</button>{{ ' ' }}\n        <button class=\"btn btn-light\" (click)=\"onClickRemoveStep()\">Remove Step</button>\n      </div>\n      <div class=\"toolbar-organize\" *ngIf=\"editMode === StepEditMode.ORGANIZE\">\n        <button class=\"btn btn-light\" *ngIf=\"step.type!=='basic'\" (click)=\"onClickEndOrganize()\">End\n          Organize</button>{{ ' ' }}\n      </div>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"isNextStop\" class=\"card\">\n  <div class=\"card-body indented-card-body\">\n    <app-button>Next</app-button>\n  </div>\n</div>\n"
+module.exports = "<div class=\"card\">\n  <div class=\"card-body\">\n    <h5 class=\"card-title noselect\">\n      <button class=\"expand-button btn btn-secondary btn-sm\" (click)=\"onExpandButtonClick()\">\n        <fa-icon *ngIf=\"isExpanded\" [icon]=\"faMinus\"></fa-icon>\n        <fa-icon *ngIf=\"!isExpanded\" [icon]=\"faPlus\"></fa-icon>\n      </button>\n      <span class=\"app-text-secondary\">{{itemIndex+1}}.{{ ' ' }}</span>\n      <span class=\"debug-entity-id\">[{{step.id}}]{{' '}}</span>\n      <app-editable-wrapper [value]=\"step.title\" (valueChange)=\"onTitleUpdated($event)\"></app-editable-wrapper>{{ ' ' }}\n      <span style=\"display:inline-block;width:4px;\"></span>\n      <span class=\"app-text-secondary step-type\" [hidden]=\"isExpanded\">{{summary}}</span>\n    </h5>\n    <div class=\"indented-card-body after-title\" [hidden]=\"!isExpanded\">\n      <div class=\"step-body\" *ngIf=\"step.type!=='basic'\">\n        <div class=\"column-row\" [class.isMobile]=\"isMobile\">\n          <app-column class=\"column\" [stepID]=\"step.id\"\n            *ngFor=\"let column of step.columns; let i = index; trackBy: trackColumn\"\n            [style.width]=\"(isMobile || column.widthUnit==='flex') ? '' : (column.width+column.widthUnit)\"\n            [column]=\"column\" [index]=\"i\" [editMode]=\"editMode\">\n          </app-column>\n          <div *ngIf=\"step.columns.length <= 0\" class=\"column\" [class.isMobile]=\"isMobile\">\n            <div class=\"alert alert-primary\" role=\"alert\">\n              <fa-icon [icon]=\"faInfoCircle\"></fa-icon>\n              Start by pressing \"Add {{this.step.type}}\"\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div *ngIf=\"step.type==='basic'\" [class.isMobile]=\"isMobile\">\n        <h6>Select step type:</h6>\n        <div class=\"column step-type-selector\" [class.isMobile]=\"isMobile\" [style.width]=\"'100%'\">\n          <button class=\"btn btn-secondary\" (click)=\"onClickTypeSelector('view')\">View</button>\n          <button class=\"btn btn-secondary\" (click)=\"onClickTypeSelector('operator')\">Operator</button>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"step-buttons toolbar\" [hidden]=\"!isExpanded\">\n      <div class=\"toolbar-default\" *ngIf=\"editMode === StepEditMode.DEFAULT\">\n        <button class=\"btn btn-light\" *ngIf=\"step.type!=='basic'\" (click)=\"onClickAddColumn()\">Add\n          {{this.step.type}}</button>{{ ' ' }}\n        <button class=\"btn btn-light\" *ngIf=\"step.type!=='basic'\" (click)=\"onClickOrganize()\">Organize</button>{{ ' ' }}\n        <button class=\"btn btn-light\" (click)=\"onClickRemoveStep()\">Remove Step</button>\n      </div>\n      <div class=\"toolbar-organize\" *ngIf=\"editMode === StepEditMode.ORGANIZE\">\n        <button class=\"btn btn-light\" *ngIf=\"step.type!=='basic'\" (click)=\"onClickEndOrganize()\">End\n          Organize</button>{{ ' ' }}\n      </div>\n    </div>\n  </div>\n</div>\n<div *ngIf=\"isNextStop\" class=\"card\">\n  <div class=\"card-body indented-card-body\">\n    <app-button>Next</app-button>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/view-widget/json-view/json-view.component.html":
+/*!******************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/view-widget/json-view/json-view.component.html ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<textarea [style.height]=\"height+'px'\" (blur)=\"onContentUpdated($event)\">{{jsonString}}</textarea>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/view-widget/textarea-view/textarea-view.component.html":
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/view-widget/textarea-view/textarea-view.component.html ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<textarea [style.height]=\"height+'px'\" (blur)=\"onContentUpdated($event)\">{{content}}</textarea>\n"
 
 /***/ }),
 
@@ -118,7 +140,7 @@ module.exports = "<div class=\"card\">\n  <div class=\"card-body\">\n    <h5 cla
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"column-input\">\n  <div class=\"toolbar\" *ngIf=\"isOrganizeMode\">\n    <div class=\"filler\"></div>\n    <button class=\"btn btn-secondary btn-sm\" (click)=\"onClickResizeButton(+1)\">\n      <fa-icon [icon]=\"faPlus\" size=\"xs\"></fa-icon>\n    </button>\n    <button class=\"btn btn-secondary btn-sm\" (click)=\"onClickResizeButton(-1)\">\n      <fa-icon [icon]=\"faMinus\" size=\"xs\"></fa-icon>\n    </button>\n    <button class=\"btn btn-secondary btn-sm\" *ngIf=\"isOrganizeMode\" (click)=\"onClickTrash()\">\n      <fa-icon [icon]=\"faTrashAlt\" size=\"xs\"></fa-icon>\n    </button>\n  </div>\n  <h6 class=\"text-secondary view-title\">\n    <span class=\"debug-entity-id\">[{{viewWidget.id}}]{{' '}}</span>\n    <app-editable-wrapper [value]=\"viewWidget.view.title\" (valueChange)=\"onTitleUpdated($event)\"></app-editable-wrapper>\n  </h6>\n</div>\n<div class=\"view\">\n  <textarea [style.height]=\"height+'px'\">{{viewWidget.view.default}}</textarea>\n</div>\n<div class=\"column-output\"></div>\n"
+module.exports = "<div class=\"column-input\">\n  <div class=\"toolbar\" *ngIf=\"isOrganizeMode\">\n    <div class=\"filler\"></div>\n    <button class=\"btn btn-secondary btn-sm\" (click)=\"onClickResizeButton(+1)\">\n      <fa-icon [icon]=\"faPlus\" size=\"xs\"></fa-icon>\n    </button>\n    <button class=\"btn btn-secondary btn-sm\" (click)=\"onClickResizeButton(-1)\">\n      <fa-icon [icon]=\"faMinus\" size=\"xs\"></fa-icon>\n    </button>\n    <button class=\"btn btn-secondary btn-sm\" *ngIf=\"isOrganizeMode\" (click)=\"onClickTrash()\">\n      <fa-icon [icon]=\"faTrashAlt\" size=\"xs\"></fa-icon>\n    </button>\n  </div>\n  <h6 class=\"text-secondary view-title\">\n    <div class=\"debug-entity-id\">[{{viewWidget.id}}]{{' '}}</div>\n    <app-editable-wrapper [value]=\"viewWidget.view.title\" (valueChange)=\"onTitleUpdated($event)\"></app-editable-wrapper>\n  </h6>\n</div>\n<div class=\"view\">\n  <!-- <textarea [style.height]=\"height+'px'\" (blur)=\"onContentUpdated($event)\">{{content}}</textarea> -->\n  <app-textarea-view *ngIf=\"viewWidget.view.type === ViewWidgetType.TEXTAREA\" [style.height]=\"height+'px'\"\n    (valueChange)=\"onContentUpdated($event)\" [content]=\"content\"></app-textarea-view>\n  <app-json-view *ngIf=\"viewWidget.view.type === ViewWidgetType.JSON\" [style.height]=\"height+'px'\"\n    (valueChange)=\"onContentUpdated($event)\" [content]=\"content\"></app-json-view>\n</div>\n<div class=\"column-output\"></div>\n"
 
 /***/ }),
 
@@ -235,6 +257,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _view_widget_view_widget_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./view-widget/view-widget.component */ "./src/app/view-widget/view-widget.component.ts");
 /* harmony import */ var _operator_widget_operator_widget_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./operator-widget/operator-widget.component */ "./src/app/operator-widget/operator-widget.component.ts");
 /* harmony import */ var _components_circle_circle_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/circle/circle.component */ "./src/app/components/circle/circle.component.ts");
+/* harmony import */ var _view_widget_textarea_view_textarea_view_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./view-widget/textarea-view/textarea-view.component */ "./src/app/view-widget/textarea-view/textarea-view.component.ts");
+/* harmony import */ var _view_widget_json_view_json_view_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./view-widget/json-view/json-view.component */ "./src/app/view-widget/json-view/json-view.component.ts");
+
+
 
 
 
@@ -263,7 +289,9 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _column_column_component__WEBPACK_IMPORTED_MODULE_11__["ColumnComponent"],
             _view_widget_view_widget_component__WEBPACK_IMPORTED_MODULE_12__["ViewWidgetComponent"],
             _operator_widget_operator_widget_component__WEBPACK_IMPORTED_MODULE_13__["OperatorWidgetComponent"],
-            _components_circle_circle_component__WEBPACK_IMPORTED_MODULE_14__["CircleComponent"]
+            _components_circle_circle_component__WEBPACK_IMPORTED_MODULE_14__["CircleComponent"],
+            _view_widget_textarea_view_textarea_view_component__WEBPACK_IMPORTED_MODULE_15__["TextareaViewComponent"],
+            _view_widget_json_view_json_view_component__WEBPACK_IMPORTED_MODULE_16__["JsonViewComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
@@ -464,7 +492,7 @@ CircleComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":host {\n  display: inline-block;\n}\n\nfa-icon {\n  display: inline-block;\n  padding-left: 4px;\n  color: #888;\n  font-size: 0.8em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9lZGl0YWJsZS13cmFwcGVyL0M6XFxwXFxzd2lzcy1zdHJpbmcvc3JjXFxhcHBcXGNvbXBvbmVudHNcXGVkaXRhYmxlLXdyYXBwZXJcXGVkaXRhYmxlLXdyYXBwZXIuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2NvbXBvbmVudHMvZWRpdGFibGUtd3JhcHBlci9lZGl0YWJsZS13cmFwcGVyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UscUJBQUE7QUNDRjs7QURHQTtFQUNFLHFCQUFBO0VBQ0EsaUJBQUE7RUFDQSxXQUFBO0VBQ0EsZ0JBQUE7QUNBRiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZWRpdGFibGUtd3JhcHBlci9lZGl0YWJsZS13cmFwcGVyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG59XG5cblxuZmEtaWNvbiB7XG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgcGFkZGluZy1sZWZ0OiA0cHg7XG4gIGNvbG9yOiAjODg4O1xuICBmb250LXNpemU6IDAuOGVtO1xufVxuIiwiOmhvc3Qge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG59XG5cbmZhLWljb24ge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIHBhZGRpbmctbGVmdDogNHB4O1xuICBjb2xvcjogIzg4ODtcbiAgZm9udC1zaXplOiAwLjhlbTtcbn0iXX0= */"
+module.exports = ":host {\n  display: block;\n  background: none;\n  -webkit-box-flex: 1;\n          flex-grow: 1;\n}\n:host:hover {\n  background-color: #EEE;\n}\n:host:active {\n  background-color: #DDD;\n}\nspan {\n  display: block;\n  width: 100%;\n  padding: 2px 1px;\n}\ninput {\n  display: block;\n  width: 100%;\n}\nfa-icon {\n  display: inline-block;\n  padding-left: 4px;\n  color: #888;\n  font-size: 0.8em;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9lZGl0YWJsZS13cmFwcGVyL0M6XFxwXFxzd2lzcy1zdHJpbmcvc3JjXFxhcHBcXGNvbXBvbmVudHNcXGVkaXRhYmxlLXdyYXBwZXJcXGVkaXRhYmxlLXdyYXBwZXIuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2NvbXBvbmVudHMvZWRpdGFibGUtd3JhcHBlci9lZGl0YWJsZS13cmFwcGVyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsY0FBQTtFQUVBLGdCQUFBO0VBQ0EsbUJBQUE7VUFBQSxZQUFBO0FDQUY7QURFRTtFQUNFLHNCQUFBO0FDQUo7QURHRTtFQUNFLHNCQUFBO0FDREo7QURNQTtFQUNFLGNBQUE7RUFDQSxXQUFBO0VBQ0EsZ0JBQUE7QUNIRjtBRE1BO0VBQ0UsY0FBQTtFQUNBLFdBQUE7QUNIRjtBRE9BO0VBQ0UscUJBQUE7RUFDQSxpQkFBQTtFQUNBLFdBQUE7RUFDQSxnQkFBQTtBQ0pGIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9lZGl0YWJsZS13cmFwcGVyL2VkaXRhYmxlLXdyYXBwZXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICAvLyB3aWR0aDogMTAwJTtcbiAgYmFja2dyb3VuZDogbm9uZTtcbiAgZmxleC1ncm93OiAxO1xuXG4gICY6aG92ZXIge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICNFRUU7XG4gIH1cblxuICAmOmFjdGl2ZSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI0RERDtcblxuICB9XG59XG5cbnNwYW4ge1xuICBkaXNwbGF5OiBibG9jaztcbiAgd2lkdGg6IDEwMCU7XG4gIHBhZGRpbmc6IDJweCAxcHg7XG59XG5cbmlucHV0IHtcbiAgZGlzcGxheTogYmxvY2s7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG5cbmZhLWljb24ge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIHBhZGRpbmctbGVmdDogNHB4O1xuICBjb2xvcjogIzg4ODtcbiAgZm9udC1zaXplOiAwLjhlbTtcbn1cbiIsIjpob3N0IHtcbiAgZGlzcGxheTogYmxvY2s7XG4gIGJhY2tncm91bmQ6IG5vbmU7XG4gIGZsZXgtZ3JvdzogMTtcbn1cbjpob3N0OmhvdmVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI0VFRTtcbn1cbjpob3N0OmFjdGl2ZSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNEREQ7XG59XG5cbnNwYW4ge1xuICBkaXNwbGF5OiBibG9jaztcbiAgd2lkdGg6IDEwMCU7XG4gIHBhZGRpbmc6IDJweCAxcHg7XG59XG5cbmlucHV0IHtcbiAgZGlzcGxheTogYmxvY2s7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG5mYS1pY29uIHtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICBwYWRkaW5nLWxlZnQ6IDRweDtcbiAgY29sb3I6ICM4ODg7XG4gIGZvbnQtc2l6ZTogMC44ZW07XG59Il19 */"
 
 /***/ }),
 
@@ -851,18 +879,19 @@ OperatorWidgetComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*!***************************!*\
   !*** ./src/app/s/Step.ts ***!
   \***************************/
-/*! exports provided: WidthUnit, WidgetType, StepFactory */
+/*! exports provided: WidthUnit, WidgetType, StepUtils */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidthUnit", function() { return WidthUnit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WidgetType", function() { return WidgetType; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StepFactory", function() { return StepFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StepUtils", function() { return StepUtils; });
 var WidthUnit;
 (function (WidthUnit) {
     WidthUnit["PIXEL"] = "px";
     WidthUnit["PERCENTAGE"] = "%";
+    WidthUnit["flex"] = "flex";
 })(WidthUnit || (WidthUnit = {}));
 var WidgetType;
 (function (WidgetType) {
@@ -870,7 +899,7 @@ var WidgetType;
     WidgetType["VIEW"] = "view";
     WidgetType["OPERATOR"] = "operator";
 })(WidgetType || (WidgetType = {}));
-class StepFactory {
+class StepUtils {
     static createStep(config) {
         let result = {
             id: 0,
@@ -881,7 +910,65 @@ class StepFactory {
         result = Object.assign({}, result, config);
         return result;
     }
+    static iterateOperators(args) {
+        args.steps.forEach((step, stepIndex) => {
+            const { columns, id: stepID } = step;
+            columns.forEach((column) => {
+                switch (column.type) {
+                    case WidgetType.VIEW:
+                        {
+                            args.viewCallback(column, stepID, stepIndex);
+                        }
+                        break;
+                    case WidgetType.OPERATOR:
+                        {
+                            args.operatorCallback(column, stepID, stepIndex);
+                        }
+                        break;
+                }
+            });
+        });
+    }
+    static iterateOperatorsOfStep(args) {
+        const { step, stepID, stepIndex } = args;
+        const { columns } = step;
+        columns.forEach((column) => {
+            switch (column.type) {
+                case WidgetType.VIEW:
+                    {
+                        args.viewCallback(column, stepID, stepIndex);
+                    }
+                    break;
+                case WidgetType.OPERATOR:
+                    {
+                        args.operatorCallback(column, stepID, stepIndex);
+                    }
+                    break;
+            }
+        });
+    }
 }
+
+
+/***/ }),
+
+/***/ "./src/app/s/View.ts":
+/*!***************************!*\
+  !*** ./src/app/s/View.ts ***!
+  \***************************/
+/*! exports provided: ViewWidgetType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewWidgetType", function() { return ViewWidgetType; });
+var ViewWidgetType;
+(function (ViewWidgetType) {
+    ViewWidgetType["TEXTAREA"] = "textarea";
+    ViewWidgetType["LIST"] = "list";
+    ViewWidgetType["TUPLE_TEXT"] = "tupleText";
+    ViewWidgetType["JSON"] = "json";
+})(ViewWidgetType || (ViewWidgetType = {}));
 
 
 /***/ }),
@@ -893,7 +980,7 @@ class StepFactory {
 /*! exports provided: steps, default */
 /***/ (function(module) {
 
-module.exports = {"steps":[{"id":1,"title":"Input","type":"view","columns":[{"id":7,"width":50,"widthUnit":"%","type":"view","view":{"type":"textarea","title":"Input","name":"input","default":"hello world"}},{"id":8,"width":40,"widthUnit":"%","type":"view","view":{"type":"textarea","title":"Input Regex","name":"inputRegex","default":"llo*"}},{"id":3,"width":10,"widthUnit":"%","type":"view","view":{"type":"textarea","title":"Token Names","name":"inputRegexTokenNames","default":"aaa"}}]},{"id":2,"title":"Process","type":"operator","columns":[{"id":9,"width":100,"widthUnit":"%","type":"operator","operator":{"type":"regex-match-rename","inputs":{"source":{"id":15,"contextName":"input"},"regex":{"id":16,"contextName":"inputRegex"},"names":{"id":17,"contextName":"inputRegexTokenNames"}},"outputs":{"result":{"id":18,"contextName":"tokens"},"residue":{"id":19,"contextName":"tokens-residue"}}}}]},{"id":3,"title":"Tokens","type":"view","columns":[{"id":10,"width":60,"widthUnit":"%","type":"view","view":{"type":"textarea","title":"Tokens","name":"tokens","default":""}},{"id":11,"width":40,"widthUnit":"%","type":"view","view":{"type":"textarea","title":"Residue","name":"tokens-residue","default":""}}]},{"id":4,"title":"Template","type":"view","columns":[{"id":12,"width":70,"widthUnit":"%","type":"view","view":{"type":"textarea","title":"Template","name":"template","default":""}}]},{"id":5,"title":"Combine","type":"operator","columns":[{"id":13,"width":100,"widthUnit":"%","type":"operator","operator":{"type":"handlebars-template","inputs":{"template":{"id":20,"contextName":"template"},"data":{"id":21,"contextName":"tokens"}},"outputs":{"result":{"id":22,"contextName":"output"}}}}]},{"id":6,"title":"Output","type":"view","columns":[{"id":14,"width":100,"widthUnit":"%","type":"view","view":{"type":"textarea","title":"Result","name":"output","default":""}}]}]};
+module.exports = {"steps":[{"id":1,"title":"Input","type":"view","columns":[{"id":7,"width":50,"widthUnit":"%","type":"view","view":{"type":"textarea","title":"Input","name":"input","default":"hello world\n"}},{"id":8,"width":40,"widthUnit":"%","type":"view","view":{"type":"textarea","title":"Input Regex","name":"inputRegex","default":"(llo.*)"}},{"id":23,"width":10,"widthUnit":"%","type":"view","view":{"type":"textarea","title":"Token Names","name":"inputRegexTokenNames","default":"lolz"}}]},{"id":2,"title":"Process","type":"operator","columns":[{"id":9,"width":100,"widthUnit":"%","type":"operator","operator":{"type":"regex-match-rename","inputs":{"source":{"id":15,"contextName":"input"},"regex":{"id":16,"contextName":"inputRegex"},"names":{"id":17,"contextName":"inputRegexTokenNames"}},"outputs":{"result":{"id":18,"contextName":"tokens"},"residue":{"id":19,"contextName":"tokens-residue"}}}}]},{"id":3,"title":"Tokens","type":"view","columns":[{"id":10,"width":60,"widthUnit":"%","type":"view","view":{"type":"json","title":"Tokens","name":"tokens","default":""}},{"id":11,"width":40,"widthUnit":"%","type":"view","view":{"type":"textarea","title":"Residue","name":"tokens-residue","default":""}}]},{"id":4,"title":"Template","type":"view","columns":[{"id":12,"width":70,"widthUnit":"%","type":"view","view":{"type":"textarea","title":"Template","name":"template","default":"{{#each @root}}\n{{@index}}: {{lolz}}\n{{/each}}"}}]},{"id":5,"title":"Combine","type":"operator","columns":[{"id":13,"width":100,"widthUnit":"%","type":"operator","operator":{"type":"handlebars-template","inputs":{"template":{"id":20,"contextName":"template"},"data":{"id":21,"contextName":"tokens"}},"outputs":{"result":{"id":22,"contextName":"output"}}}}]},{"id":6,"title":"Output","type":"view","columns":[{"id":14,"width":100,"widthUnit":"%","type":"view","view":{"type":"textarea","title":"Result","name":"output","default":""}}]}]};
 
 /***/ }),
 
@@ -911,9 +998,368 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mockSteps_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_mockSteps.json */ "./src/app/s/_mockSteps.json");
 var _mockSteps_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./_mockSteps.json */ "./src/app/s/_mockSteps.json", 1);
 
-
+ // './_mockStepsSimple.json';
 const mockSteps = (_mockSteps_json__WEBPACK_IMPORTED_MODULE_1__["steps"]
-    .map((v) => _Step__WEBPACK_IMPORTED_MODULE_0__["StepFactory"].createStep(v)));
+    .map((v) => _Step__WEBPACK_IMPORTED_MODULE_0__["StepUtils"].createStep(v)));
+
+
+/***/ }),
+
+/***/ "./src/app/s/operators.ts":
+/*!********************************!*\
+  !*** ./src/app/s/operators.ts ***!
+  \********************************/
+/*! exports provided: operators */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "operators", function() { return operators; });
+const operators = {
+    'csv-split': __webpack_require__(/*! ./operators/csv-split */ "./src/app/s/operators/csv-split.ts").operator,
+    'handlebars-template': __webpack_require__(/*! ./operators/handlebars-template */ "./src/app/s/operators/handlebars-template.ts").operator,
+    'regex-match-rename': __webpack_require__(/*! ./operators/regex-match-rename */ "./src/app/s/operators/regex-match-rename.ts").operator,
+};
+
+
+/***/ }),
+
+/***/ "./src/app/s/operators/csv-split.ts":
+/*!******************************************!*\
+  !*** ./src/app/s/operators/csv-split.ts ***!
+  \******************************************/
+/*! exports provided: operator */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "operator", function() { return operator; });
+const operator = {
+    name: 'csv-split',
+    description: 'split a csv string into tokens, taking account of the presence of quotes',
+    inputs: ['str', 'separatorRegex', 'quotesRegex'],
+    outputs: ['tokens', 'err'],
+    run: ({ str, separatorRegex, quotesRegex }) => {
+        try {
+            // const testCase = '123,2.99,AMO024,Title,  "Description\\", more info",,123987564';
+            // const regex = / (?=(?:(?:[^\"]|\\")*\"(?:[^\"]|\\")*\")*(?!(?:[^\"]|\\")*\"))/;
+            const regexStr = `${separatorRegex}(?=(?:(?:[^${quotesRegex}]|\\${quotesRegex})*${quotesRegex}(?:[^${quotesRegex}]|\\${quotesRegex})*${quotesRegex})*(?!(?:[^${quotesRegex}]|\\${quotesRegex})*${quotesRegex}))`;
+            const regex = new RegExp(regexStr, '');
+            const tokens = str.split(regex).map((token, i) => {
+                return (token
+                    .replace(new RegExp(`(^${quotesRegex})|(${quotesRegex}$)`, 'g'), '') // remove start and end quotes
+                    .replace(new RegExp(`\\\\(${quotesRegex})`, 'g'), '$1') // remove escaped quotes
+                );
+                // return token;
+            });
+            return {
+                tokens,
+                err: 'ok',
+            };
+        }
+        catch (e) {
+            return {
+                tokens: null,
+                err: '' + e.toString(),
+            };
+        }
+    },
+};
+
+
+/***/ }),
+
+/***/ "./src/app/s/operators/handlebars-template.ts":
+/*!****************************************************!*\
+  !*** ./src/app/s/operators/handlebars-template.ts ***!
+  \****************************************************/
+/*! exports provided: operator */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "operator", function() { return operator; });
+/* harmony import */ var handlebars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
+/* harmony import */ var handlebars__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(handlebars__WEBPACK_IMPORTED_MODULE_0__);
+
+const operator = {
+    name: 'handlebars-template',
+    description: 'Generates text by applying a handlebars template to "data"',
+    inputs: ['template', 'data'],
+    outputs: ['result', 'err'],
+    run: ({ template, data }) => {
+        try {
+            const handlebarDelegate = Object(handlebars__WEBPACK_IMPORTED_MODULE_0__["compile"])(template);
+            const result = handlebarDelegate(data);
+            return {
+                result,
+                err: 'ok',
+            };
+        }
+        catch (e) {
+            return {
+                result: '',
+                err: '' + e.toString(),
+            };
+        }
+    },
+};
+
+
+/***/ }),
+
+/***/ "./src/app/s/operators/regex-match-rename.ts":
+/*!***************************************************!*\
+  !*** ./src/app/s/operators/regex-match-rename.ts ***!
+  \***************************************************/
+/*! exports provided: operator */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "operator", function() { return operator; });
+const operator = {
+    name: 'regex-match-rename',
+    description: 'regex-match and then rename the resulting capture groups',
+    inputs: [
+        'source',
+        'regex',
+        'names',
+    ],
+    outputs: [
+        'result',
+        'residue',
+        'err',
+    ],
+    run: ({ source, regex, names }) => {
+        const aliasList = ['_fullMatch', ...names.split('\n')];
+        let splitRegex = /a/;
+        let tokenRegex = /a/;
+        try {
+            splitRegex = new RegExp(regex, 'gm'); // global multiline
+            tokenRegex = new RegExp(regex, 'm'); // multiline
+        }
+        catch (error) {
+            return {
+                result: '',
+                residue: '',
+                err: error.toString(),
+            };
+        }
+        const matchResults = source.match(splitRegex);
+        const residue = source.replace(splitRegex, '');
+        const isTotalMatch = residue === '';
+        let matchResultSummary = (matchResults == null ? 'no match' : `${matchResults.length} matches`);
+        if (isTotalMatch) {
+            matchResultSummary += ', full match';
+        }
+        else {
+            matchResultSummary += ', partial match';
+        }
+        if (!matchResults || matchResults.length <= 0) {
+            return {
+                result: '',
+                residue: '',
+                err: matchResultSummary,
+            };
+        }
+        const tokensList = (matchResults
+            .map((match) => {
+            return tokenRegex.exec(match);
+        })
+            .map((tokens, matchIndex) => {
+            const result = { _matchIndex: 0 };
+            if (!tokens) {
+                return {};
+            }
+            tokens.forEach((token, i) => (result[aliasList[i] || i] = token));
+            result._matchIndex = matchIndex;
+            result._input = tokens.input;
+            return result;
+        }));
+        return {
+            result: tokensList,
+            residue,
+            err: matchResultSummary,
+        };
+    },
+};
+
+
+/***/ }),
+
+/***/ "./src/app/s/runtime.service.ts":
+/*!**************************************!*\
+  !*** ./src/app/s/runtime.service.ts ***!
+  \**************************************/
+/*! exports provided: RuntimeService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RuntimeService", function() { return RuntimeService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var _operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./operators */ "./src/app/s/operators.ts");
+/* harmony import */ var _Step__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Step */ "./src/app/s/Step.ts");
+/* harmony import */ var _steps_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./steps.service */ "./src/app/s/steps.service.ts");
+
+
+
+
+
+
+
+let RuntimeService = class RuntimeService {
+    constructor(stepsService) {
+        this.stepsService = stepsService;
+        this.entitySubjects = {};
+        this.operators = _operators__WEBPACK_IMPORTED_MODULE_4__["operators"];
+        this.entitiesChanged$ = this.stepsService.steps$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((steps) => this.updateEntitySubjects(steps)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((val) => console.log('entitiesChanged')), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])());
+        // this.entitiesChangedSource$ = merge(
+        //   this.entitiesUpdatesSource$,
+        //   this.stepsService.steps$.pipe(
+        //     map((steps) => this.updateEntitiesAndDispatchDelta(steps)),
+        //   ),
+        // ).pipe(
+        //   // tap((entityDataChanges) => console.log('entitiesChangedSource$', this.entities)),
+        // );
+        // this.entitiesChanged$ = this.entitiesChangedSource$.pipe(
+        //   map((entityDataChanges) => entityDataChanges.map(entityDataChange => entityDataChange.index)),
+        // );
+    }
+    updateEntitySubjects(steps) {
+        const contextSubjectHolders = [{}];
+        _Step__WEBPACK_IMPORTED_MODULE_5__["StepUtils"].iterateOperators({
+            steps,
+            viewCallback: (viewWidget, stepID, stepIndex) => {
+                const { id: widgetID, view } = viewWidget;
+                const contextSubjectHolder = Object.assign({}, contextSubjectHolders[contextSubjectHolders.length - 1]);
+                const { name } = view;
+                console.log(`Step ${stepID} view[${widgetID}] ${name} input$ would be`, contextSubjectHolder[name]);
+                const input$ = (contextSubjectHolder[name] || new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](view.default)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["startWith"])(view.default), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((val) => console.log(`${widgetID} view ${name} input$ triggered`, val)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])());
+                const inputUpdated$ = new rxjs__WEBPACK_IMPORTED_MODULE_2__["ReplaySubject"]();
+                // const input$ = stepIndex === 0 ? of(view.default) : this.entitySubjects[];
+                const process$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["merge"])(input$, inputUpdated$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((val) => console.log(`${widgetID} view ${name} inputUpdated$ triggered`, val)))).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((val) => console.log(`${widgetID} view ${name} process$ triggered`, val)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])());
+                const output$ = process$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((val) => console.log(`${widgetID} view ${name} output$ triggered`, val)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])());
+                output$.name = `${widgetID} output$`;
+                output$.subscribe({
+                    next: () => console.log(`${widgetID} view ${name} output$ subscribe triggered`),
+                    complete: () => console.log(`${widgetID} view complete`)
+                });
+                contextSubjectHolder[name] = output$;
+                this.entitySubjects[widgetID] = {
+                    entityID: widgetID,
+                    input$,
+                    process$,
+                    output$,
+                    inputUpdated$,
+                };
+                contextSubjectHolders.push(contextSubjectHolder);
+            },
+            operatorCallback: (operatorWidget, stepID, stepIndex) => {
+                const { id: columnID, operator } = operatorWidget;
+                const { type } = operator;
+                const contextSubjectHolder = Object.assign({}, contextSubjectHolders[contextSubjectHolders.length - 1]);
+                const inputList = Object.entries(operator.inputs)
+                    .map(([inputKey, { id: widgetID, contextName }], i) => {
+                    console.log(`Step ${stepID} operator[${columnID}] ${contextName} input$ would be`, contextSubjectHolder[contextName]);
+                    return { inputKey, observable: contextSubjectHolder[contextName] || rxjs__WEBPACK_IMPORTED_MODULE_2__["EMPTY"] };
+                });
+                console.log('inputList', inputList);
+                const input$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])(inputList.map(({ observable }) => observable)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((values) => {
+                    return inputList.reduce((obj, { inputKey }, i) => (Object.assign({}, obj, { [inputKey]: values[i] })), {});
+                }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((args) => console.log(`${columnID} operator ${type} input$ triggered`, args))); // TODO: typescript types
+                // const input$ = stepIndex === 0 ? of(view.default) : this.entitySubjects[];
+                const process$ = input$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((args) => console.log(`${columnID} operator ${type} process$ triggered`, args)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((args) => this.operators[type].run(args)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((args) => console.log(`${columnID} operator ${type} process$ completed`, args)));
+                const output$ = process$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((val) => {
+                    return Object.entries(operator.outputs)
+                        .reduce((obj, [outputKey, { id: widgetID, contextName }]) => {
+                        return Object.assign({}, obj, { [contextName]: val[outputKey] == null ? '' : val[outputKey] });
+                    }, {});
+                }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((val) => console.log(`${columnID} operator ${type} output$ triggered`, val)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])());
+                output$.name = `${columnID} output$`;
+                Object.entries(operator.outputs)
+                    .forEach(([outputKey, { id: widgetID, contextName }], i) => {
+                    contextSubjectHolder[contextName] = output$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((val) => val[contextName] == null ? '' : val[contextName]));
+                });
+                contextSubjectHolders.push(contextSubjectHolder);
+            },
+        });
+        window.contextSubjectHolders = contextSubjectHolders; // Debug
+        console.log('this.entitySubjects', this.entitySubjects);
+        // this.connectEntitySubjects(steps, this.stepsService.contexts);
+        return this.entitySubjects;
+    }
+    connectEntitySubjects(steps, contexts) {
+        contexts.forEach((context) => {
+            const { beforeStepID, keys } = context;
+            keys.forEach((key) => {
+                const { fromID, toID, name } = key;
+                debugger;
+                this.entitySubjects[fromID].output$.subscribe((output) => {
+                    this.entitySubjects[toID].inputUpdated$.next(output);
+                });
+            });
+        });
+    }
+    // // also mutates this.entities
+    // updateEntitiesAndDispatchDelta(steps: Step[]) {
+    //   const changedEntities: EntityDataChange[] = [];
+    //   StepUtils.iterateOperators({
+    //     steps,
+    //     viewCallback: (viewWidget: ViewWidget) => {
+    //       const { id: widgetID, view } = viewWidget;
+    //       const entityData: EntityData = this.entities[widgetID] || { contextName: view.name, content: null };
+    //       if (!this.entities[widgetID]) {
+    //         changedEntities.push({ event: 'create', index: widgetID, old: { contextName: view.name, content: null } });
+    //         entityData.content = view.default;
+    //       }
+    //       this.entities[widgetID] = entityData;
+    //     },
+    //     operatorCallback: (operatorWidget: OperatorWidget) => {
+    //       const { operator } = operatorWidget;
+    //       Object.entries(operator.inputs)
+    //         .forEach(([inputKey, { id: widgetID, contextName }], i) => {
+    //           const entityData: EntityData = this.entities[widgetID] || { contextName, content: null };
+    //           if (!this.entities[widgetID]) {
+    //             changedEntities.push({ event: 'create', index: widgetID, old: { contextName, content: null } });
+    //           }
+    //           this.entities[widgetID] = entityData;
+    //         });
+    //       Object.entries(operator.outputs)
+    //         .forEach(([outputKey, { id: widgetID, contextName }], i) => {
+    //           const entityData: EntityData = this.entities[widgetID] || { contextName, content: null };
+    //           if (!this.entities[widgetID]) {
+    //             changedEntities.push({ event: 'create', index: widgetID, old: { contextName, content: null } });
+    //           }
+    //           this.entities[widgetID] = entityData;
+    //         });
+    //     },
+    //   });
+    //   return changedEntities;
+    // }
+    updateContent(entityID, content) {
+        console.log('updateContent', entityID, content);
+        this.entitySubjects[entityID].inputUpdated$.next(content);
+        console.log('updateContent done', entityID, content);
+    }
+    onClickNext(beforeStepID) {
+        console.log(`onClickNext beforeStepID: ${beforeStepID}`);
+        // this.stepsService
+    }
+};
+RuntimeService.ctorParameters = () => [
+    { type: _steps_service__WEBPACK_IMPORTED_MODULE_6__["StepsService"] }
+];
+RuntimeService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], RuntimeService);
+
 
 
 /***/ }),
@@ -945,19 +1391,18 @@ let StepsService = class StepsService {
         this.stepsSource = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](_mockSteps__WEBPACK_IMPORTED_MODULE_4__["mockSteps"]);
         this.entities = [];
         this.latestStepID = _mockSteps__WEBPACK_IMPORTED_MODULE_4__["mockSteps"].map(s => s.id).reduce((a, v) => Math.max(a, v), 0);
-        this.steps$ = this.stepsSource.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((steps) => this.updateContexts(steps)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])(1));
+        this.steps$ = this.stepsSource.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((steps) => this.updateContexts(steps)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((steps) => console.log('steps', steps, this.contexts)));
     }
     addStep() {
         const oldSteps = [...this.stepsSource.getValue()];
-        this.latestStepID += 1;
-        oldSteps.push(_Step__WEBPACK_IMPORTED_MODULE_5__["StepFactory"].createStep({ id: this.latestStepID, title: 'New Step' }));
+        oldSteps.push(_Step__WEBPACK_IMPORTED_MODULE_5__["StepUtils"].createStep({ id: this.entities.length, title: 'New Step' }));
         this.stepsSource.next(oldSteps);
     }
     updateStep(stepID, newValue) {
         const oldSteps = [...this.stepsSource.getValue()];
         const positionID = oldSteps.findIndex(step => step.id === stepID);
-        oldSteps[positionID] = _Step__WEBPACK_IMPORTED_MODULE_5__["StepFactory"].createStep(newValue);
-        console.log('updateStep', stepID, oldSteps[positionID]);
+        oldSteps[positionID] = _Step__WEBPACK_IMPORTED_MODULE_5__["StepUtils"].createStep(newValue);
+        // console.log('updateStep', stepID, oldSteps[positionID]);
         this.stepsSource.next(oldSteps);
     }
     removeStep(stepID) {
@@ -967,6 +1412,47 @@ let StepsService = class StepsService {
         this.stepsSource.next(oldSteps);
     }
     addWidget(stepID, widgetType) {
+        let entityID = this.entities.length;
+        const column = {
+            id: entityID++,
+            width: 1,
+            widthUnit: 'flex',
+            type: widgetType,
+        };
+        switch (widgetType) {
+            case _Step__WEBPACK_IMPORTED_MODULE_5__["WidgetType"].VIEW:
+                {
+                    column.type = _Step__WEBPACK_IMPORTED_MODULE_5__["WidgetType"].VIEW;
+                    column.view = {
+                        default: 'view',
+                        name: 'view',
+                        title: 'View',
+                        type: 'textarea',
+                    };
+                }
+                break;
+            case _Step__WEBPACK_IMPORTED_MODULE_5__["WidgetType"].OPERATOR:
+                {
+                    column.type = _Step__WEBPACK_IMPORTED_MODULE_5__["WidgetType"].OPERATOR;
+                    column.operator = {
+                        type: 'operator',
+                        title: 'operator',
+                        inputs: {
+                            in: { id: entityID++, contextName: 'context_in' }
+                        },
+                        outputs: {
+                            out: { id: entityID++, contextName: 'context_out' }
+                        },
+                    };
+                }
+                break;
+        }
+        const targetStep = this.stepsSource.getValue().find(step => step.id === stepID);
+        if (!targetStep) {
+            throw new TypeError(`Step ID "${stepID}" not found`);
+        }
+        targetStep.columns.push(column);
+        this.updateStep(stepID, targetStep);
     }
     updateWidget(stepID, widgetIndex, widget) {
         const targetStep = this.stepsSource.getValue().find(step => step.id === stepID);
@@ -992,13 +1478,13 @@ let StepsService = class StepsService {
             switch (type) {
                 case _Step__WEBPACK_IMPORTED_MODULE_5__["WidgetType"].VIEW:
                     {
-                        const beforeContext = this.updateViewWidgetContext(stepIndex, stepID, columns, contextHolders, newContexts);
+                        const beforeContext = this.updateViewWidgetContext(stepIndex, stepID, columns, contextHolders, newContexts, this.entities);
                         newContexts.push(beforeContext);
                     }
                     break;
                 case _Step__WEBPACK_IMPORTED_MODULE_5__["WidgetType"].OPERATOR:
                     {
-                        const beforeContext = this.updateOperatorWidgetContext(stepIndex, stepID, columns, contextHolders, newContexts);
+                        const beforeContext = this.updateOperatorWidgetContext(stepIndex, stepID, columns, contextHolders, newContexts, this.entities);
                         newContexts.push(beforeContext);
                     }
                     break;
@@ -1009,7 +1495,7 @@ let StepsService = class StepsService {
         this.contexts = newContexts;
         this.contextHolders = contextHolders;
     }
-    updateViewWidgetContext(stepIndex, stepID, columns, contextHolders, newContexts) {
+    updateViewWidgetContext(stepIndex, stepID, columns, contextHolders, newContexts, entitiesList) {
         // mutates contextHolder and newContexts in place
         const beforeContext = {
             beforeStepID: stepID,
@@ -1024,16 +1510,19 @@ let StepsService = class StepsService {
             if (contextHolder[name]) {
                 const { lastSeenColumnID: lastSeenID, lastSeenStepIndex } = contextHolder[name];
                 beforeContext.keys.push({
-                    name, fromStepIndex: lastSeenStepIndex,
-                    fromID: lastSeenID, toID: columnID, type: null,
+                    name,
+                    fromStepIndex: lastSeenStepIndex,
+                    type: null,
+                    fromID: lastSeenID, toID: columnID,
                 });
             }
+            entitiesList[columnID] = column;
             contextHolder[name] = { lastSeenColumnID: columnID, lastSeenStepIndex: stepIndex };
         });
         contextHolders.push(contextHolder);
         return beforeContext;
     }
-    updateOperatorWidgetContext(stepIndex, stepID, columns, contextHolders, newContexts) {
+    updateOperatorWidgetContext(stepIndex, stepID, columns, contextHolders, newContexts, entitiesList) {
         // mutates contextHolder and newContexts in place
         const beforeContext = {
             beforeStepID: stepID,
@@ -1041,22 +1530,26 @@ let StepsService = class StepsService {
         };
         const contextHolder = Object.assign({}, contextHolders[contextHolders.length - 1]);
         columns.forEach((column) => {
-            const { id: columnID, type: columnType } = column;
-            const operatorWidget = column.operator;
+            const { id: columnID, type: columnType, operator } = column;
+            const operatorWidget = operator;
             const { inputs, outputs } = operatorWidget;
             Object.entries(inputs).forEach(([inputKey, { id: connectorID, contextName }]) => {
                 // console.log('operator', contextName, connectorID);
+                entitiesList[connectorID] = { id: connectorID, contextName };
                 if (contextHolder[contextName]) {
                     const { lastSeenColumnID: lastSeenID, lastSeenStepIndex } = contextHolder[contextName];
                     beforeContext.keys.push({
-                        name: contextName, fromStepIndex: lastSeenStepIndex,
-                        fromID: lastSeenID, toID: connectorID, type: null,
+                        name: contextName,
+                        fromStepIndex: lastSeenStepIndex,
+                        type: null,
+                        fromID: lastSeenID, toID: connectorID,
                     });
                 }
                 // contextHolder[inputKey] = columnID;
                 // beforeContext.keys.push({ name:inputKey, fromID: columnID, toID: null, type: null });
             });
             Object.entries(outputs).forEach(([outputKey, { id: connectorID, contextName }]) => {
+                entitiesList[connectorID] = { id: connectorID, contextName };
                 contextHolder[contextName] = { lastSeenColumnID: connectorID, lastSeenStepIndex: stepIndex };
             });
         });
@@ -1081,7 +1574,7 @@ StepsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".card {\n  background-color: rgba(255, 255, 255, 0.7);\n}\n\n.expand-button {\n  width: 30px;\n  margin-right: 20px;\n}\n\n.card-title {\n  margin-bottom: 0;\n  color: black;\n}\n\n.card-subtitle {\n  margin-bottom: 0;\n  margin-left: 40px;\n}\n\n.card {\n  margin-top: 4px;\n  margin-bottom: 4px;\n}\n\n.step-body {\n  overflow: auto;\n}\n\n.step-body .column-row {\n  display: -webkit-box;\n  display: flex;\n  width: 100%;\n  margin-left: -4px;\n  margin-right: -4px;\n}\n\n.step-body .column-row.isMobile {\n  display: block;\n  margin-left: 0;\n  margin-right: 0;\n}\n\n.step-body .column {\n  margin: 4px;\n  width: 100%;\n}\n\n.indented-card-body {\n  margin-left: 50px;\n  margin-right: 8px;\n}\n\n.indented-card-body.after-title {\n  padding-top: 0px;\n}\n\n.step-buttons {\n  margin-left: calc(50px - 0.75rem);\n  padding-top: 0;\n}\n\n.step-type {\n  font-size: 0.8em;\n  font-style: italic;\n}\n\n.step-type-selector {\n  margin-left: -4px;\n  margin-right: -4px;\n}\n\n.step-type-selector button {\n  width: calc(50% - 8px);\n  margin: 4px;\n  height: 100px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc3RlcC9DOlxccFxcc3dpc3Mtc3RyaW5nL3NyY1xcYXBwXFxzdGVwXFxzdGVwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9zdGVwL3N0ZXAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSwwQ0FBQTtBQ0NGOztBREVBO0VBQ0UsV0FBQTtFQUNBLGtCQUFBO0FDQ0Y7O0FERUE7RUFDRSxnQkFBQTtFQUNBLFlBQUE7QUNDRjs7QURFQTtFQUNFLGdCQUFBO0VBQ0EsaUJBQUE7QUNDRjs7QURFQTtFQUNFLGVBQUE7RUFDQSxrQkFBQTtBQ0NGOztBREVBO0VBQ0UsY0FBQTtBQ0NGOztBRENFO0VBQ0Usb0JBQUE7RUFBQSxhQUFBO0VBQ0EsV0FBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7QUNDSjs7QURDSTtFQUNFLGNBQUE7RUFDQSxjQUFBO0VBQ0EsZUFBQTtBQ0NOOztBREdFO0VBQ0UsV0FBQTtFQUNBLFdBQUE7QUNESjs7QURLQTtFQUNFLGlCQUFBO0VBQ0EsaUJBQUE7QUNGRjs7QURJRTtFQUNFLGdCQUFBO0FDRko7O0FETUE7RUFDRSxpQ0FBQTtFQUNBLGNBQUE7QUNIRjs7QURVQTtFQUNFLGdCQUFBO0VBQ0Esa0JBQUE7QUNQRjs7QURVQTtFQUNFLGlCQUFBO0VBQ0Esa0JBQUE7QUNQRjs7QURTRTtFQUNFLHNCQUFBO0VBQ0EsV0FBQTtFQUNBLGFBQUE7QUNQSiIsImZpbGUiOiJzcmMvYXBwL3N0ZXAvc3RlcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jYXJkIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjcpOyAvL3JnYmEoMCwgMCwgMCwgMC4zKTtcbn1cblxuLmV4cGFuZC1idXR0b24ge1xuICB3aWR0aDogMzBweDtcbiAgbWFyZ2luLXJpZ2h0OiAyMHB4O1xufVxuXG4uY2FyZC10aXRsZSB7XG4gIG1hcmdpbi1ib3R0b206IDA7XG4gIGNvbG9yOiBibGFjaztcbn1cblxuLmNhcmQtc3VidGl0bGUge1xuICBtYXJnaW4tYm90dG9tOiAwO1xuICBtYXJnaW4tbGVmdDogNDBweDtcbn1cblxuLmNhcmQge1xuICBtYXJnaW4tdG9wOiA0cHg7XG4gIG1hcmdpbi1ib3R0b206IDRweDtcbn1cblxuLnN0ZXAtYm9keSB7XG4gIG92ZXJmbG93OiBhdXRvO1xuXG4gIC5jb2x1bW4tcm93IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIG1hcmdpbi1sZWZ0OiAtNHB4O1xuICAgIG1hcmdpbi1yaWdodDogLTRweDtcblxuICAgICYuaXNNb2JpbGUge1xuICAgICAgZGlzcGxheTogYmxvY2s7XG4gICAgICBtYXJnaW4tbGVmdDogMDtcbiAgICAgIG1hcmdpbi1yaWdodDogMDtcbiAgICB9XG4gIH1cblxuICAuY29sdW1uIHtcbiAgICBtYXJnaW46IDRweDtcbiAgICB3aWR0aDogMTAwJTtcbiAgfVxufVxuXG4uaW5kZW50ZWQtY2FyZC1ib2R5IHtcbiAgbWFyZ2luLWxlZnQ6IDUwcHg7XG4gIG1hcmdpbi1yaWdodDogOHB4O1xuXG4gICYuYWZ0ZXItdGl0bGUge1xuICAgIHBhZGRpbmctdG9wOiAwcHg7XG4gIH1cbn1cblxuLnN0ZXAtYnV0dG9ucyB7XG4gIG1hcmdpbi1sZWZ0OiBjYWxjKDUwcHggLSAwLjc1cmVtKTtcbiAgcGFkZGluZy10b3A6IDA7XG5cbiAgLy8gLmJ0bi1saWdodDpmaXJzdC1jaGlsZCB7XG4gIC8vICAgcGFkZGluZy1sZWZ0OiAwO1xuICAvLyB9XG59XG5cbi5zdGVwLXR5cGUge1xuICBmb250LXNpemU6IDAuOGVtO1xuICBmb250LXN0eWxlOiBpdGFsaWM7XG59XG5cbi5zdGVwLXR5cGUtc2VsZWN0b3Ige1xuICBtYXJnaW4tbGVmdDogLTRweDtcbiAgbWFyZ2luLXJpZ2h0OiAtNHB4O1xuXG4gIGJ1dHRvbiB7XG4gICAgd2lkdGg6IGNhbGMoNTAlIC0gOHB4KTtcbiAgICBtYXJnaW46IDRweDtcbiAgICBoZWlnaHQ6IDEwMHB4O1xuICB9XG59XG4iLCIuY2FyZCB7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LCAyNTUsIDI1NSwgMC43KTtcbn1cblxuLmV4cGFuZC1idXR0b24ge1xuICB3aWR0aDogMzBweDtcbiAgbWFyZ2luLXJpZ2h0OiAyMHB4O1xufVxuXG4uY2FyZC10aXRsZSB7XG4gIG1hcmdpbi1ib3R0b206IDA7XG4gIGNvbG9yOiBibGFjaztcbn1cblxuLmNhcmQtc3VidGl0bGUge1xuICBtYXJnaW4tYm90dG9tOiAwO1xuICBtYXJnaW4tbGVmdDogNDBweDtcbn1cblxuLmNhcmQge1xuICBtYXJnaW4tdG9wOiA0cHg7XG4gIG1hcmdpbi1ib3R0b206IDRweDtcbn1cblxuLnN0ZXAtYm9keSB7XG4gIG92ZXJmbG93OiBhdXRvO1xufVxuLnN0ZXAtYm9keSAuY29sdW1uLXJvdyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIHdpZHRoOiAxMDAlO1xuICBtYXJnaW4tbGVmdDogLTRweDtcbiAgbWFyZ2luLXJpZ2h0OiAtNHB4O1xufVxuLnN0ZXAtYm9keSAuY29sdW1uLXJvdy5pc01vYmlsZSB7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBtYXJnaW4tbGVmdDogMDtcbiAgbWFyZ2luLXJpZ2h0OiAwO1xufVxuLnN0ZXAtYm9keSAuY29sdW1uIHtcbiAgbWFyZ2luOiA0cHg7XG4gIHdpZHRoOiAxMDAlO1xufVxuXG4uaW5kZW50ZWQtY2FyZC1ib2R5IHtcbiAgbWFyZ2luLWxlZnQ6IDUwcHg7XG4gIG1hcmdpbi1yaWdodDogOHB4O1xufVxuLmluZGVudGVkLWNhcmQtYm9keS5hZnRlci10aXRsZSB7XG4gIHBhZGRpbmctdG9wOiAwcHg7XG59XG5cbi5zdGVwLWJ1dHRvbnMge1xuICBtYXJnaW4tbGVmdDogY2FsYyg1MHB4IC0gMC43NXJlbSk7XG4gIHBhZGRpbmctdG9wOiAwO1xufVxuXG4uc3RlcC10eXBlIHtcbiAgZm9udC1zaXplOiAwLjhlbTtcbiAgZm9udC1zdHlsZTogaXRhbGljO1xufVxuXG4uc3RlcC10eXBlLXNlbGVjdG9yIHtcbiAgbWFyZ2luLWxlZnQ6IC00cHg7XG4gIG1hcmdpbi1yaWdodDogLTRweDtcbn1cbi5zdGVwLXR5cGUtc2VsZWN0b3IgYnV0dG9uIHtcbiAgd2lkdGg6IGNhbGMoNTAlIC0gOHB4KTtcbiAgbWFyZ2luOiA0cHg7XG4gIGhlaWdodDogMTAwcHg7XG59Il19 */"
+module.exports = ".card {\n  background-color: rgba(255, 255, 255, 0.7);\n}\n\n.expand-button {\n  width: 30px;\n  margin-right: 20px;\n}\n\n.card-title {\n  margin-bottom: 0;\n  color: black;\n  display: -webkit-box;\n  display: flex;\n}\n\n.card-title span {\n  display: block;\n  padding-right: 4px;\n}\n\n.card-subtitle {\n  margin-bottom: 0;\n  margin-left: 40px;\n}\n\n.card {\n  margin-top: 4px;\n  margin-bottom: 4px;\n}\n\n.step-body {\n  overflow: auto;\n}\n\n.step-body .column-row {\n  display: -webkit-box;\n  display: flex;\n  width: 100%;\n  margin-left: -4px;\n  margin-right: -4px;\n}\n\n.step-body .column-row.isMobile {\n  display: block;\n  margin-left: 0;\n  margin-right: 0;\n}\n\n.step-body .column {\n  margin: 4px;\n  width: 100%;\n}\n\n.indented-card-body {\n  margin-left: 50px;\n  margin-right: 0;\n}\n\n.indented-card-body.after-title {\n  padding-top: 0px;\n}\n\n.step-buttons {\n  margin-left: calc(50px - 0.75rem);\n  padding-top: 0;\n}\n\n.step-type {\n  font-size: 0.8em;\n  font-style: italic;\n}\n\n.step-type-selector {\n  margin-left: -4px;\n  margin-right: -4px;\n}\n\n.step-type-selector button {\n  width: calc(50% - 8px);\n  margin: 4px;\n  height: 100px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc3RlcC9DOlxccFxcc3dpc3Mtc3RyaW5nL3NyY1xcYXBwXFxzdGVwXFxzdGVwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9zdGVwL3N0ZXAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSwwQ0FBQTtBQ0NGOztBREVBO0VBQ0UsV0FBQTtFQUNBLGtCQUFBO0FDQ0Y7O0FERUE7RUFDRSxnQkFBQTtFQUNBLFlBQUE7RUFDQSxvQkFBQTtFQUFBLGFBQUE7QUNDRjs7QURDRTtFQUNFLGNBQUE7RUFDQSxrQkFBQTtBQ0NKOztBREdBO0VBQ0UsZ0JBQUE7RUFDQSxpQkFBQTtBQ0FGOztBREdBO0VBQ0UsZUFBQTtFQUNBLGtCQUFBO0FDQUY7O0FER0E7RUFDRSxjQUFBO0FDQUY7O0FERUU7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSxXQUFBO0VBQ0EsaUJBQUE7RUFDQSxrQkFBQTtBQ0FKOztBREVJO0VBQ0UsY0FBQTtFQUNBLGNBQUE7RUFDQSxlQUFBO0FDQU47O0FESUU7RUFDRSxXQUFBO0VBQ0EsV0FBQTtBQ0ZKOztBRE1BO0VBQ0UsaUJBQUE7RUFDQSxlQUFBO0FDSEY7O0FES0U7RUFDRSxnQkFBQTtBQ0hKOztBRE9BO0VBQ0UsaUNBQUE7RUFDQSxjQUFBO0FDSkY7O0FEV0E7RUFDRSxnQkFBQTtFQUNBLGtCQUFBO0FDUkY7O0FEV0E7RUFDRSxpQkFBQTtFQUNBLGtCQUFBO0FDUkY7O0FEVUU7RUFDRSxzQkFBQTtFQUNBLFdBQUE7RUFDQSxhQUFBO0FDUkoiLCJmaWxlIjoic3JjL2FwcC9zdGVwL3N0ZXAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY2FyZCB7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LCAyNTUsIDI1NSwgMC43KTsgLy9yZ2JhKDAsIDAsIDAsIDAuMyk7XG59XG5cbi5leHBhbmQtYnV0dG9uIHtcbiAgd2lkdGg6IDMwcHg7XG4gIG1hcmdpbi1yaWdodDogMjBweDtcbn1cblxuLmNhcmQtdGl0bGUge1xuICBtYXJnaW4tYm90dG9tOiAwO1xuICBjb2xvcjogYmxhY2s7XG4gIGRpc3BsYXk6IGZsZXg7XG5cbiAgc3BhbiB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgcGFkZGluZy1yaWdodDogNHB4O1xuICB9XG59XG5cbi5jYXJkLXN1YnRpdGxlIHtcbiAgbWFyZ2luLWJvdHRvbTogMDtcbiAgbWFyZ2luLWxlZnQ6IDQwcHg7XG59XG5cbi5jYXJkIHtcbiAgbWFyZ2luLXRvcDogNHB4O1xuICBtYXJnaW4tYm90dG9tOiA0cHg7XG59XG5cbi5zdGVwLWJvZHkge1xuICBvdmVyZmxvdzogYXV0bztcblxuICAuY29sdW1uLXJvdyB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBtYXJnaW4tbGVmdDogLTRweDtcbiAgICBtYXJnaW4tcmlnaHQ6IC00cHg7XG5cbiAgICAmLmlzTW9iaWxlIHtcbiAgICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgICAgbWFyZ2luLWxlZnQ6IDA7XG4gICAgICBtYXJnaW4tcmlnaHQ6IDA7XG4gICAgfVxuICB9XG5cbiAgLmNvbHVtbiB7XG4gICAgbWFyZ2luOiA0cHg7XG4gICAgd2lkdGg6IDEwMCU7XG4gIH1cbn1cblxuLmluZGVudGVkLWNhcmQtYm9keSB7XG4gIG1hcmdpbi1sZWZ0OiA1MHB4O1xuICBtYXJnaW4tcmlnaHQ6IDA7XG5cbiAgJi5hZnRlci10aXRsZSB7XG4gICAgcGFkZGluZy10b3A6IDBweDtcbiAgfVxufVxuXG4uc3RlcC1idXR0b25zIHtcbiAgbWFyZ2luLWxlZnQ6IGNhbGMoNTBweCAtIDAuNzVyZW0pO1xuICBwYWRkaW5nLXRvcDogMDtcblxuICAvLyAuYnRuLWxpZ2h0OmZpcnN0LWNoaWxkIHtcbiAgLy8gICBwYWRkaW5nLWxlZnQ6IDA7XG4gIC8vIH1cbn1cblxuLnN0ZXAtdHlwZSB7XG4gIGZvbnQtc2l6ZTogMC44ZW07XG4gIGZvbnQtc3R5bGU6IGl0YWxpYztcbn1cblxuLnN0ZXAtdHlwZS1zZWxlY3RvciB7XG4gIG1hcmdpbi1sZWZ0OiAtNHB4O1xuICBtYXJnaW4tcmlnaHQ6IC00cHg7XG5cbiAgYnV0dG9uIHtcbiAgICB3aWR0aDogY2FsYyg1MCUgLSA4cHgpO1xuICAgIG1hcmdpbjogNHB4O1xuICAgIGhlaWdodDogMTAwcHg7XG4gIH1cbn1cbiIsIi5jYXJkIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjcpO1xufVxuXG4uZXhwYW5kLWJ1dHRvbiB7XG4gIHdpZHRoOiAzMHB4O1xuICBtYXJnaW4tcmlnaHQ6IDIwcHg7XG59XG5cbi5jYXJkLXRpdGxlIHtcbiAgbWFyZ2luLWJvdHRvbTogMDtcbiAgY29sb3I6IGJsYWNrO1xuICBkaXNwbGF5OiBmbGV4O1xufVxuLmNhcmQtdGl0bGUgc3BhbiB7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBwYWRkaW5nLXJpZ2h0OiA0cHg7XG59XG5cbi5jYXJkLXN1YnRpdGxlIHtcbiAgbWFyZ2luLWJvdHRvbTogMDtcbiAgbWFyZ2luLWxlZnQ6IDQwcHg7XG59XG5cbi5jYXJkIHtcbiAgbWFyZ2luLXRvcDogNHB4O1xuICBtYXJnaW4tYm90dG9tOiA0cHg7XG59XG5cbi5zdGVwLWJvZHkge1xuICBvdmVyZmxvdzogYXV0bztcbn1cbi5zdGVwLWJvZHkgLmNvbHVtbi1yb3cge1xuICBkaXNwbGF5OiBmbGV4O1xuICB3aWR0aDogMTAwJTtcbiAgbWFyZ2luLWxlZnQ6IC00cHg7XG4gIG1hcmdpbi1yaWdodDogLTRweDtcbn1cbi5zdGVwLWJvZHkgLmNvbHVtbi1yb3cuaXNNb2JpbGUge1xuICBkaXNwbGF5OiBibG9jaztcbiAgbWFyZ2luLWxlZnQ6IDA7XG4gIG1hcmdpbi1yaWdodDogMDtcbn1cbi5zdGVwLWJvZHkgLmNvbHVtbiB7XG4gIG1hcmdpbjogNHB4O1xuICB3aWR0aDogMTAwJTtcbn1cblxuLmluZGVudGVkLWNhcmQtYm9keSB7XG4gIG1hcmdpbi1sZWZ0OiA1MHB4O1xuICBtYXJnaW4tcmlnaHQ6IDA7XG59XG4uaW5kZW50ZWQtY2FyZC1ib2R5LmFmdGVyLXRpdGxlIHtcbiAgcGFkZGluZy10b3A6IDBweDtcbn1cblxuLnN0ZXAtYnV0dG9ucyB7XG4gIG1hcmdpbi1sZWZ0OiBjYWxjKDUwcHggLSAwLjc1cmVtKTtcbiAgcGFkZGluZy10b3A6IDA7XG59XG5cbi5zdGVwLXR5cGUge1xuICBmb250LXNpemU6IDAuOGVtO1xuICBmb250LXN0eWxlOiBpdGFsaWM7XG59XG5cbi5zdGVwLXR5cGUtc2VsZWN0b3Ige1xuICBtYXJnaW4tbGVmdDogLTRweDtcbiAgbWFyZ2luLXJpZ2h0OiAtNHB4O1xufVxuLnN0ZXAtdHlwZS1zZWxlY3RvciBidXR0b24ge1xuICB3aWR0aDogY2FsYyg1MCUgLSA4cHgpO1xuICBtYXJnaW46IDRweDtcbiAgaGVpZ2h0OiAxMDBweDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -1131,11 +1624,17 @@ let StepComponent = class StepComponent {
         switch (this.step.type) {
             case _s_Step__WEBPACK_IMPORTED_MODULE_4__["WidgetType"].VIEW:
                 this.summary = this.step.columns.map(c => {
+                    if (c.type !== _s_Step__WEBPACK_IMPORTED_MODULE_4__["WidgetType"].VIEW) {
+                        return '';
+                    }
                     return c.view.title;
                 }).join(', ');
                 break;
             case _s_Step__WEBPACK_IMPORTED_MODULE_4__["WidgetType"].OPERATOR:
                 this.summary = '[' + this.step.columns.map(c => {
+                    if (c.type !== _s_Step__WEBPACK_IMPORTED_MODULE_4__["WidgetType"].OPERATOR) {
+                        return '';
+                    }
                     return c.operator.title || c.operator.type;
                 }).join(', ') + ']';
                 break;
@@ -1177,6 +1676,9 @@ let StepComponent = class StepComponent {
     onClickEndOrganize() {
         this.changeToEditMode(StepEditMode.DEFAULT);
     }
+    onClickAddColumn() {
+        this.stepsService.addWidget(this.step.id, this.step.type);
+    }
 };
 StepComponent.ctorParameters = () => [
     { type: _s_steps_service__WEBPACK_IMPORTED_MODULE_5__["StepsService"] }
@@ -1205,6 +1707,128 @@ StepComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/view-widget/json-view/json-view.component.scss":
+/*!****************************************************************!*\
+  !*** ./src/app/view-widget/json-view/json-view.component.scss ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ":host {\n  display: block;\n}\n\ntextarea {\n  width: 100%;\n  height: 100%;\n  border: none;\n  border-top: 1px solid #888;\n  display: block;\n  resize: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlldy13aWRnZXQvanNvbi12aWV3L0M6XFxwXFxzd2lzcy1zdHJpbmcvc3JjXFxhcHBcXHZpZXctd2lkZ2V0XFxqc29uLXZpZXdcXGpzb24tdmlldy5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvdmlldy13aWRnZXQvanNvbi12aWV3L2pzb24tdmlldy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGNBQUE7QUNDRjs7QURFQTtFQUNFLFdBQUE7RUFDQSxZQUFBO0VBQ0EsWUFBQTtFQUNBLDBCQUFBO0VBQ0EsY0FBQTtFQUNBLFlBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL3ZpZXctd2lkZ2V0L2pzb24tdmlldy9qc29uLXZpZXcuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XG4gIGRpc3BsYXk6IGJsb2NrO1xufVxuXG50ZXh0YXJlYSB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIGJvcmRlcjogbm9uZTtcbiAgYm9yZGVyLXRvcDogMXB4IHNvbGlkICM4ODg7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICByZXNpemU6IG5vbmU7XG59XG4iLCI6aG9zdCB7XG4gIGRpc3BsYXk6IGJsb2NrO1xufVxuXG50ZXh0YXJlYSB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIGJvcmRlcjogbm9uZTtcbiAgYm9yZGVyLXRvcDogMXB4IHNvbGlkICM4ODg7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICByZXNpemU6IG5vbmU7XG59Il19 */"
+
+/***/ }),
+
+/***/ "./src/app/view-widget/json-view/json-view.component.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/view-widget/json-view/json-view.component.ts ***!
+  \**************************************************************/
+/*! exports provided: JsonViewComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JsonViewComponent", function() { return JsonViewComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let JsonViewComponent = class JsonViewComponent {
+    constructor() {
+        this.valueChange = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+    }
+    ngOnInit() {
+    }
+    ngOnChanges(changes) {
+        const changeInContent = changes.content;
+        this.jsonString = JSON.stringify(changeInContent.currentValue, null, 4);
+    }
+    onContentUpdated(value) {
+        try {
+            const obj = JSON.parse(value);
+            this.valueChange.emit(obj);
+        }
+        catch (e) {
+            this.err = e.toString();
+        }
+    }
+};
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], JsonViewComponent.prototype, "height", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], JsonViewComponent.prototype, "content", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
+], JsonViewComponent.prototype, "valueChange", void 0);
+JsonViewComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-json-view',
+        template: __webpack_require__(/*! raw-loader!./json-view.component.html */ "./node_modules/raw-loader/index.js!./src/app/view-widget/json-view/json-view.component.html"),
+        styles: [__webpack_require__(/*! ./json-view.component.scss */ "./src/app/view-widget/json-view/json-view.component.scss")]
+    })
+], JsonViewComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/view-widget/textarea-view/textarea-view.component.scss":
+/*!************************************************************************!*\
+  !*** ./src/app/view-widget/textarea-view/textarea-view.component.scss ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ":host {\n  display: block;\n}\n\ntextarea {\n  width: 100%;\n  height: 100%;\n  border: none;\n  border-top: 1px solid #888;\n  display: block;\n  resize: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlldy13aWRnZXQvdGV4dGFyZWEtdmlldy9DOlxccFxcc3dpc3Mtc3RyaW5nL3NyY1xcYXBwXFx2aWV3LXdpZGdldFxcdGV4dGFyZWEtdmlld1xcdGV4dGFyZWEtdmlldy5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvdmlldy13aWRnZXQvdGV4dGFyZWEtdmlldy90ZXh0YXJlYS12aWV3LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsY0FBQTtBQ0NGOztBREVBO0VBQ0UsV0FBQTtFQUNBLFlBQUE7RUFDQSxZQUFBO0VBQ0EsMEJBQUE7RUFDQSxjQUFBO0VBQ0EsWUFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvdmlldy13aWRnZXQvdGV4dGFyZWEtdmlldy90ZXh0YXJlYS12aWV3LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xuICBkaXNwbGF5OiBibG9jaztcbn1cblxudGV4dGFyZWEge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBib3JkZXI6IG5vbmU7XG4gIGJvcmRlci10b3A6IDFweCBzb2xpZCAjODg4O1xuICBkaXNwbGF5OiBibG9jaztcbiAgcmVzaXplOiBub25lO1xufVxuIiwiOmhvc3Qge1xuICBkaXNwbGF5OiBibG9jaztcbn1cblxudGV4dGFyZWEge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBib3JkZXI6IG5vbmU7XG4gIGJvcmRlci10b3A6IDFweCBzb2xpZCAjODg4O1xuICBkaXNwbGF5OiBibG9jaztcbiAgcmVzaXplOiBub25lO1xufSJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/view-widget/textarea-view/textarea-view.component.ts":
+/*!**********************************************************************!*\
+  !*** ./src/app/view-widget/textarea-view/textarea-view.component.ts ***!
+  \**********************************************************************/
+/*! exports provided: TextareaViewComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TextareaViewComponent", function() { return TextareaViewComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let TextareaViewComponent = class TextareaViewComponent {
+    constructor() {
+        this.valueChange = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+    }
+    ngOnInit() {
+    }
+    onContentUpdated(value) {
+        this.valueChange.emit(value);
+    }
+};
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], TextareaViewComponent.prototype, "height", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], TextareaViewComponent.prototype, "content", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
+], TextareaViewComponent.prototype, "valueChange", void 0);
+TextareaViewComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-textarea-view',
+        template: __webpack_require__(/*! raw-loader!./textarea-view.component.html */ "./node_modules/raw-loader/index.js!./src/app/view-widget/textarea-view/textarea-view.component.html"),
+        styles: [__webpack_require__(/*! ./textarea-view.component.scss */ "./src/app/view-widget/textarea-view/textarea-view.component.scss")]
+    })
+], TextareaViewComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/app/view-widget/view-widget.component.scss":
 /*!********************************************************!*\
   !*** ./src/app/view-widget/view-widget.component.scss ***!
@@ -1212,7 +1836,7 @@ StepComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":host {\n  border: 1px solid #888;\n  display: block;\n  padding: 4px;\n  background: white;\n}\n\nh6 {\n  margin-left: 2px;\n  margin-right: 2px;\n  margin-top: 4px;\n  margin-bottom: 2px;\n}\n\n.view-title {\n  background-color: white;\n  width: 100%;\n  text-align: center;\n}\n\n.toolbar {\n  display: -webkit-box;\n  display: flex;\n  width: 100%;\n}\n\ntextarea {\n  width: 100%;\n  border: none;\n  border-top: 1px solid #888;\n  display: block;\n  resize: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlldy13aWRnZXQvQzpcXHBcXHN3aXNzLXN0cmluZy9zcmNcXGFwcFxcdmlldy13aWRnZXRcXHZpZXctd2lkZ2V0LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC92aWV3LXdpZGdldC92aWV3LXdpZGdldC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHNCQUFBO0VBQ0EsY0FBQTtFQUNBLFlBQUE7RUFDQSxpQkFBQTtBQ0NGOztBREVBO0VBQ0UsZ0JBQUE7RUFDQSxpQkFBQTtFQUNBLGVBQUE7RUFDQSxrQkFBQTtBQ0NGOztBREVBO0VBQ0UsdUJBQUE7RUFDQSxXQUFBO0VBQ0Esa0JBQUE7QUNDRjs7QURFQTtFQUNFLG9CQUFBO0VBQUEsYUFBQTtFQUNBLFdBQUE7QUNDRjs7QURFQTtFQUNFLFdBQUE7RUFFQSxZQUFBO0VBQ0EsMEJBQUE7RUFDQSxjQUFBO0VBQ0EsWUFBQTtBQ0FGIiwiZmlsZSI6InNyYy9hcHAvdmlldy13aWRnZXQvdmlldy13aWRnZXQuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XG4gIGJvcmRlcjogMXB4IHNvbGlkICM4ODg7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBwYWRkaW5nOiA0cHg7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xufVxuXG5oNiB7XG4gIG1hcmdpbi1sZWZ0OiAycHg7XG4gIG1hcmdpbi1yaWdodDogMnB4O1xuICBtYXJnaW4tdG9wOiA0cHg7XG4gIG1hcmdpbi1ib3R0b206IDJweDtcbn1cblxuLnZpZXctdGl0bGUge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgd2lkdGg6IDEwMCU7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cblxuLnRvb2xiYXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICB3aWR0aDogMTAwJTtcbn1cblxudGV4dGFyZWEge1xuICB3aWR0aDogMTAwJTtcbiAgLy8gaGVpZ2h0OiAxMDAlO1xuICBib3JkZXI6IG5vbmU7XG4gIGJvcmRlci10b3A6IDFweCBzb2xpZCAjODg4O1xuICBkaXNwbGF5OiBibG9jaztcbiAgcmVzaXplOiBub25lO1xufVxuIiwiOmhvc3Qge1xuICBib3JkZXI6IDFweCBzb2xpZCAjODg4O1xuICBkaXNwbGF5OiBibG9jaztcbiAgcGFkZGluZzogNHB4O1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbn1cblxuaDYge1xuICBtYXJnaW4tbGVmdDogMnB4O1xuICBtYXJnaW4tcmlnaHQ6IDJweDtcbiAgbWFyZ2luLXRvcDogNHB4O1xuICBtYXJnaW4tYm90dG9tOiAycHg7XG59XG5cbi52aWV3LXRpdGxlIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gIHdpZHRoOiAxMDAlO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi50b29sYmFyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbnRleHRhcmVhIHtcbiAgd2lkdGg6IDEwMCU7XG4gIGJvcmRlcjogbm9uZTtcbiAgYm9yZGVyLXRvcDogMXB4IHNvbGlkICM4ODg7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICByZXNpemU6IG5vbmU7XG59Il19 */"
+module.exports = ":host {\n  border: 1px solid #888;\n  display: block;\n  padding: 4px;\n  background: white;\n}\n\nh6 {\n  margin-left: 2px;\n  margin-right: 2px;\n  margin-top: 4px;\n  margin-bottom: 2px;\n}\n\n.view-title {\n  background-color: white;\n  width: 100%;\n  text-align: center;\n  display: -webkit-box;\n  display: flex;\n  flex-wrap: wrap;\n}\n\n.toolbar {\n  display: -webkit-box;\n  display: flex;\n  width: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdmlldy13aWRnZXQvQzpcXHBcXHN3aXNzLXN0cmluZy9zcmNcXGFwcFxcdmlldy13aWRnZXRcXHZpZXctd2lkZ2V0LmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC92aWV3LXdpZGdldC92aWV3LXdpZGdldC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHNCQUFBO0VBQ0EsY0FBQTtFQUNBLFlBQUE7RUFDQSxpQkFBQTtBQ0NGOztBREVBO0VBQ0UsZ0JBQUE7RUFDQSxpQkFBQTtFQUNBLGVBQUE7RUFDQSxrQkFBQTtBQ0NGOztBREVBO0VBQ0UsdUJBQUE7RUFDQSxXQUFBO0VBQ0Esa0JBQUE7RUFDQSxvQkFBQTtFQUFBLGFBQUE7RUFDQSxlQUFBO0FDQ0Y7O0FERUE7RUFDRSxvQkFBQTtFQUFBLGFBQUE7RUFDQSxXQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC92aWV3LXdpZGdldC92aWV3LXdpZGdldC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgYm9yZGVyOiAxcHggc29saWQgIzg4ODtcbiAgZGlzcGxheTogYmxvY2s7XG4gIHBhZGRpbmc6IDRweDtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG59XG5cbmg2IHtcbiAgbWFyZ2luLWxlZnQ6IDJweDtcbiAgbWFyZ2luLXJpZ2h0OiAycHg7XG4gIG1hcmdpbi10b3A6IDRweDtcbiAgbWFyZ2luLWJvdHRvbTogMnB4O1xufVxuXG4udmlldy10aXRsZSB7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICB3aWR0aDogMTAwJTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LXdyYXA6IHdyYXA7XG59XG5cbi50b29sYmFyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbnRleHRhcmVhIHtcbn1cbiIsIjpob3N0IHtcbiAgYm9yZGVyOiAxcHggc29saWQgIzg4ODtcbiAgZGlzcGxheTogYmxvY2s7XG4gIHBhZGRpbmc6IDRweDtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG59XG5cbmg2IHtcbiAgbWFyZ2luLWxlZnQ6IDJweDtcbiAgbWFyZ2luLXJpZ2h0OiAycHg7XG4gIG1hcmdpbi10b3A6IDRweDtcbiAgbWFyZ2luLWJvdHRvbTogMnB4O1xufVxuXG4udmlldy10aXRsZSB7XG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICB3aWR0aDogMTAwJTtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LXdyYXA6IHdyYXA7XG59XG5cbi50b29sYmFyIHtcbiAgZGlzcGxheTogZmxleDtcbiAgd2lkdGg6IDEwMCU7XG59Il19 */"
 
 /***/ }),
 
@@ -1229,26 +1853,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _s_steps_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../s/steps.service */ "./src/app/s/steps.service.ts");
+/* harmony import */ var _s_runtime_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../s/runtime.service */ "./src/app/s/runtime.service.ts");
+/* harmony import */ var _s_steps_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../s/steps.service */ "./src/app/s/steps.service.ts");
+/* harmony import */ var _s_View__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../s/View */ "./src/app/s/View.ts");
+
+
 
 
 
 
 let ViewWidgetComponent = class ViewWidgetComponent {
-    constructor(stepsService, elementRef) {
+    constructor(stepsService, runtimeService, elementRef) {
         this.stepsService = stepsService;
+        this.runtimeService = runtimeService;
         this.elementRef = elementRef;
         this.faPlus = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faPlus"];
         this.faMinus = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faMinus"];
         this.faTrashAlt = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faTrashAlt"];
+        this.ViewWidgetType = _s_View__WEBPACK_IMPORTED_MODULE_5__["ViewWidgetType"];
         this.isOrganizeMode = false;
         this.height = 300;
     }
     ngOnInit() {
+        // merge(
+        //   this.runtimeService.entitiesChanged$.pipe(
+        //     // tap((a) => console.log('entityRuntimeData', [...a], this.viewWidget.id)),
+        //     filter((changedIndexes) => changedIndexes.some(index => index === this.viewWidget.id)),
+        //   ),
+        //   this.stepsService.steps$.pipe(take(1)),
+        // ).subscribe(() => {
+        //   // console.log('entityRuntimeData', this.viewWidget.id)),
+        //   this.content = this.runtimeService.entities[this.viewWidget.id].content;
+        // });
+        this.runtimeService.entitiesChanged$.subscribe((entitySubjects) => {
+            entitySubjects[this.viewWidget.id].input$.subscribe((content) => {
+                this.content = content;
+            });
+        });
     }
     onTitleUpdated(value) {
         this.viewWidget.view.title = value;
         this.stepsService.updateWidget(this.stepID, this.index, this.viewWidget);
+    }
+    onContentUpdated({ target }) {
+        this.runtimeService.updateContent(this.viewWidget.id, target.value);
     }
     elGetBoundingClientRect() {
         return this.elementRef.nativeElement.getBoundingClientRect();
@@ -1266,7 +1914,8 @@ let ViewWidgetComponent = class ViewWidgetComponent {
     }
 };
 ViewWidgetComponent.ctorParameters = () => [
-    { type: _s_steps_service__WEBPACK_IMPORTED_MODULE_3__["StepsService"] },
+    { type: _s_steps_service__WEBPACK_IMPORTED_MODULE_4__["StepsService"] },
+    { type: _s_runtime_service__WEBPACK_IMPORTED_MODULE_3__["RuntimeService"] },
     { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
