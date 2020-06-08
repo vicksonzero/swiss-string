@@ -10,6 +10,8 @@ import { StepsService } from '../s/steps.service';
 })
 export class StepComponent implements OnInit {
   isExpanded = true;
+  isOrganizeMode = false;
+
   @Input() itemIndex: number;
   @Input() step: IStep;
   @Input() nodes: { [x: number]: INodeInstance };
@@ -54,5 +56,33 @@ export class StepComponent implements OnInit {
 
     this.isMobile = (innerWidth < TABLET_PORTRAIT);
 
+  }
+
+  setOrganizeMode(isOrganizeMode: boolean) {
+    this.isOrganizeMode = isOrganizeMode;
+  }
+
+  onClickOrganize() {
+    this.setOrganizeMode(true);
+  }
+
+  onClickEndOrganize() {
+    this.setOrganizeMode(false);
+  }
+
+  onClickColumnChangeSize(columnID: number, delta: number) {
+    this.stepsService.columnResize(this.step.stepID, columnID, delta);
+  }
+
+  onClickColumnArrange(columnID: number, delta: number) {
+    this.stepsService.columnArrange(this.step.stepID, columnID, delta);
+  }
+
+  onColumnMoveToStep(columnID: number, newStepID: number) {
+    this.stepsService.columnMoveToStep(this.step.stepID, columnID, newStepID);
+  }
+
+  onClickColumnRemove(columnID: number) {
+    this.stepsService.columnRemove(this.step.stepID, columnID);
   }
 }

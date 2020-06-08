@@ -12,14 +12,24 @@
   </div>
   <div class="card-body step-body" [class.isMobile]="isMobile" [hidden]="!isExpanded">
     <app-column class="column" [class.isMobile]="isMobile"
-      *ngFor="let column of columns; let i = index; trackBy: trackColumn"
-      [style.flex]="isMobile ? '' : (column.width)" [nodeInstance]="nodes[column.nodeID]" [index]="i">
+      *ngFor="let column of columns; let i = index; trackBy: trackColumn" [index]="i"
+      [style.flex]="isMobile ? '' : (column.width)" [style.height]="column.height + 'px'"
+      [nodeInstance]="nodes[column.nodeID]" [isOrganizeMode]="isOrganizeMode"
+      (clickResizeButton)="onClickColumnChangeSize(i, $event)" (clickArrangeButton)="onClickColumnArrange(i, $event)"
+      (requestMoveToStep)="onColumnMoveToStep(i, $event)" (clickTrash)="onClickColumnRemove()" [canSizeUp]="true"
+      [canSizeDown]="column.height>100" [canArrangeUp]="i>0" [canArrangeDown]="i < columns.length-1">
     </app-column>
+
   </div>
-  <div class="card-body step-buttons" [hidden]="!isExpanded">
-    <a href="#" class="btn btn-primary">Next</a>{{ ' ' }}
-    <a href="#" class="btn btn-light">Add Node</a>{{ ' ' }}
-    <a href="#" class="btn btn-light">Organize</a>{{ ' ' }}
-    <a href="#" class="btn btn-light" (click)="onClickRemoveStep()">Remove Step</a>
+
+  <div class="step-buttons card-body toolbar" [hidden]="!isExpanded">
+    <div class="toolbar-default" *ngIf="!isOrganizeMode">
+      <button class="btn btn-light">Add Node</button>{{ ' ' }}
+      <button class="btn btn-light" (click)="onClickOrganize()">Organize</button>{{ ' ' }}
+      <button class="btn btn-light" (click)="onClickRemoveStep()">Remove Step</button>
+    </div>
+    <div class="toolbar-organize" *ngIf="isOrganizeMode">
+      <button class="btn btn-light" (click)="onClickEndOrganize()">End Organize</button>{{ ' ' }}
+    </div>
   </div>
 </div>

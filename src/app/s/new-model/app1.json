@@ -18,15 +18,18 @@
       "columns": [
         {
           "nodeID": 0,
-          "width": "5"
+          "width": 5,
+          "height": 300
         },
         {
           "nodeID": 1,
-          "width": "4"
+          "width": 4,
+          "height": 300
         },
         {
           "nodeID": 2,
-          "width": "1"
+          "width": 1,
+          "height": 300
         }
       ]
     },
@@ -38,11 +41,13 @@
       "columns": [
         {
           "nodeID": 3,
-          "width": "1"
+          "width": 1,
+          "height": 300
         },
         {
           "nodeID": 4,
-          "width": "1"
+          "width": 1,
+          "height": 300
         }
       ]
     },
@@ -54,7 +59,8 @@
       "columns": [
         {
           "nodeID": 5,
-          "width": "1"
+          "width": 1,
+          "height": 300
         }
       ]
     }

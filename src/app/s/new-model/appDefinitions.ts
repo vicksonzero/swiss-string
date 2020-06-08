@@ -41,7 +41,14 @@ export interface IStep {
 }
 export interface IColumn {
   nodeID: number;
-  width: string;
+  /**
+   * Width in Flex ratios
+   */
+  width: number;
+  /**
+   * Height in pixels
+   */
+  height: number;
 }
 export interface INodeInstance {
   nodeID: number;

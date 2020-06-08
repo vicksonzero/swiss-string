@@ -27,6 +27,5 @@ export class NodeComponent implements OnInit {
     const innerWidth = window.innerWidth;
 
     this.isMobile = (innerWidth < TABLET_PORTRAIT);
-
   }
 }

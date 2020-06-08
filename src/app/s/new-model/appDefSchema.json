@@ -140,7 +140,7 @@
           }
         },
         "nodeType": {
-          "oneOf": [
+          "anyOf": [
             {
               "$ref": "#/definitions/operators"
             },
@@ -205,12 +205,18 @@
           "type": "integer"
         },
         "width": {
-          "type": "string"
+          "type": "number",
+          "description": "Width in Flex ratios"
+        },
+        "height": {
+          "type": "number",
+          "description": "Height in pixels"
         }
       },
       "required": [
         "nodeID",
-        "width"
+        "width",
+        "height"
       ]
     },
     "ISocket": {
