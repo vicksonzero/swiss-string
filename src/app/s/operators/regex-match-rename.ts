@@ -1,6 +1,11 @@
 export const operator = {
     name: 'regex-match-rename',
     description: 'regex-match and then rename the resulting capture groups',
+    externalLinks: [
+      'https://regexone.com/',
+      'https://regexr.com/',
+      'https://cheatography.com/davechild/cheat-sheets/regular-expressions/',
+    ],
     inputs: [
         'source', // string
         'regex', // string

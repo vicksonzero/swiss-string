@@ -1,0 +1,45 @@
+
+textarea {
+  width: 100%;
+  // height: 100%;
+}
+
+.node-input ul {
+  list-style: none;
+  padding: 0;
+
+  li:before {
+    content: '\2B9E';
+    margin: 0 1em;    /* any design */
+  }
+}
+
+.node-output ul {
+  list-style: none;
+  padding: 0;
+
+  li:before {
+    content: '\2B9C';
+    margin: 0 1em;    /* any design */
+  }
+}
+
+.isMobile{
+  &.node-input ul {
+    list-style: none;
+
+    li:before {
+      content: '\2B9E';
+      margin: 0 1em;    /* any design */
+    }
+  }
+
+  &.node-output ul {
+    list-style: none;
+
+    li:before {
+      content: '\2B9C';
+      margin: 0 1em;    /* any design */
+    }
+  }
+}

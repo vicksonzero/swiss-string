@@ -1,3 +1,4 @@
+import { IStep } from './new-model/appDefinitions';
 import { Operator } from './Operator';
 import { View } from './View';
 
@@ -39,15 +40,16 @@ export interface OperatorWidget extends WidgetConfig {
 }
 
 export class StepFactory {
-  static createStep(config: Partial<Step>): Step {
+  static createStep(config: Partial<IStep>, ): IStep {
     const a = {
-      id: 0,
-      title: 'Input',
-      type: WidgetType.BASIC,
+      stepID: 0,
+      title: 'Step',
+      description: '',
+      inputProtection: false,
       columns: [
-        { id: 1, width: 100, widthUnit: '%', type: WidgetType.BASIC }
       ],
     };
     return { ...a, ...config };
   }
 }
+

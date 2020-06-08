@@ -1,5 +1,5 @@
 <div>
-  <app-step *ngFor="let step of steps; let i = index; trackBy: trackItem" [step]="step" [itemIndex]="i+1"></app-step>
+  <app-step *ngFor="let step of steps; let i = index; trackBy: trackItem" [step]="step" [itemIndex]="i+1" [nodes]="nodes"></app-step>
   <div *ngIf="steps.length <= 0">
     <p>Start by pressing "Add step"</p>
   </div>

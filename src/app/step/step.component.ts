@@ -1,6 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { TABLET_PORTRAIT } from 'src/media';
-import { OperatorWidget, Step, ViewWidget, WidgetConfig, WidgetType } from '../s/Step';
+import { IColumn, INodeInstance, IStep } from '../s/new-model/appDefinitions';
 import { StepsService } from '../s/steps.service';
 
 @Component({
@@ -11,8 +11,10 @@ import { StepsService } from '../s/steps.service';
 export class StepComponent implements OnInit {
   isExpanded = true;
   @Input() itemIndex: number;
-  @Input() step: Step;
-  columns: WidgetConfig[];
+  @Input() step: IStep;
+  @Input() nodes: { [x: number]: INodeInstance };
+
+  columns: IColumn[];
   summary: string;
 
   isMobile = false;
@@ -22,37 +24,25 @@ export class StepComponent implements OnInit {
   ngOnInit() {
     this.columns = this.step.columns;
     this.updateDeviceWidth();
-    switch (this.step.type) {
-      case WidgetType.VIEW:
-        this.summary = this.columns.map(c => {
-          return (c as ViewWidget).view.title;
-        }).join(', ');
-        break;
-      case WidgetType.OPERATOR:
-        this.summary = '[' + this.columns.map(c => {
-          return (c as OperatorWidget).operator.title || (c as OperatorWidget).operator.type;
-        }).join(', ') + ']';
-        break;
-      default:
-        this.summary = 'Step';
-    }
+    this.summary = 'Step';
   }
+
   onExpandButtonClick() {
     this.isExpanded = !this.isExpanded;
   }
 
   onClickRemoveStep() {
-    this.stepsService.removeStep(this.step.id);
+    this.stepsService.removeStep(this.step.stepID);
   }
 
   onTitleUpdated(val: any) {
     console.log('onTitleUpdated');
     this.step.title = val;
-    this.stepsService.updateStep(this.step.id, this.step);
+    this.stepsService.updateStep(this.step.stepID, this.step);
   }
 
-  trackColumn(index: number, item: WidgetConfig) {
-    return item.id;
+  trackColumn(index: number, item: IColumn) {
+    return item.nodeID;
   }
 
   @HostListener('window:resize', ['$event'])

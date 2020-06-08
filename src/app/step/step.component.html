@@ -7,18 +7,18 @@
       <span class="text-secondary">{{itemIndex}}.{{ ' ' }}</span>
       <app-editable-wrapper [value]="step.title" (valueChange)="onTitleUpdated($event)"></app-editable-wrapper>{{ ' ' }}
       <span style="display:inline-block;width:4px;"></span>
-      <span class="text-secondary step-type" [hidden]="isExpanded">{{summary}}</span>
+      <span class="text-secondary step-type">{{step.description}}</span>
     </h5>
   </div>
   <div class="card-body step-body" [class.isMobile]="isMobile" [hidden]="!isExpanded">
     <app-column class="column" [class.isMobile]="isMobile"
       *ngFor="let column of columns; let i = index; trackBy: trackColumn"
-      [style.width]="isMobile ? '' : (column.width+column.widthUnit)" [column]="column" [index]="i">
+      [style.flex]="isMobile ? '' : (column.width)" [nodeInstance]="nodes[column.nodeID]" [index]="i">
     </app-column>
   </div>
   <div class="card-body step-buttons" [hidden]="!isExpanded">
     <a href="#" class="btn btn-primary">Next</a>{{ ' ' }}
-    <a href="#" class="btn btn-light">Add {{this.step.type}}</a>{{ ' ' }}
+    <a href="#" class="btn btn-light">Add Node</a>{{ ' ' }}
     <a href="#" class="btn btn-light">Organize</a>{{ ' ' }}
     <a href="#" class="btn btn-light" (click)="onClickRemoveStep()">Remove Step</a>
   </div>

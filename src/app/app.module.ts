@@ -9,7 +9,7 @@ import { MainComponent } from './main/main.component';
 import { StepComponent } from './step/step.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ColumnComponent } from './column/column.component';
-import { ViewWidgetComponent } from './view-widget/view-widget.component';
+import { NodeComponent } from './node/node.component';
 import { OperatorWidgetComponent } from './operator-widget/operator-widget.component';
 
 @NgModule({
@@ -20,7 +20,7 @@ import { OperatorWidgetComponent } from './operator-widget/operator-widget.compo
     StepComponent,
     EditableWrapperComponent,
     ColumnComponent,
-    ViewWidgetComponent,
+    NodeComponent,
     OperatorWidgetComponent
   ],
   imports: [

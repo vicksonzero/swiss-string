@@ -1,0 +1,350 @@
+{
+  "title": "IApp",
+  "type": "object",
+  "additionalProperties": false,
+  "format": "grid",
+  "properties": {
+    "_comments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "title": {
+      "type": "string",
+      "description": "title of app",
+      "default": "new app",
+      "options": {
+        "grid_columns": 12
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "description of what the whole app does",
+      "default": "Power the next game changer",
+      "options": {
+        "grid_columns": 12
+      }
+    },
+    "stepCounter": {
+      "type": "integer",
+      "default": 0,
+      "minimum": 0
+    },
+    "nodeCounter": {
+      "type": "integer",
+      "default": 0,
+      "minimum": 0
+    },
+    "editorCounter": {
+      "type": "integer",
+      "default": 0,
+      "minimum": 0
+    },
+    "steps": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/IStep"
+      },
+      "default": []
+    },
+    "nodes": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "#/definitions/INodeInstance"
+      }
+    },
+    "content": {
+      "type": "any"
+    }
+  },
+  "required": [
+    "_comments",
+    "title",
+    "description",
+    "stepCounter",
+    "nodeCounter",
+    "editorCounter",
+    "steps",
+    "nodes"
+  ],
+  "definitions": {
+    "IStep": {
+      "type": "object",
+      "headerTemplate": "{{ i1 }}. [{{ self.stepID }}] {{ self.title }} ({{ self.description }})",
+      "format": "grid",
+      "additionalProperties": false,
+      "properties": {
+        "stepID": {
+          "type": "integer",
+          "default": 0,
+          "minimum": 0,
+          "options": {
+            "grid_columns": 3
+          }
+        },
+        "title": {
+          "type": "string",
+          "default": "",
+          "options": {
+            "grid_columns": 9
+          }
+        },
+        "description": {
+          "type": "string",
+          "default": "",
+          "options": {
+            "grid_columns": 12
+          }
+        },
+        "inputProtection": {
+          "type": "boolean",
+          "default": false
+        },
+        "columns": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/IColumn"
+          }
+        }
+      },
+      "required": [
+        "stepID",
+        "title",
+        "description",
+        "inputProtection",
+        "columns"
+      ]
+    },
+    "INodeInstance": {
+      "type": "object",
+      "headerTemplate": "{{ i1 }}. [{{ self.nodeID }}] {{ self.title }} ({{ self.nodeType }})",
+      "additionalProperties": false,
+      "format": "grid",
+      "properties": {
+        "nodeID": {
+          "type": "integer",
+          "default": 0,
+          "minimum": 0,
+          "options": {
+            "grid_columns": 3
+          }
+        },
+        "title": {
+          "type": "string",
+          "options": {
+            "grid_columns": 6
+          }
+        },
+        "nodeType": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/operators"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "options": {
+            "grid_columns": 12
+          }
+        },
+        "inputs": {
+          "type": "array",
+          "format": "table",
+          "options": {
+            "grid_columns": 12
+          },
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/editorInputSocket"
+              },
+              {
+                "$ref": "#/definitions/ILinkedInputSocket"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "format": "table",
+          "options": {
+            "grid_columns": 12
+          },
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ISocket"
+              },
+              {
+                "$ref": "#/definitions/ILinkedOutputSocket"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "nodeID",
+        "title",
+        "nodeType",
+        "inputs",
+        "outputs"
+      ]
+    },
+    "IColumn": {
+      "type": "object",
+      "title": "IColumn",
+      "additionalProperties": false,
+      "format": "grid",
+      "properties": {
+        "nodeID": {
+          "type": "integer"
+        },
+        "width": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "nodeID",
+        "width"
+      ]
+    },
+    "ISocket": {
+      "type": "object",
+      "title": "ISocket",
+      "additionalProperties": false,
+      "format": "grid",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "editorInputSocket": {
+      "title": "editorInputSocket",
+      "type": "object",
+      "additionalProperties": false,
+      "format": "grid",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "editor": {
+          "type": "string",
+          "options": {
+            "grid_columns": 12
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "ILinkedInputSocket": {
+      "title": "ILinkedInputSocket",
+      "type": "object",
+      "additionalProperties": false,
+      "format": "grid",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "nodeID": {
+              "type": "number",
+              "default": 0,
+              "minimum": 0
+            },
+            "outputName": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "nodeID",
+            "outputName"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "source"
+      ]
+    },
+    "ILinkedOutputSocket": {
+      "title": "ILinkedOutputSocket",
+      "type": "object",
+      "additionalProperties": false,
+      "format": "grid",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "destinations": {
+          "type": "array",
+          "format": "table",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "nodeID": {
+                "type": "number",
+                "default": 0,
+                "minimum": 0
+              },
+              "inputName": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "nodeID",
+              "inputName"
+            ]
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "destinations"
+      ]
+    },
+    "operators": {
+      "type": "string",
+      "enum": [
+        "editor",
+        "editor-textarea",
+        "editor-list-string",
+        "editor-regex",
+        "regex-match-rename",
+        "add",
+        "subtract",
+        "regex-replace"
+      ]
+    }
+  }
+}

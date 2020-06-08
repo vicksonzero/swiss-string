@@ -1,0 +1,191 @@
+{
+  "_comments": [
+    "https://www.jsonschemavalidator.net/",
+    "https://bcherny.github.io/json-schema-to-typescript-browser/",
+    "https://json-editor.github.io/json-editor/"
+  ],
+  "title": "regex parse and reconstitution",
+  "description": "",
+  "stepCounter": 10,
+  "nodeCounter": 10,
+  "editorCounter": 10,
+  "steps": [
+    {
+      "stepID": 0,
+      "title": "Input",
+      "description": "get started here",
+      "inputProtection": false,
+      "columns": [
+        {
+          "nodeID": 0,
+          "width": "5"
+        },
+        {
+          "nodeID": 1,
+          "width": "4"
+        },
+        {
+          "nodeID": 2,
+          "width": "1"
+        }
+      ]
+    },
+    {
+      "stepID": 1,
+      "title": "Vector test",
+      "description": "Nothing to see here. just testing",
+      "inputProtection": false,
+      "columns": [
+        {
+          "nodeID": 3,
+          "width": "1"
+        },
+        {
+          "nodeID": 4,
+          "width": "1"
+        }
+      ]
+    },
+    {
+      "stepID": 2,
+      "title": "Step 3",
+      "description": "Step 3 Description",
+      "inputProtection": false,
+      "columns": [
+        {
+          "nodeID": 5,
+          "width": "1"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "nodeID": 0,
+      "title": "Input",
+      "nodeType": "editor-textarea",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "destinations": [
+            {
+              "nodeID": 5,
+              "inputName": "input"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nodeID": 1,
+      "title": "Input Regex",
+      "nodeType": "editor-regex",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "inputRegex",
+          "type": "regex",
+          "destinations": []
+        }
+      ]
+    },
+    {
+      "nodeID": 2,
+      "title": "Token Names",
+      "nodeType": "editor-list-string",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "inputRegexTokenNames",
+          "type": "string",
+          "destinations": []
+        }
+      ]
+    },
+    {
+      "nodeID": 3,
+      "title": "Test Vector2",
+      "nodeType": "editor",
+      "inputs": [
+        {
+          "name": "testVector2",
+          "type": "number-list",
+          "editor": "vector2"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "testVector2",
+          "type": "number-list",
+          "destinations": []
+        }
+      ]
+    },
+    {
+      "nodeID": 4,
+      "title": "Test Vector3",
+      "nodeType": "editor",
+      "inputs": [
+        {
+          "name": "testVector3",
+          "type": "number-list",
+          "editor": "vector3"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "testVector3",
+          "type": "number-list",
+          "destinations": []
+        }
+      ]
+    },
+    {
+      "nodeID": 5,
+      "title": "regex-match-rename",
+      "nodeType": "regex-match-rename",
+      "inputs": [
+        {
+          "name": "input",
+          "type": "string",
+          "source": {
+            "nodeID": 0,
+            "outputName": "input"
+          }
+        },
+        {
+          "name": "inputRegex",
+          "type": "string",
+          "source": {
+            "nodeID": 1,
+            "outputName": "inputRegex"
+          }
+        },
+        {
+          "name": "inputRegexTokenNames",
+          "type": "string",
+          "source": {
+            "nodeID": 2,
+            "outputName": "inputRegexTokenNames"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tokens",
+          "type": "string",
+          "destinations": []
+
+        },
+        {
+          "name": "tokensResidue",
+          "type": "string",
+          "destinations": []
+        }
+      ]
+    }
+  ],
+  "content": {}
+}
