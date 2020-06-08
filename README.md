@@ -22,4 +22,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 - Simple export as JSON to file (https://www.npmjs.com/package/data-exporter)
 - handlebar template language (https://handlebarsjs.com/guide/expressions.html)
 - helpers for handlebar (https://getpublii.com/dev/js-helper/)
-- JSON query language (https://jmespath.org/ )
+- JSON query language (https://jmespath.org/)
+- JSON schema (https://www.jsonschemavalidator.net/)
+- JSON schema to TS definitions (https://bcherny.github.io/json-schema-to-typescript-browser/)
+- JSON schema to editor (https://json-editor.github.io/json-editor/)

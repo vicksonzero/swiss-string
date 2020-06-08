@@ -4,12 +4,12 @@
 <div class="node-input" [class.isMobile]="isMobile">
   <!-- Inputs <span>({{nodeInstance.inputs.length}})</span> -->
   <ul>
-    <li *ngFor="let input of nodeInstance.inputs; let i = index;">{{input.name}}</li>
+    <li *ngFor="let input of nodeInstance.inputs; let i = index;">{{input.name}} ({{input.type}})</li>
   </ul>
 </div>
 <div class="node-output" [class.isMobile]="isMobile">
   <!-- Outputs <span>({{nodeInstance.outputs.length}})</span> -->
   <ul>
-    <li *ngFor="let output of nodeInstance.outputs; let i = index;">{{output.name}}</li>
+    <li *ngFor="let output of nodeInstance.outputs; let i = index;">{{output.name}} ({{output.type}})</li>
   </ul>
 </div>

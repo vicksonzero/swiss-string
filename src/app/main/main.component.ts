@@ -3,6 +3,7 @@ import { INodeInstance, IStep } from '../s/new-model/appDefinitions';
 import { NodeService } from '../s/node.service';
 import { Step } from '../s/Step';
 import { StepsService } from '../s/steps.service';
+import { merge } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -25,6 +26,24 @@ export class MainComponent implements OnInit {
 
     this.nodeService.nodes$.subscribe((nodes) => {
       this.nodes = nodes;
+    });
+
+    merge(this.stepsService.steps$, this.nodeService.nodes$).subscribe(([steps, nodes]) => {
+      const obj = {
+        _comments: [
+          'https://www.jsonschemavalidator.net/',
+          'https://bcherny.github.io/json-schema-to-typescript-browser/',
+          'https://json-editor.github.io/json-editor/'
+        ],
+        title: 'regex parse and reconstitution',
+        description: '',
+        stepCounter: this.stepsService.stepCounter,
+        nodeCounter: this.nodeService.nodeCounter,
+        editorCounter: 10,
+        steps,
+        nodes
+      };
+      this.stepsJSON = JSON.stringify(obj, null, 4);
     });
   }
 
