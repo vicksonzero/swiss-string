@@ -24,3 +24,8 @@ body {
 .app-text-secondary {
   color: $primary-color;
 }
+
+
+.flip-list-move {
+  transition: transform 1s;
+}

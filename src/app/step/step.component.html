@@ -11,15 +11,16 @@
     </h5>
   </div>
   <div class="card-body step-body" [class.isMobile]="isMobile" [hidden]="!isExpanded">
-    <app-column class="column" [class.isMobile]="isMobile"
-      *ngFor="let column of columns; let i = index; trackBy: trackColumn" [index]="i"
-      [style.flex]="isMobile ? '' : (column.width)" [style.height]="column.height + 'px'"
-      [nodeInstance]="nodes[column.nodeID]" [isOrganizeMode]="isOrganizeMode"
-      (clickResizeButton)="onClickColumnChangeSize(i, $event)" (clickArrangeButton)="onClickColumnArrange(i, $event)"
-      (requestMoveToStep)="onColumnMoveToStep(i, $event)" (clickTrash)="onClickColumnRemove()" [canSizeUp]="true"
-      [canSizeDown]="column.height>100" [canArrangeUp]="i>0" [canArrangeDown]="i < columns.length-1">
-    </app-column>
-
+    <app-transition-group [className]="'flip-list'" class="flip-list" [class.isMobile]="isMobile">
+      <app-column class="column list-items" [class.isMobile]="isMobile" appTransitionGroupItem
+        *ngFor="let column of columns; let i = index; trackBy: trackColumn" [index]="i"
+        [style.flex]="isMobile ? '' : (column.width)" [style.height]="column.height + 'px'"
+        [nodeInstance]="nodes[column.nodeID]" [isOrganizeMode]="isOrganizeMode"
+        (clickResizeButton)="onClickColumnChangeSize(column.nodeID, $event)" (clickArrangeButton)="onClickColumnArrange(column.nodeID, $event)"
+        (requestMoveToStep)="onColumnMoveToStep(column.nodeID, $event)" (clickTrash)="onClickColumnRemove(column.nodeID)" [canSizeUp]="true"
+        [canSizeDown]="column.height>100" [canArrangeUp]="i>0" [canArrangeDown]="i < columns.length-1">
+      </app-column>
+    </app-transition-group>
   </div>
 
   <div class="step-buttons card-body toolbar" [hidden]="!isExpanded">

@@ -11,17 +11,22 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ColumnComponent } from './column/column.component';
 import { NodeComponent } from './node/node.component';
 import { OperatorWidgetComponent } from './operator-widget/operator-widget.component';
+import { TransitionGroupComponent, TransitionGroupItemDirective } from './components/transition-group/transition-group.component';
+import { DimBgComponent } from './components/dim-bg/dim-bg.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
     ButtonComponent,
-    StepComponent,
-    EditableWrapperComponent,
     ColumnComponent,
+    EditableWrapperComponent,
+    MainComponent,
     NodeComponent,
-    OperatorWidgetComponent
+    OperatorWidgetComponent,
+    StepComponent,
+    TransitionGroupComponent,
+    TransitionGroupItemDirective,
+    DimBgComponent,
   ],
   imports: [
     BrowserModule,

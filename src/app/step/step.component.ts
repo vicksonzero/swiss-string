@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ContentChildren, Directive, ElementRef, HostListener, Input, OnInit, QueryList } from '@angular/core';
 import { TABLET_PORTRAIT } from 'src/media';
 import { IColumn, INodeInstance, IStep } from '../s/new-model/appDefinitions';
 import { StepsService } from '../s/steps.service';
@@ -70,19 +70,19 @@ export class StepComponent implements OnInit {
     this.setOrganizeMode(false);
   }
 
-  onClickColumnChangeSize(columnID: number, delta: number) {
-    this.stepsService.columnResize(this.step.stepID, columnID, delta);
+  onClickColumnChangeSize(nodeID: number, delta: number) {
+    this.stepsService.columnResize(this.step.stepID, nodeID, delta);
   }
 
-  onClickColumnArrange(columnID: number, delta: number) {
-    this.stepsService.columnArrange(this.step.stepID, columnID, delta);
+  onClickColumnArrange(nodeID: number, delta: number) {
+    this.stepsService.columnArrange(this.step.stepID, nodeID, delta);
   }
 
-  onColumnMoveToStep(columnID: number, newStepID: number) {
-    this.stepsService.columnMoveToStep(this.step.stepID, columnID, newStepID);
+  onColumnMoveToStep(nodeID: number, newStepID: number) {
+    this.stepsService.columnMoveToStep(this.step.stepID, nodeID, newStepID);
   }
 
-  onClickColumnRemove(columnID: number) {
-    this.stepsService.columnRemove(this.step.stepID, columnID);
+  onClickColumnRemove(nodeID: number) {
+    this.stepsService.columnRemove(this.step.stepID, nodeID);
   }
 }

@@ -45,10 +45,14 @@ export class StepsService {
     this.stepsSource.next(oldSteps);
   }
 
-  columnResize(stepID: number, columnID: number, delta: number) {
+  columnResize(stepID: number, nodeID: number, delta: number) {
     const oldStep = this.stepsSource.getValue().find(step => step.stepID === stepID);
     if (!oldStep) {
       throw new TypeError(`Step ID "${stepID}" not found`);
+    }
+    const columnID = oldStep.columns.findIndex((col) => col.nodeID === nodeID);
+    if (columnID < 0) {
+      throw new TypeError(`column ID "${columnID}" not found in Step ID "${stepID}"`);
     }
     const oldColumn = oldStep.columns[columnID];
     const newHeight = Math.max(100, oldColumn.height + delta);
@@ -56,10 +60,14 @@ export class StepsService {
     this.updateStep(stepID, oldStep);
   }
 
-  columnArrange(stepID: number, columnID: number, delta: number) {
+  columnArrange(stepID: number, nodeID: number, delta: number) {
     const oldStep = this.stepsSource.getValue().find(step => step.stepID === stepID);
     if (!oldStep) {
       throw new TypeError(`Step ID "${stepID}" not found`);
+    }
+    const columnID = oldStep.columns.findIndex((col) => col.nodeID === nodeID);
+    if (columnID < 0) {
+      throw new TypeError(`column ID "${columnID}" not found in Step ID "${stepID}"`);
     }
     if (oldStep.columns.length - 1 < columnID) {
       throw new TypeError(`Step "${stepID}" does not have column "${columnID}"`);
@@ -82,7 +90,7 @@ export class StepsService {
     this.updateStep(stepID, oldStep);
   }
 
-  columnMoveToStep(stepID: number, columnID: number, newStepID: number) {
+  columnMoveToStep(stepID: number, nodeID: number, newStepID: number) {
     const oldStep = this.stepsSource.getValue().find(step => step.stepID === stepID);
     const newStep = this.stepsSource.getValue().find(step => step.stepID === newStepID);
     if (!oldStep) {
@@ -91,6 +99,10 @@ export class StepsService {
 
     if (!newStep) {
       throw new TypeError(`New Step ID "${newStepID}" not found`);
+    }
+    const columnID = oldStep.columns.findIndex((col) => col.nodeID === nodeID);
+    if (columnID < 0) {
+      throw new TypeError(`column ID "${columnID}" not found in Step ID "${stepID}"`);
     }
     if (oldStep.columns.length - 1 < columnID) {
       throw new TypeError(`Step "${stepID}" does not have column "${columnID}"`);
@@ -103,10 +115,14 @@ export class StepsService {
     this.updateStep(newStepID, newStep);
   }
 
-  columnRemove(stepID: number, columnID: number) {
+  columnRemove(stepID: number, nodeID: number) {
     const oldStep = this.stepsSource.getValue().find(step => step.stepID === stepID);
     if (!oldStep) {
       throw new TypeError(`Step ID "${stepID}" not found`);
+    }
+    const columnID = oldStep.columns.findIndex((col) => col.nodeID === nodeID);
+    if (columnID < 0) {
+      throw new TypeError(`column ID "${columnID}" not found in Step ID "${stepID}"`);
     }
     if (oldStep.columns.length - 1 < columnID) {
       throw new TypeError(`Step "${stepID}" does not have column "${columnID}"`);
