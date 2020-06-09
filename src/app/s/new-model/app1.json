@@ -117,14 +117,16 @@
       "inputs": [
         {
           "name": "testVector2",
-          "type": "number-list",
+          "type": "array",
+          "arrayOf": "number",
           "editor": "vector2"
         }
       ],
       "outputs": [
         {
           "name": "testVector2",
-          "type": "number-list",
+          "type": "array",
+          "arrayOf": "number",
           "destinations": []
         }
       ]
@@ -136,14 +138,16 @@
       "inputs": [
         {
           "name": "testVector3",
-          "type": "number-list",
+          "type": "array",
+          "arrayOf": "number",
           "editor": "vector3"
         }
       ],
       "outputs": [
         {
           "name": "testVector3",
-          "type": "number-list",
+          "type": "array",
+          "arrayOf": "number",
           "destinations": []
         }
       ]
