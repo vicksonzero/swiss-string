@@ -1,8 +1,9 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">
-      <button class="expand-button btn btn-outline-secondary btn-sm" (click)="onExpandButtonClick()">
-        {{isExpanded ? '-' : '+' }}
+      <button class="expand-button btn btn-secondary btn-sm" (click)="onExpandButtonClick()">
+        <fa-icon *ngIf="isExpanded" [icon]="faMinus"></fa-icon>
+        <fa-icon *ngIf="!isExpanded" [icon]="faPlus"></fa-icon>
       </button>
       <span class="text-secondary">{{itemIndex}}.{{ ' ' }}</span>
       <app-editable-wrapper [value]="step.title" (valueChange)="onTitleUpdated($event)"></app-editable-wrapper>{{ ' ' }}

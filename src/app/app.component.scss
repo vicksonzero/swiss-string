@@ -1,15 +1,21 @@
-@import '../variables';
+@import "../variables";
 
 .main {
   position: relative;
   width: 100%;
   height: calc(100% - 32px);
-  background-color: #888;
+  background-color: rgb(214, 234, 253);
   margin-top: 55px;
 }
 
-nav{
-  background-color: $secondary-color;
+nav {
+  background-color: $primary-color;
+  color: white;
+
+  a,
+  button {
+    color: white;
+  }
 }
 
 :host {

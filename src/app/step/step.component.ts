@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ContentChildren, Directive, ElementRef, HostListener, Input, OnInit, QueryList } from '@angular/core';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TABLET_PORTRAIT } from 'src/media';
 import { IColumn, INodeInstance, IStep } from '../s/new-model/appDefinitions';
 import { StepsService } from '../s/steps.service';
@@ -11,6 +12,8 @@ import { StepsService } from '../s/steps.service';
 export class StepComponent implements OnInit {
   isExpanded = true;
   isOrganizeMode = false;
+  public faPlus = faPlus;
+  public faMinus = faMinus;
 
   @Input() itemIndex: number;
   @Input() step: IStep;
