@@ -9,21 +9,26 @@
 
 .card-subtitle {
   margin-bottom: 0;
-  margin-left: 40px;
+  margin-left: 50px;
 }
 
 .card {
   margin-top: 4px;
   margin-bottom: 4px;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .step-body {
-  margin-left: 40px;
+  margin-left: 50px;
   padding-top: 0;
+
+  app-transition-group {
+    overflow-x: auto;
+  }
 }
 
 .step-buttons {
-  margin-left: 40px;
+  margin-left: calc(50px - 0.75rem);
   padding-top: 0;
 }
 
@@ -32,12 +37,11 @@
   font-style: italic;
 }
 
-.btn-light:first-child {
-  padding-left: 0;
-}
-
 .column.isMobile {
   width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 1em;
 }
 
 .flip-list {

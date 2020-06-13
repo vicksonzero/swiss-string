@@ -20,6 +20,18 @@ body {
   background-color: $primary-color;
 }
 
+.btn-secondary {
+  background-color: white;
+  border: #5a6268 solid 1px;
+  color: #5a6268;
+
+  &.disabled {
+    background-color: white;
+    border-color: #AAA;
+    color: #AAA;
+  }
+}
+
 
 .app-text-secondary {
   color: $primary-color;

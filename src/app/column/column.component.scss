@@ -1,8 +1,10 @@
 :host {
+  margin: 4px;
   padding: 4px;
   border: 1px silver solid;
   display: block;
   background-color: rgba(255, 255, 255, 0.7);
+  min-width: 200px;
 }
 
 .toolbar {
