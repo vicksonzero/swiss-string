@@ -65,6 +65,10 @@ export class StepComponent implements OnInit {
     this.isOrganizeMode = isOrganizeMode;
   }
 
+  onClickAddNode() {
+    this.stepsService.addColumn(this.step.stepID);
+  }
+
   onClickOrganize() {
     this.setOrganizeMode(true);
   }

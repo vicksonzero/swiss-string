@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { merge } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { INodeInstance, IStep } from '../s/new-model/appDefinitions';
 import { NodeService } from '../s/node.service';
 import { Step } from '../s/Step';
@@ -21,14 +21,19 @@ export class MainComponent implements OnInit {
     this.stepsService.steps$.subscribe((steps) => {
       // console.log('MainComponent', steps);
       this.steps = steps;
-      this.stepsJSON = JSON.stringify(steps, null, 4);
+      // this.stepsJSON = JSON.stringify(steps, null, 4);
     });
 
     this.nodeService.nodes$.subscribe((nodes) => {
-      this.nodes = nodes;
+      this.nodes = nodes.reduce((result, node) => {
+        return {
+          ...result,
+          [node.nodeID]: node,
+        };
+      }, {});
     });
 
-    merge(this.stepsService.steps$, this.nodeService.nodes$).subscribe(([steps, nodes]) => {
+    combineLatest(this.stepsService.steps$, this.nodeService.nodes$).subscribe(([steps, nodes]) => {
       const obj = {
         _comments: [
           'https://www.jsonschemavalidator.net/',

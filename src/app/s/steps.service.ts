@@ -4,6 +4,7 @@ import { shareReplay } from 'rxjs/operators';
 import { mockSteps } from './mockSteps';
 import { IStep } from './new-model/appDefinitions';
 import { StepFactory } from './Step';
+import { NodeService } from './node.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class StepsService {
   nodeCounter = mockSteps.nodeCounter;
   editorCounter = mockSteps.editorCounter;
 
-  constructor() {
+  constructor(private nodeService: NodeService) {
     this.steps$ = this.stepsSource.pipe(
       shareReplay(1),
     );
@@ -43,6 +44,23 @@ export class StepsService {
     const positionID = oldSteps.findIndex(step => step.stepID === stepID);
     oldSteps.splice(positionID, 1);
     this.stepsSource.next(oldSteps);
+  }
+
+  addColumn(stepID: number) {
+    const oldStep = this.stepsSource.getValue().find(step => step.stepID === stepID);
+    if (!oldStep) {
+      throw new TypeError(`Step ID "${stepID}" not found`);
+    }
+
+    const newNode = this.nodeService.createNode();
+
+    oldStep.columns.push({
+      nodeID: newNode.nodeID,
+      width: 1,
+      height: 300,
+    });
+
+    this.updateStep(stepID, oldStep);
   }
 
   columnResize(stepID: number, nodeID: number, delta: number) {

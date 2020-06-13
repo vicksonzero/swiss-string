@@ -1,11 +1,14 @@
-<div class="view">
-  <h6 class="text-secondary">{{nodeInstance.nodeID}}. {{nodeInstance.title}}</h6>
+<div class="title">
+  <h6 class="text-secondary">{{nodeIndex + 1}}. {{nodeInstance.title}} <span>[{{nodeInstance.nodeID}}]</span></h6>
 </div>
 <div class="node-input" [class.isMobile]="isMobile">
   <!-- Inputs <span>({{nodeInstance.inputs.length}})</span> -->
   <ul>
     <li *ngFor="let input of nodeInstance.inputs; let i = index;">{{input.name}} ({{input.type}})</li>
   </ul>
+</div>
+<div class="view">
+
 </div>
 <div class="node-output" [class.isMobile]="isMobile">
   <!-- Outputs <span>({{nodeInstance.outputs.length}})</span> -->

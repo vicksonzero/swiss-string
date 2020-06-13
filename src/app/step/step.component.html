@@ -7,6 +7,7 @@
       </button>
       <span class="text-secondary">{{itemIndex}}.{{ ' ' }}</span>
       <app-editable-wrapper [value]="step.title" (valueChange)="onTitleUpdated($event)"></app-editable-wrapper>{{ ' ' }}
+      <span>[{{step.stepID}}]</span>
       <span style="display:inline-block;width:4px;"></span>
       <span class="text-secondary step-type">{{step.description}}</span>
     </h5>
@@ -17,16 +18,18 @@
         *ngFor="let column of columns; let i = index; trackBy: trackColumn" [index]="i"
         [style.flex]="isMobile ? '' : (column.width)" [style.height]="column.height + 'px'"
         [nodeInstance]="nodes[column.nodeID]" [isOrganizeMode]="isOrganizeMode"
-        (clickResizeButton)="onClickColumnChangeSize(column.nodeID, $event)" (clickArrangeButton)="onClickColumnArrange(column.nodeID, $event)"
-        (requestMoveToStep)="onColumnMoveToStep(column.nodeID, $event)" (clickTrash)="onClickColumnRemove(column.nodeID)" [canSizeUp]="true"
-        [canSizeDown]="column.height>100" [canArrangeUp]="i>0" [canArrangeDown]="i < columns.length-1">
+        (clickResizeButton)="onClickColumnChangeSize(column.nodeID, $event)"
+        (clickArrangeButton)="onClickColumnArrange(column.nodeID, $event)"
+        (requestMoveToStep)="onColumnMoveToStep(column.nodeID, $event)"
+        (clickTrash)="onClickColumnRemove(column.nodeID)" [canSizeUp]="true" [canSizeDown]="column.height>100"
+        [canArrangeUp]="i>0" [canArrangeDown]="i < columns.length-1">
       </app-column>
     </app-transition-group>
   </div>
 
   <div class="step-buttons card-body toolbar" [hidden]="!isExpanded">
     <div class="toolbar-default" *ngIf="!isOrganizeMode">
-      <button class="btn btn-light">Add Node</button>{{ ' ' }}
+      <button class="btn btn-light" (click)="onClickAddNode()">Add Node</button>{{ ' ' }}
       <button class="btn btn-light" (click)="onClickOrganize()">Organize</button>{{ ' ' }}
       <button class="btn btn-light" (click)="onClickRemoveStep()">Remove Step</button>
     </div>

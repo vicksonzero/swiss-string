@@ -19,6 +19,22 @@ export class NodeService {
       shareReplay(1),
     );
   }
+
+  createNode() {
+    const old = this.nodesSource.getValue();
+    const insertValue: INodeInstance = {
+      nodeID: this.nodeCounter,
+      title: "Node",
+      nodeType: "",
+      inputs: [],
+      outputs: [],
+    };
+
+    this.nodeCounter++;
+    this.nodesSource.next([...old, insertValue]);
+    return insertValue;
+  }
+
 }
 
 

@@ -9,6 +9,7 @@ import { INodeInstance } from '../s/new-model/appDefinitions';
 })
 export class NodeComponent implements OnInit {
 
+  @Input() nodeIndex: number;
   @Input() nodeInstance: INodeInstance;
   isMobile = false;
 

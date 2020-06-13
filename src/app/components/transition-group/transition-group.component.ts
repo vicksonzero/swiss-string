@@ -70,6 +70,12 @@ export class TransitionGroupComponent implements AfterViewInit {
     setTimeout(() => this.refreshPosition('prevPos'), 0); // save init positions on next 'tick'
   }
 
+  @HostListener('scroll', ['$event']) // for scroll events of the current element
+  onScroll(event: Event) {
+    setTimeout(() => this.refreshPosition('newPos'), 0); // save init positions on next 'tick'
+    setTimeout(() => this.refreshPosition('prevPos'), 0); // save init positions on next 'tick'
+  }
+
   runCallback(item: TransitionGroupItemDirective) {
     if (item.moveCallback) {
       item.moveCallback();
@@ -95,7 +101,7 @@ export class TransitionGroupComponent implements AfterViewInit {
   }
 
   refreshPosition(prop: 'prevPos' | 'newPos') {
-    console.log('refreshPosition ', prop);
+    // console.log('refreshPosition ', prop);
 
     this.items.forEach((item) => {
       const parentPos = this.el.nativeElement.getBoundingClientRect() as DOMRect;
