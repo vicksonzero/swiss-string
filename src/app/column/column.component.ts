@@ -12,8 +12,10 @@ export class ColumnComponent implements OnInit {
 
   isMobile = false;
   @Input() nodeInstance: INodeInstance;
+  @Input() stepID: number;
   @Input() index: number;
   @Input() isOrganizeMode: boolean;
+
   public faPlus = faPlus;
   public faMinus = faMinus;
   public faTrashAlt = faTrashAlt;

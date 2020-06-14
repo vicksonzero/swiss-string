@@ -61,6 +61,11 @@
           "nodeID": 5,
           "width": 1,
           "height": 300
+        },
+        {
+          "nodeID": 6,
+          "width": 1,
+          "height": 300
         }
       ]
     }
@@ -191,6 +196,36 @@
         },
         {
           "name": "tokensResidue",
+          "type": "string",
+          "destinations": []
+        }
+      ]
+    },
+    {
+      "nodeID": 6,
+      "title": "handlebars-template",
+      "nodeType": "handlebars-template",
+      "inputs": [
+        {
+          "name": "template",
+          "type": "string",
+          "source": {
+            "nodeID": 0,
+            "outputName": "input"
+          }
+        },
+        {
+          "name": "data",
+          "type": "string",
+          "source": {
+            "nodeID": 1,
+            "outputName": "inputRegex"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
           "type": "string",
           "destinations": []
         }

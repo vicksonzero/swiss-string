@@ -13,9 +13,10 @@
     </h5>
   </div>
   <div class="card-body step-body" [class.isMobile]="isMobile" [hidden]="!isExpanded">
-    <app-transition-group [className]="'flip-list'" class="flip-list" [class.isMobile]="isMobile">
+    <app-transition-group [className]="'flip-list'" class="flip-list" [class.isMobile]="isMobile"
+      [appMatchHeight]="isMobile ? '' : ('step-'+step.stepID+'-input-items step-'+step.stepID+'-output-items')">
       <app-column class="column list-items" [class.isMobile]="isMobile" appTransitionGroupItem
-        *ngFor="let column of columns; let i = index; trackBy: trackColumn" [index]="i"
+        *ngFor="let column of columns; let i = index; trackBy: trackColumn" [index]="i" [stepID]="step.stepID"
         [style.flex]="isMobile ? '' : (column.width)" [style.height]="column.height + 'px'"
         [nodeInstance]="nodes[column.nodeID]" [isOrganizeMode]="isOrganizeMode"
         (clickResizeButton)="onClickColumnChangeSize(column.nodeID, $event)"

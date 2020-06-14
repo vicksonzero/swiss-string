@@ -11,8 +11,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ColumnComponent } from './column/column.component';
 import { NodeComponent } from './node/node.component';
 import { OperatorWidgetComponent } from './operator-widget/operator-widget.component';
-import { TransitionGroupComponent, TransitionGroupItemDirective } from './components/transition-group/transition-group.component';
+import { TransitionGroupComponent } from './components/transition-group/transition-group.component';
+import { TransitionGroupItemDirective } from './components/transition-group/transition-group-item.directive';
 import { DimBgComponent } from './components/dim-bg/dim-bg.component';
+import { MatchHeightDirective } from './components/match-height.directive';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { DimBgComponent } from './components/dim-bg/dim-bg.component';
     TransitionGroupComponent,
     TransitionGroupItemDirective,
     DimBgComponent,
+    MatchHeightDirective,
   ],
   imports: [
     BrowserModule,

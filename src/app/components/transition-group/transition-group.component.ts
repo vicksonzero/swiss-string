@@ -1,19 +1,6 @@
-import { Directive, ElementRef, Component, AfterViewInit, Input, ContentChildren, QueryList, HostListener } from '@angular/core';
+import { ElementRef, Component, AfterViewInit, Input, ContentChildren, QueryList, HostListener } from '@angular/core';
+import { TransitionGroupItemDirective } from './transition-group-item.directive';
 
-@Directive({
-  selector: '[appTransitionGroupItem]'
-})
-export class TransitionGroupItemDirective {
-  prevPos: DOMRect;
-  newPos: DOMRect;
-  el: HTMLElement;
-  moved: boolean;
-  moveCallback: any;
-
-  constructor(elRef: ElementRef) {
-    this.el = elRef.nativeElement;
-  }
-}
 
 
 @Component({
