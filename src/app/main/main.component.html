@@ -1,8 +1,11 @@
 <div>
-  <app-step *ngFor="let step of steps; let i = index; trackBy: trackItem" [step]="step" [itemIndex]="i+1" [nodes]="nodes"></app-step>
-  <div *ngIf="steps.length <= 0">
-    <p>Start by pressing "Add step"</p>
-  </div>
+  <app-transition-group [className]="'flip-list'" class="steps-container flip-list">
+    <app-step *ngFor="let step of steps; let i = index; trackBy: trackItem" [step]="step" [itemIndex]="i+1"
+      [nodes]="nodes" appTransitionGroupItem [canArrangeUp]="i>0" [canArrangeDown]="i < steps.length-1" class="list-items"></app-step>
+    <div *ngIf="steps.length <= 0">
+      <p>Start by pressing "Add step"</p>
+    </div>
+  </app-transition-group>
 </div>
 <div>
   <app-button (click)="onClickAddStep()">Add step</app-button>

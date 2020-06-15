@@ -33,16 +33,44 @@ export class StepsService {
 
   updateStep(stepID: number, newValue: IStep) {
     const oldSteps = [...this.stepsSource.getValue()];
-    const positionID = oldSteps.findIndex(step => step.stepID === stepID);
-    oldSteps[positionID] = StepFactory.createStep(newValue);
+    const stepIndex = oldSteps.findIndex(step => step.stepID === stepID);
+    if (stepIndex < 0) {
+      throw new Error(`Step Index "${stepIndex}" Not found`);
+    }
+    oldSteps[stepIndex] = StepFactory.createStep(newValue);
+
+    this.stepsSource.next(oldSteps);
+  }
+
+  arrangeStep(stepID: number, delta: number) {
+    const oldSteps = [...this.stepsSource.getValue()];
+    const stepIndex = oldSteps.findIndex(step => step.stepID === stepID);
+
+    if (stepIndex < 0) {
+      throw new Error(`Step Index "${stepIndex}" Not found`);
+    }
+
+    if (stepIndex + delta < 0) {
+      throw new Error(`Column "${stepIndex} + (${delta})" cannot go negative`);
+    }
+
+    if (stepIndex + delta > oldSteps.length) {
+      // Column ${stepIndex} + (${delta}) can go beyond array. will just be put at the end correctly
+    }
+
+    // cut and paste
+    oldSteps.splice(
+      stepIndex + delta, 0,
+      oldSteps.splice(stepIndex, 1)[0]
+    );
 
     this.stepsSource.next(oldSteps);
   }
 
   removeStep(stepID: number) {
     const oldSteps = [...this.stepsSource.getValue()];
-    const positionID = oldSteps.findIndex(step => step.stepID === stepID);
-    oldSteps.splice(positionID, 1);
+    const stepIndex = oldSteps.findIndex(step => step.stepID === stepID);
+    oldSteps.splice(stepIndex, 1);
     this.stepsSource.next(oldSteps);
   }
 

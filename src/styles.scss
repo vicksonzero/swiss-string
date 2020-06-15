@@ -51,6 +51,14 @@ body {
   }
 }
 
+.btn-light {
+
+  &.disabled,
+  &:disabled {
+    color: #aaa;
+  }
+}
+
 .app-text-secondary {
   color: $primary-color;
 }

@@ -59,8 +59,8 @@ export class MainComponent implements OnInit {
     this.stepsService.addStep();
   }
 
-  trackItem(index: number, item: Step) {
-    return item.id;
+  trackItem(index: number, item: IStep) {
+    return item.stepID;
   }
 
   onPaperChange(val: string) {

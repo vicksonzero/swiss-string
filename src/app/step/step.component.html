@@ -32,6 +32,15 @@
     <div class="toolbar-default" *ngIf="!isOrganizeMode">
       <button class="btn btn-light" (click)="onClickAddNode()">Add Node</button>{{ ' ' }}
       <button class="btn btn-light" (click)="onClickOrganize()">Organize</button>{{ ' ' }}
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button class="btn btn-light" [disabled]="!canArrangeUp" (click)="onClickStepArrange(-1)" title="Move Step Up">
+          <fa-icon [icon]="faArrowUp"></fa-icon>
+        </button>
+        <button class="btn btn-light" [disabled]="!canArrangeDown" (click)="onClickStepArrange(+1)"
+          title="Move Step Down">
+          <fa-icon [icon]="faArrowDown"></fa-icon>
+        </button>
+      </div>{{ ' ' }}
       <button class="btn btn-light" (click)="onClickRemoveStep()">Remove Step</button>
     </div>
     <div class="toolbar-organize" *ngIf="isOrganizeMode">

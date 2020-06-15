@@ -1,3 +1,7 @@
+:host {
+  display: block;
+}
+
 .expand-button {
   width: 30px;
   margin-right: 20px;
@@ -16,6 +20,10 @@
   margin-top: 4px;
   margin-bottom: 4px;
   background-color: rgba(255, 255, 255, 0.7);
+}
+
+.card:focus-within {
+  border: #333 solid 1px;
 }
 
 .step-body {
@@ -39,6 +47,7 @@
 
 .column {
   margin: 4px;
+
   &:first-child {
     margin-left: 0;
   }

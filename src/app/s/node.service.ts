@@ -24,8 +24,8 @@ export class NodeService {
     const old = this.nodesSource.getValue();
     const insertValue: INodeInstance = {
       nodeID: this.nodeCounter,
-      title: "Node",
-      nodeType: "",
+      title: 'Node',
+      nodeType: '',
       inputs: [],
       outputs: [],
     };

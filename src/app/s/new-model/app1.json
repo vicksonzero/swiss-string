@@ -18,17 +18,17 @@
       "columns": [
         {
           "nodeID": 0,
-          "width": 5,
+          "width": 8,
           "height": 300
         },
         {
           "nodeID": 1,
-          "width": 4,
+          "width": 5,
           "height": 300
         },
         {
           "nodeID": 2,
-          "width": 1,
+          "width": 2,
           "height": 300
         }
       ]

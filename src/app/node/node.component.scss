@@ -1,12 +1,19 @@
 :host {
   display: flex;
-  height: 100%;
   flex-direction: column;
+  flex:1 1 auto;
 }
 
 textarea {
   width: 100%;
-  // height: 100%;
+  flex: 1 1 auto;
+  outline: none;
+  border: 1px solid #CCC;
+  resize: none;
+
+  &:focus {
+    border: 1px solid black;
+  }
 }
 
 .title {
@@ -32,6 +39,11 @@ textarea {
 
   .main {
     flex: 1 1 auto;
+    margin-left: 2em;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -42,7 +54,10 @@ textarea {
 
   li:before {
     content: "\2B9E";
-    margin: 0 1em; /* any design */
+    display: inline-block;
+    text-align: center;
+    width: 2em;
+    /* any design */
   }
 }
 
@@ -53,7 +68,10 @@ textarea {
 
   li:before {
     content: "\2B9C";
-    margin: 0 1em; /* any design */
+    display: inline-block;
+    text-align: center;
+    width: 2em;
+    /* any design */
   }
 }
 
@@ -63,7 +81,8 @@ textarea {
 
     li:before {
       content: "\2B9E";
-      margin: 0 1em; /* any design */
+      margin: 0 1em;
+      /* any design */
     }
   }
 
@@ -72,7 +91,8 @@ textarea {
 
     li:before {
       content: "\2B9C";
-      margin: 0 1em; /* any design */
+      margin: 0 1em;
+      /* any design */
     }
   }
 }

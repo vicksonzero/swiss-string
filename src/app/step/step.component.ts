@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { TABLET_PORTRAIT } from 'src/media';
 import { IColumn, INodeInstance, IStep } from '../s/new-model/appDefinitions';
 import { StepsService } from '../s/steps.service';
@@ -14,7 +14,11 @@ export class StepComponent implements OnInit {
   isOrganizeMode = false;
   public faPlus = faPlus;
   public faMinus = faMinus;
+  public faArrowUp = faArrowUp;
+  public faArrowDown = faArrowDown;
 
+  @Input() canArrangeUp: boolean;
+  @Input() canArrangeDown: boolean;
   @Input() itemIndex: number;
   @Input() step: IStep;
   @Input() nodes: { [x: number]: INodeInstance };
@@ -71,6 +75,10 @@ export class StepComponent implements OnInit {
 
   onClickOrganize() {
     this.setOrganizeMode(true);
+  }
+
+  onClickStepArrange(delta: number) {
+    this.stepsService.arrangeStep(this.step.stepID, delta);
   }
 
   onClickEndOrganize() {

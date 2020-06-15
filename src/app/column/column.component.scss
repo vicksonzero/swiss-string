@@ -1,9 +1,14 @@
 :host {
   padding: 4px;
   border: 1px silver solid;
-  display: block;
+  display: flex;
+  flex-direction: column;
   background-color: rgba(255, 255, 255, 0.7);
   min-width: 200px;
+
+  &:focus-within {
+    background-color: rgba(255, 255, 255, 1);
+  }
 }
 
 .toolbar {
