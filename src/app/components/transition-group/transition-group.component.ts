@@ -1,8 +1,6 @@
 import { ElementRef, Component, AfterViewInit, Input, ContentChildren, QueryList, HostListener } from '@angular/core';
 import { TransitionGroupItemDirective } from './transition-group-item.directive';
 
-
-
 @Component({
   selector: 'app-transition-group',
   templateUrl: './transition-group.component.html',

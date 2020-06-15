@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ContentChildren, Directive, ElementRef, HostListener, Input, OnInit, QueryList } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TABLET_PORTRAIT } from 'src/media';
 import { IColumn, INodeInstance, IStep } from '../s/new-model/appDefinitions';

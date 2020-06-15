@@ -192,7 +192,6 @@
           "name": "tokens",
           "type": "string",
           "destinations": []
-
         },
         {
           "name": "tokensResidue",

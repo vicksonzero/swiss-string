@@ -1,7 +1,4 @@
-import {
-  Directive, ElementRef, AfterViewChecked,
-  Input, HostListener
-} from '@angular/core';
+import { Directive, ElementRef, AfterViewChecked, Input, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[appMatchHeight]'
