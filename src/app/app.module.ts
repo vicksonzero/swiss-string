@@ -15,6 +15,7 @@ import { TransitionGroupComponent } from './components/transition-group/transiti
 import { TransitionGroupItemDirective } from './components/transition-group/transition-group-item.directive';
 import { DimBgComponent } from './components/dim-bg/dim-bg.component';
 import { MatchHeightDirective } from './components/match-height.directive';
+import { LongPressDirective } from './components/long-press/long-press.directive';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { MatchHeightDirective } from './components/match-height.directive';
     TransitionGroupItemDirective,
     DimBgComponent,
     MatchHeightDirective,
+    LongPressDirective,
   ],
   imports: [
     BrowserModule,
