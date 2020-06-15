@@ -6,16 +6,29 @@
   <div [class]="('view-items node-input ' + 'step-' + stepID + '-input-items')" [class.isMobile]="isMobile">
     <!-- Inputs <span>({{nodeInstance.inputs.length}})</span> -->
     <ul>
-      <li *ngFor="let input of nodeInstance.inputs; let i = index;">{{input.name}} ({{input.type}})</li>
+      <li *ngFor="let input of nodeInstance.inputs; let i = index;">
+        <fa-icon [icon]="faCaretSquareRightR" size="lg"></fa-icon>{{input.name}} ({{input.type}})
+      </li>
     </ul>
   </div>
-  <div class="view-items main">
-    <textarea></textarea>
+  <div class="view-items main-container">
+    <fa-icon [icon]="faBolt" *ngIf="nodeInstance.nodeType !== 'editor'"></fa-icon>
+    <fa-icon [icon]="faEdit" *ngIf="nodeInstance.nodeType === 'editor'"></fa-icon>
+    <div class="main">
+      <textarea *ngIf="nodeInstance.nodeType === 'editor'"></textarea>
+      <h4 *ngIf="nodeInstance.nodeType !== 'editor'">{{nodeInstance.nodeType}}</h4>
+      <select class="custom-select" *ngIf="nodeInstance.nodeType === ''">
+        <option value="editor">editor</option>
+        <option *ngFor="let op of operatorList"> {{op}} </option>
+      </select>
+    </div>
   </div>
   <div [class]="('view-items node-output ' + 'step-' + stepID + '-output-items')" [class.isMobile]="isMobile">
     <!-- Outputs <span>({{nodeInstance.outputs.length}})</span> -->
     <ul>
-      <li *ngFor="let output of nodeInstance.outputs; let i = index;">{{output.name}} ({{output.type}})</li>
+      <li *ngFor="let output of nodeInstance.outputs; let i = index;">
+        <fa-icon [icon]="faCaretSquareLeft" size="lg"></fa-icon>{{output.name}} ({{output.type}})
+      </li>
     </ul>
   </div>
 

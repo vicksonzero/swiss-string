@@ -1,14 +1,14 @@
 :host {
   display: flex;
   flex-direction: column;
-  flex:1 1 auto;
+  flex: 1 1 auto;
 }
 
 textarea {
   width: 100%;
   flex: 1 1 auto;
   outline: none;
-  border: 1px solid #CCC;
+  border: 1px solid #ccc;
   resize: none;
 
   &:focus {
@@ -37,41 +37,80 @@ textarea {
     flex: 0 1 auto;
   }
 
-  .main {
+  .main-container {
     flex: 1 1 auto;
-    margin-left: 2em;
+    margin-left: 2.5em;
     margin-top: 2px;
     margin-bottom: 2px;
     display: flex;
-    flex-direction: column;
+    // background-color: #F0F0F0;
+    align-items: stretch;
+
+    fa-icon {
+      display: inline-block;
+      width: 2.5em;
+      margin-left: -2.5em;
+      text-align: center;
+      align-self: center;
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+
+      h4 {
+        display: block;
+        background-color: #fff3bd;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1em), calc(100% - 1em) 100%, 0 100%);
+      }
+    }
   }
 }
 
-.node-input ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-
-  li:before {
-    content: "\2B9E";
-    display: inline-block;
-    text-align: center;
-    width: 2em;
-    /* any design */
-  }
-}
-
+.node-input ul,
 .node-output ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-left: 2.5em;
 
-  li:before {
-    content: "\2B9C";
+  // li:before {
+  //   content: "\2B9E";
+  //   display: inline-block;
+  //   text-align: center;
+  //   width: 2.5em;
+  //   /* any design */
+  // }
+
+  fa-icon {
     display: inline-block;
+    width: 2.5em;
+    margin-left: -2.5em;
+    padding-left: 0.7em;
+    padding-right: 0.7em;
     text-align: center;
-    width: 2em;
-    /* any design */
+  }
+
+  li {
+    word-break: break-all;
+  }
+}
+
+.node-output ul {
+  // li:before {
+  //   content: "\2B9C";
+  //   display: inline-block;
+  //   text-align: center;
+  //   width: 2.5em;
+  //   /* any design */
+  // }
+
+  fa-icon {
+    text-align: center;
   }
 }
 
@@ -79,20 +118,24 @@ textarea {
   &.node-input ul {
     list-style: none;
 
-    li:before {
-      content: "\2B9E";
-      margin: 0 1em;
-      /* any design */
-    }
+    // li:before {
+    //   content: "\2B9E";
+    //   margin: 0 1em;
+    //   /* any design */
+    // }
   }
 
   &.node-output ul {
     list-style: none;
 
-    li:before {
-      content: "\2B9C";
-      margin: 0 1em;
-      /* any design */
-    }
+    // li:before {
+    //   content: "\2B9C";
+    //   margin: 0 1em;
+    //   /* any design */
+    // }
   }
+}
+
+.custom-select {
+  width: 50%;
 }
