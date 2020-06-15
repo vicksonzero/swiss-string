@@ -8,7 +8,7 @@ export class TransitionGroupItemDirective {
   newPos: DOMRect;
   el: HTMLElement;
   moved: boolean;
-  moveCallback: any;
+  moveCallback: any; // ((e: TransitionEvent) => void) | null;
 
   constructor(elRef: ElementRef) {
     this.el = elRef.nativeElement;

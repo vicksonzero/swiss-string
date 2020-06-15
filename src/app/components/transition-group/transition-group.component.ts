@@ -1,4 +1,4 @@
-import { ElementRef, Component, AfterViewInit, Input, ContentChildren, QueryList, HostListener } from '@angular/core';
+import { AfterViewInit, Component, ContentChildren, ElementRef, HostListener, Input, QueryList } from '@angular/core';
 import { TransitionGroupItemDirective } from './transition-group-item.directive';
 
 @Component({
@@ -73,12 +73,14 @@ export class TransitionGroupComponent implements AfterViewInit {
     }
     const cssClass = this.className + '-move';
     const el = item.el;
-    const style: any = el.style;
+    const style: CSSStyleDeclaration = el.style;
     el.classList.add(cssClass);
-    style.transform = style.WebkitTransform = style.transitionDuration = '';
-    el.addEventListener('transition' + 'end', item.moveCallback = (e: any) => {
+    style.transform = style.transitionDuration = '';
+    el.addEventListener('transition' + 'end', item.moveCallback = (e: TransitionEvent) => {
       if (!e || /transform$/.test(e.propertyName)) {
-        el.removeEventListener('transition' + 'end', item.moveCallback);
+        if (item.moveCallback) {
+          el.removeEventListener('transition' + 'end', item.moveCallback);
+        }
         item.moveCallback = null;
         el.classList.remove(cssClass);
       }
@@ -112,8 +114,8 @@ export class TransitionGroupComponent implements AfterViewInit {
     const dy = item.prevPos.top - item.newPos.top;
     if (dx || dy) {
       item.moved = true;
-      const style: any = item.el.style;
-      style.transform = style.WebkitTransform = 'translate(' + dx + 'px,' + dy + 'px)';
+      const style: CSSStyleDeclaration = item.el.style;
+      style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
       style.transitionDuration = '0s';
     }
   }
