@@ -17,7 +17,7 @@
       [appMatchHeight]="isMobile ? '' : ('step-'+step.stepID+'-input-items step-'+step.stepID+'-output-items')">
       <app-column class="column list-items" [class.isMobile]="isMobile" appTransitionGroupItem
         *ngFor="let column of columns; let i = index; trackBy: trackColumn" [index]="i" [stepID]="step.stepID"
-        [style.flex]="isMobile ? '' : (column.width)" [style.height]="column.height + 'px'"
+        [style.flex]="isMobile ? '' : (column.width)" [style.minHeight]="column.height + 'px'"
         [nodeInstance]="nodes[column.nodeID]" [isOrganizeMode]="isOrganizeMode"
         (clickResizeButton)="onClickColumnChangeSize(column.nodeID, $event)"
         (clickArrangeButton)="onClickColumnArrange(column.nodeID, $event)"
