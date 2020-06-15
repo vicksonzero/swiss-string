@@ -136,7 +136,28 @@ export class StepsService {
     this.updateStep(stepID, oldStep);
   }
 
-  columnMoveToStep(stepID: number, nodeID: number, newStepID: number) {
+  columnArrangeToStep(stepID: number, nodeID: number, delta: number) {
+    const oldSteps = [...this.stepsSource.getValue()];
+
+    const stepIndex = oldSteps.findIndex(step => step.stepID === stepID);
+    if (stepIndex < 0) {
+      throw new Error(`Step Index "${stepIndex}" Not found`);
+    }
+
+    const newStep = oldSteps[stepIndex + delta];
+    if (!newStep) {
+      throw new Error(`Cannot move step from index "${stepIndex}" to "${stepIndex + delta}"`);
+    }
+
+    this.columnMoveToStep(
+      stepID,
+      nodeID,
+      newStep.stepID,
+      delta <= 0
+    );
+  }
+
+  columnMoveToStep(stepID: number, nodeID: number, newStepID: number, isTail: boolean = true) {
     const oldStep = this.stepsSource.getValue().find(step => step.stepID === stepID);
     const newStep = this.stepsSource.getValue().find(step => step.stepID === newStepID);
     if (!oldStep) {
@@ -157,7 +178,11 @@ export class StepsService {
     const cutColumn = oldStep.columns.splice(columnID, 1)[0];
     this.updateStep(stepID, oldStep);
 
-    newStep.columns.push(cutColumn);
+    if (isTail) {
+      newStep.columns.push(cutColumn);
+    } else {
+      newStep.columns.unshift(cutColumn);
+    }
     this.updateStep(newStepID, newStep);
   }
 

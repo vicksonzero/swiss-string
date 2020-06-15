@@ -9,16 +9,36 @@
       (click)="onClickResizeButton(-1)">
       <fa-icon [icon]="faMinus" size="xs"></fa-icon>
     </button>
-    <button class="btn btn-secondary btn-sm" [disabled]="!canArrangeUp" [title]="'Move Column ' + (isMobile ? 'Up' : 'Left')"
+    <button class="btn btn-secondary btn-sm" [disabled]="!canSizeDown" title="Change Column Width"
+      (click)="onClickResizeButton(1)">
+      <fa-icon [icon]="faArrowsAltH" size="xs"></fa-icon>
+    </button>
+
+    <!-- Arrange -->
+    <button class="btn btn-secondary btn-sm" *ngIf="!canArrangeUp" [disabled]="!canArrangeUpStep"
+      [title]="(!canArrangeUpStep ? 'Cannot ' : '') + 'Move Column One Step Up'"
+      (click)="onClickArrangeToStepButton(-1)">
+      <fa-icon *ngIf="isMobile" [icon]="faAngleDoubleUp" size="xs"></fa-icon>
+      <fa-icon *ngIf="!isMobile" [icon]="faAngleDoubleLeft" size="xs"></fa-icon>
+    </button>
+    <button class="btn btn-secondary btn-sm" *ngIf="canArrangeUp" [title]="'Move Column ' + (isMobile ? 'Up' : 'Left')"
       (click)="onClickArrangeButton(-1)">
-      <fa-icon *ngIf="isMobile" [icon]="faArrowUp" size="xs"></fa-icon>
-      <fa-icon *ngIf="!isMobile" [icon]="faArrowLeft" size="xs"></fa-icon>
+      <fa-icon *ngIf="isMobile" [icon]="faAngleUp" size="xs"></fa-icon>
+      <fa-icon *ngIf="!isMobile" [icon]="faAngleLeft" size="xs"></fa-icon>
     </button>
-    <button class="btn btn-secondary btn-sm" [disabled]="!canArrangeDown" [title]="'Move Column ' + (isMobile ? 'Down' : 'Right')"
-      (click)="onClickArrangeButton(+1)">
-      <fa-icon *ngIf="isMobile" [icon]="faArrowDown" size="xs"></fa-icon>
-      <fa-icon *ngIf="!isMobile" [icon]="faArrowRight" size="xs"></fa-icon>
+    <button class="btn btn-secondary btn-sm" *ngIf="canArrangeDown"
+      [title]="'Move Column ' + (isMobile ? 'Down' : 'Right')" (click)="onClickArrangeButton(+1)">
+      <fa-icon *ngIf="isMobile" [icon]="faAngleDown" size="xs"></fa-icon>
+      <fa-icon *ngIf="!isMobile" [icon]="faAngleRight" size="xs"></fa-icon>
     </button>
+    <button class="btn btn-secondary btn-sm" *ngIf="!canArrangeDown" [disabled]="!canArrangeDownStep"
+      [title]="(!canArrangeDownStep ? 'Cannot ' : '') + 'Move Column One Step Down'"
+      (click)="onClickArrangeToStepButton(+1)">
+      <fa-icon *ngIf="isMobile" [icon]="faAngleDoubleDown" size="xs"></fa-icon>
+      <fa-icon *ngIf="!isMobile" [icon]="faAngleDoubleRight" size="xs"></fa-icon>
+    </button>
+    <!-- END Arrange -->
+
     <button class="btn btn-secondary btn-sm" *ngIf="isOrganizeMode" title="Delete Column" (click)="onClickTrash()">
       <fa-icon [icon]="faTrashAlt" size="xs"></fa-icon>
     </button>

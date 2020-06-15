@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" [class.isOrganizeMode]="isOrganizeMode">
   <div class="card-body">
     <h5 class="card-title">
       <button class="expand-button btn btn-secondary btn-sm" (click)="onExpandButtonClick()">
@@ -21,9 +21,12 @@
         [nodeInstance]="nodes[column.nodeID]" [isOrganizeMode]="isOrganizeMode"
         (clickResizeButton)="onClickColumnChangeSize(column.nodeID, $event)"
         (clickArrangeButton)="onClickColumnArrange(column.nodeID, $event)"
+        (clickArrangeToStepButton)="onClickColumnArrangeToStep(column.nodeID, $event)"
+        
         (requestMoveToStep)="onColumnMoveToStep(column.nodeID, $event)"
         (clickTrash)="onClickColumnRemove(column.nodeID)" [canSizeUp]="true" [canSizeDown]="column.height>100"
-        [canArrangeUp]="i>0" [canArrangeDown]="i < columns.length-1">
+        [canArrangeUp]="i>0" [canArrangeDown]="i < columns.length-1" [canArrangeUpStep]="i <= 0 && canArrangeUp"
+        [canArrangeDownStep]="i >= columns.length-1 && canArrangeDown">
       </app-column>
     </app-transition-group>
   </div>

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, HostListener, OnInit } from '@angular/core';
-import { faArrowLeft, faArrowRight, faMinus, faPlus, faTrashAlt, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faMinus, faPlus, faTrashAlt, faArrowUp, faArrowDown, faArrowsAltH, faAngleDoubleLeft, faAngleDoubleRight, faAngleLeft, faAngleRight, faAngleDoubleUp, faAngleDoubleDown, faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { INodeInstance } from '../s/new-model/appDefinitions';
 import { TABLET_PORTRAIT } from 'src/media';
 
@@ -15,14 +15,25 @@ export class ColumnComponent implements OnInit {
   @Input() stepID: number;
   @Input() index: number;
   @Input() isOrganizeMode: boolean;
+  @Input() canArrangeUpStep: boolean;
+  @Input() canArrangeDownStep: boolean;
 
   public faPlus = faPlus;
   public faMinus = faMinus;
+
+  public faArrowsAltH = faArrowsAltH;
+
+  public faAngleLeft = faAngleLeft;
+  public faAngleRight = faAngleRight;
+  public faAngleUp = faAngleUp;
+  public faAngleDown = faAngleDown;
+
+  public faAngleDoubleLeft = faAngleDoubleLeft;
+  public faAngleDoubleRight = faAngleDoubleRight;
+  public faAngleDoubleUp = faAngleDoubleUp;
+  public faAngleDoubleDown = faAngleDoubleDown;
+
   public faTrashAlt = faTrashAlt;
-  public faArrowLeft = faArrowLeft;
-  public faArrowRight = faArrowRight;
-  public faArrowUp = faArrowUp;
-  public faArrowDown = faArrowDown;
 
   @Input() canSizeUp: boolean;
   @Input() canSizeDown: boolean;
@@ -31,6 +42,7 @@ export class ColumnComponent implements OnInit {
 
   @Output() clickResizeButton: EventEmitter<number> = new EventEmitter();
   @Output() clickArrangeButton: EventEmitter<number> = new EventEmitter();
+  @Output() clickArrangeToStepButton: EventEmitter<number> = new EventEmitter();
   @Output() clickTrash: EventEmitter<void> = new EventEmitter();
   @Output() requestMoveToStep: EventEmitter<number> = new EventEmitter();
 
@@ -46,6 +58,11 @@ export class ColumnComponent implements OnInit {
 
   onClickArrangeButton(delta: number) {
     this.clickArrangeButton.emit(delta);
+  }
+
+  onClickArrangeToStepButton(delta: number) {
+    // moves this column to another step
+    this.clickArrangeToStepButton.emit(delta);
   }
 
   onClickTrash() {

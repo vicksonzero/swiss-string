@@ -19,6 +19,7 @@ export class StepComponent implements OnInit {
 
   @Input() canArrangeUp: boolean;
   @Input() canArrangeDown: boolean;
+
   @Input() itemIndex: number;
   @Input() step: IStep;
   @Input() nodes: { [x: number]: INodeInstance };
@@ -91,6 +92,10 @@ export class StepComponent implements OnInit {
 
   onClickColumnArrange(nodeID: number, delta: number) {
     this.stepsService.columnArrange(this.step.stepID, nodeID, delta);
+  }
+
+  onClickColumnArrangeToStep(nodeID: number, delta: number) {
+    this.stepsService.columnArrangeToStep(this.step.stepID, nodeID, delta);
   }
 
   onColumnMoveToStep(nodeID: number, newStepID: number) {

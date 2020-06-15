@@ -13,4 +13,7 @@
 
 .toolbar {
   display: flex;
+  button {
+    min-width: 2em;
+  }
 }
