@@ -7,6 +7,20 @@
   margin-right: 20px;
 }
 
+.card {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  background-color: rgba(255, 255, 255, 0.7);
+
+  &.isOrganizeMode {
+    background-color: rgba(220, 220, 220, 1);
+  }
+
+  &:focus-within {
+    border: #333 solid 1px;
+  }
+}
+
 .card-title {
   margin-bottom: 0;
 }
@@ -14,20 +28,6 @@
 .card-subtitle {
   margin-bottom: 0;
   margin-left: 50px;
-}
-
-.card {
-  margin-top: 4px;
-  margin-bottom: 4px;
-  background-color: rgba(255, 255, 255, 0.7);
-
-  &.isOrganizeMode {
-    background-color: rgba(230, 230, 230, 1);
-  }
-}
-
-.card:focus-within {
-  border: #333 solid 1px;
 }
 
 .step-body {
