@@ -13,20 +13,26 @@
     </h5>
   </div>
   <div class="card-body step-body" [class.isMobile]="isMobile" [hidden]="!isExpanded">
-    <app-transition-group [className]="'flip-list'" class="flip-list" [class.isMobile]="isMobile"
+    <app-transition-group
+      class="flip-list" [class.isMobile]="isMobile" [className]="'flip-list'"
       [appMatchHeight]="isMobile ? '' : ('step-'+step.stepID+'-input-items step-'+step.stepID+'-output-items')">
-      <app-column class="column list-items" [class.isMobile]="isMobile" appTransitionGroupItem
-        *ngFor="let column of columns; let i = index; trackBy: trackColumn" [index]="i" [stepID]="step.stepID"
+
+      <app-column class="column list-items" [class.isMobile]="isMobile"
+        *ngFor="let column of columns; let i = index; trackBy: trackColumn" [index]="i"
         [style.flex]="isMobile ? '' : (column.width)" [style.minHeight]="column.height + 'px'"
-        [nodeInstance]="nodes[column.nodeID]" [isOrganizeMode]="isOrganizeMode"
+
+        appTransitionGroupItem
+        [stepID]="step.stepID" [nodeInstance]="nodes[column.nodeID]"
+        [isOrganizeMode]="isOrganizeMode"
+        [canSizeUp]="true" [canSizeDown]="column.height>100"
+        [canArrangeUp]="i>0" [canArrangeDown]="i < columns.length-1"
+        [canArrangeUpStep]="i <= 0 && canArrangeUp" [canArrangeDownStep]="i >= columns.length-1 && canArrangeDown">
+
         (clickResizeButton)="onClickColumnChangeSize(column.nodeID, $event)"
         (clickArrangeButton)="onClickColumnArrange(column.nodeID, $event)"
         (clickArrangeToStepButton)="onClickColumnArrangeToStep(column.nodeID, $event)"
-        
         (requestMoveToStep)="onColumnMoveToStep(column.nodeID, $event)"
-        (clickTrash)="onClickColumnRemove(column.nodeID)" [canSizeUp]="true" [canSizeDown]="column.height>100"
-        [canArrangeUp]="i>0" [canArrangeDown]="i < columns.length-1" [canArrangeUpStep]="i <= 0 && canArrangeUp"
-        [canArrangeDownStep]="i >= columns.length-1 && canArrangeDown">
+        (clickTrash)="onClickColumnRemove(column.nodeID)"
       </app-column>
     </app-transition-group>
   </div>
