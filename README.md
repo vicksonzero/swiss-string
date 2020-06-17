@@ -26,3 +26,44 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 - JSON schema (https://www.jsonschemavalidator.net/)
 - JSON schema to TS definitions (https://bcherny.github.io/json-schema-to-typescript-browser/)
 - JSON schema to editor (https://json-editor.github.io/json-editor/)
+
+
+## Wish list
+
+- [ ] diff
+- [ ] json query languages
+  - [ ] eg: 
+    - [ ] JMESPath (2015)
+    - [ ] JSONPath (2007)
+- [ ] js methods
+  - [ ] array methods (map, filter, push, splice, concat, reverse)
+  - [ ] string methods (length, substring, replace)
+  - [ ] object methods (keys)
+  - [ ] JSON.stringify with options
+- [ ] search, highlight, replace
+  - [ ] regex replace
+- [ ] editors
+  - [ ] options can be controlled by a json?
+  - [ ] types
+    - [ ] array editor
+      - [ ] can nest other editors??
+    - [ ] textarea
+    - [ ] rich text??
+      - no need la haa waa
+- [ ] code mirror
+  - [ ] json viewer
+  - [ ] handlebar highlight
+- [ ] history, undo, redo
+- [ ] choose to save with history (or not)
+- [ ] handlebar helpers
+  - [ ] math
+  - [ ] date
+  - [ ] time
+  - [ ] string length for iteration?
+  - [ ] array.fill()
+  - [ ] array.join()
+- [ ] Parameter typings and schemas
+
+
+
+
