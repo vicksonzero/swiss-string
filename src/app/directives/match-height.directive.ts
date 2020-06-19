@@ -38,15 +38,15 @@ export class MatchHeightDirective implements AfterViewChecked {
   matchHeight(parent: HTMLElement, className: string) {
     // match height logic here
 
-    if (!parent) return;
+    if (!parent) { return; }
 
     const children = parent.getElementsByClassName(className);
-    if (!children) return;
+    if (!children) { return; }
 
     // reset all children height
     Array.from(children).forEach((x: HTMLElement) => {
       x.style.height = 'initial';
-    })
+    });
 
     // gather all height
     const itemHeights = Array.from(children)

@@ -1,6 +1,9 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { faAngleDoubleDown, faAngleDoubleLeft, faAngleDoubleRight, faAngleDoubleUp,
-  faAngleDown, faAngleLeft, faAngleRight, faAngleUp, faArrowsAltH, faMinus, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAngleDoubleDown, faAngleDoubleLeft, faAngleDoubleRight, faAngleDoubleUp,
+  faAngleDown, faAngleLeft, faAngleRight, faAngleUp,
+  faArrowsAltH, faMinus, faPlus, faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import { TABLET_PORTRAIT } from 'src/media';
 import { INodeInstance } from '../../../s/new-model/appDefinitions';
 
@@ -19,16 +22,19 @@ export class ColumnComponent implements OnInit {
   @Input() canArrangeUpStep: boolean;
   @Input() canArrangeDownStep: boolean;
 
+  // +
   public faPlus = faPlus;
   public faMinus = faMinus;
 
+  // <->
   public faArrowsAltH = faArrowsAltH;
-
+  // >
   public faAngleLeft = faAngleLeft;
   public faAngleRight = faAngleRight;
   public faAngleUp = faAngleUp;
   public faAngleDown = faAngleDown;
 
+  // >>
   public faAngleDoubleLeft = faAngleDoubleLeft;
   public faAngleDoubleRight = faAngleDoubleRight;
   public faAngleDoubleUp = faAngleDoubleUp;
