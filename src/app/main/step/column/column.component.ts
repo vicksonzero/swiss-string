@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, Output, HostListener, OnInit } from '@angular/core';
-import { faArrowLeft, faArrowRight, faMinus, faPlus, faTrashAlt, faArrowUp, faArrowDown, faArrowsAltH, faAngleDoubleLeft, faAngleDoubleRight, faAngleLeft, faAngleRight, faAngleDoubleUp, faAngleDoubleDown, faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import { INodeInstance } from '../s/new-model/appDefinitions';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { faAngleDoubleDown, faAngleDoubleLeft, faAngleDoubleRight, faAngleDoubleUp,
+  faAngleDown, faAngleLeft, faAngleRight, faAngleUp, faArrowsAltH, faMinus, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { TABLET_PORTRAIT } from 'src/media';
+import { INodeInstance } from '../../../s/new-model/appDefinitions';
 
 @Component({
   selector: 'app-column',

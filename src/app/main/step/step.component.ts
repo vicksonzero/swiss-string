@@ -1,8 +1,8 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { faMinus, faPlus, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { TABLET_PORTRAIT } from 'src/media';
-import { IColumn, INodeInstance, IStep } from '../s/new-model/appDefinitions';
-import { StepsService } from '../s/steps.service';
+import { IColumn, INodeInstance, IStep } from '../../s/new-model/appDefinitions';
+import { StepsService } from '../../s/steps.service';
 
 @Component({
   selector: 'app-step',

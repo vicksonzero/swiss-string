@@ -6,11 +6,10 @@ import { AppComponent } from './app.component';
 import { ButtonComponent } from './components/button/button.component';
 import { EditableWrapperComponent } from './components/editable-wrapper/editable-wrapper.component';
 import { MainComponent } from './main/main.component';
-import { StepComponent } from './step/step.component';
+import { StepComponent } from './main/step/step.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ColumnComponent } from './column/column.component';
+import { ColumnComponent } from './main/step/column/column.component';
 import { NodeComponent } from './node/node.component';
-import { OperatorWidgetComponent } from './operator-widget/operator-widget.component';
 import { TransitionGroupComponent } from './components/transition-group/transition-group.component';
 import { TransitionGroupItemDirective } from './components/transition-group/transition-group-item.directive';
 import { DimBgComponent } from './components/dim-bg/dim-bg.component';
@@ -25,7 +24,6 @@ import { LongPressDirective } from './components/long-press/long-press.directive
     EditableWrapperComponent,
     MainComponent,
     NodeComponent,
-    OperatorWidgetComponent,
     StepComponent,
     TransitionGroupComponent,
     TransitionGroupItemDirective,
