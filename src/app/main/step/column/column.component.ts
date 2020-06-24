@@ -2,7 +2,7 @@ import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@a
 import {
   faAngleDoubleDown, faAngleDoubleLeft, faAngleDoubleRight, faAngleDoubleUp,
   faAngleDown, faAngleLeft, faAngleRight, faAngleUp,
-  faArrowsAltH, faMinus, faPlus, faTrashAlt,
+  faArrowsAltH, faMinus, faPlus, faTrashAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { TABLET_PORTRAIT } from 'src/media';
 import { INodeInstance } from '../../../s/new-model/appDefinitions';
@@ -18,9 +18,14 @@ export class ColumnComponent implements OnInit {
   @Input() nodeInstance: INodeInstance;
   @Input() stepID: number;
   @Input() index: number;
+
   @Input() isOrganizeMode: boolean;
   @Input() canArrangeUpStep: boolean;
   @Input() canArrangeDownStep: boolean;
+  @Input() canSizeUp: boolean;
+  @Input() canSizeDown: boolean;
+  @Input() canArrangeUp: boolean;
+  @Input() canArrangeDown: boolean;
 
   // +
   public faPlus = faPlus;
@@ -41,11 +46,6 @@ export class ColumnComponent implements OnInit {
   public faAngleDoubleDown = faAngleDoubleDown;
 
   public faTrashAlt = faTrashAlt;
-
-  @Input() canSizeUp: boolean;
-  @Input() canSizeDown: boolean;
-  @Input() canArrangeUp: boolean;
-  @Input() canArrangeDown: boolean;
 
   @Output() clickResizeButton: EventEmitter<number> = new EventEmitter();
   @Output() clickArrangeButton: EventEmitter<number> = new EventEmitter();

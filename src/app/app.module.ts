@@ -20,11 +20,11 @@ import { NodeComponent } from './node/node.component';
   declarations: [
     AppComponent,
     ButtonComponent,
-    ColumnComponent,
     EditableWrapperComponent,
     MainComponent,
     NodeComponent,
     StepComponent,
+    ColumnComponent,
     TransitionGroupComponent,
     TransitionGroupItemDirective,
     DimBgComponent,

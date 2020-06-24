@@ -26,13 +26,13 @@
         [isOrganizeMode]="isOrganizeMode"
         [canSizeUp]="true" [canSizeDown]="column.height>100"
         [canArrangeUp]="i>0" [canArrangeDown]="i < columns.length-1"
-        [canArrangeUpStep]="i <= 0 && canArrangeUp" [canArrangeDownStep]="i >= columns.length-1 && canArrangeDown">
+        [canArrangeUpStep]="i <= 0 && canArrangeUp" [canArrangeDownStep]="i >= columns.length-1 && canArrangeDown"
 
         (clickResizeButton)="onClickColumnChangeSize(column.nodeID, $event)"
         (clickArrangeButton)="onClickColumnArrange(column.nodeID, $event)"
         (clickArrangeToStepButton)="onClickColumnArrangeToStep(column.nodeID, $event)"
         (requestMoveToStep)="onColumnMoveToStep(column.nodeID, $event)"
-        (clickTrash)="onClickColumnRemove(column.nodeID)"
+        (clickTrash)="onClickColumnRemove(column.nodeID)">
       </app-column>
     </app-transition-group>
   </div>

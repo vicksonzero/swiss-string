@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { INodeInstance, IStep } from '../s/new-model/appDefinitions';
 import { NodeService } from '../s/node.service';
-import { Step } from '../s/Step';
 import { StepsService } from '../s/steps.service';
 
 @Component({
