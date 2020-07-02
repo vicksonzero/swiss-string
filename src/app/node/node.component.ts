@@ -29,6 +29,8 @@ export class NodeComponent implements OnInit {
 
   operatorList = Object.keys(operators);
 
+  content = '{data:{}}';
+
   ngOnInit() {
     this.updateDeviceWidth();
   }

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,6 +38,8 @@ import { NodeComponent } from './node/node.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
+    FormsModule,
+    CodemirrorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "variables";
+@import "~codemirror/lib/codemirror";
+@import "~codemirror/theme/material";
+@import "~codemirror/theme/vibrant-ink";
+@import "~codemirror/theme/mdn-like";
+@import "~codemirror/addon/scroll/simplescrollbars";
 
 html,
 body {
