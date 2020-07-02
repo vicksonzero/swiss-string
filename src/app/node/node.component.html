@@ -11,13 +11,14 @@
       </li>
     </ul>
   </div>
-  <div class="view-items main-container">
-    <fa-icon [icon]="faBolt" *ngIf="!nodeInstance.nodeType.startsWith('editor')"></fa-icon>
-    <fa-icon [icon]="faEdit" *ngIf="nodeInstance.nodeType.startsWith('editor')"></fa-icon>
-    <div class="main">
+  <div [class]="('view-items main-container' + (isEditor ? ' isEditor' : ''))">
+    <fa-icon [icon]="faBolt" *ngIf="!isEditor"></fa-icon>
+    <!-- <fa-icon [icon]="faEdit" *ngIf="isEditor"></fa-icon> -->
+    <div [class]="('main' + (isEditor ? ' isEditor' : ''))">
       <!-- <textarea *ngIf="nodeInstance.nodeType === 'editor'"></textarea> -->
       <ngx-codemirror
-        *ngIf="nodeInstance.nodeType.startsWith('editor')"
+        *ngIf="isEditor"
+        #cmEditor
         [(ngModel)]="content"
         [options]="{
           lineNumbers: true,
@@ -25,12 +26,15 @@
           mode: 'javascript',
           keyMap: 'sublime',
           scrollbarStyle: 'simple',
+          autoRefresh: true,
+          foldGutter: true,
+          gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
           extraKeys: {
             'Shift-Alt-F': 'indentAuto'
           }
         }">
       </ngx-codemirror>
-      <h4 *ngIf="!nodeInstance.nodeType.startsWith('editor')">{{nodeInstance.nodeType}}</h4>
+      <h4 *ngIf="!isEditor">{{nodeInstance.nodeType}}</h4>
       <select class="custom-select" *ngIf="nodeInstance.nodeType === ''">
         <option value="editor">editor</option>
         <option *ngFor="let op of operatorList"> {{op}} </option>

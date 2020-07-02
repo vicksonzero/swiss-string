@@ -1,16 +1,17 @@
-import { Component, Input, OnInit, HostListener } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { CodemirrorComponent } from '@ctrl/ngx-codemirror';
+import { faCaretSquareLeft as faCaretSquareLeftR, faCaretSquareRight as faCaretSquareRightR } from '@fortawesome/free-regular-svg-icons';
+import { faBolt, faCaretSquareLeft, faCaretSquareRight, faChevronLeft, faChevronRight, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { TABLET_PORTRAIT } from 'src/media';
 import { INodeInstance } from '../s/new-model/appDefinitions';
 import { operators } from '../s/operators';
-import { faBolt, faEdit, faCaretSquareLeft, faCaretSquareRight, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { faCaretSquareLeft as faCaretSquareLeftR, faCaretSquareRight as faCaretSquareRightR } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-node',
   templateUrl: './node.component.html',
   styleUrls: ['./node.component.scss']
 })
-export class NodeComponent implements OnInit {
+export class NodeComponent implements OnInit, AfterViewInit {
 
   public faBolt = faBolt;
   public faEdit = faEdit;
@@ -26,13 +27,20 @@ export class NodeComponent implements OnInit {
   @Input() nodeIndex: number;
   @Input() nodeInstance: INodeInstance;
   isMobile = false;
+  isEditor = false;
+  @ViewChild('cmEditor', { static: false }) nameInputRef: CodemirrorComponent;
 
   operatorList = Object.keys(operators);
 
-  content = '{data:{}}';
+  content = '{\n  data:{a:"b"}\n}';
 
   ngOnInit() {
     this.updateDeviceWidth();
+    this.isEditor = this.nodeInstance.nodeType.startsWith('editor');
+  }
+
+  ngAfterViewInit() {
+    if (this.nameInputRef) { this.nameInputRef.codeMirror.refresh(); }
   }
 
   constructor() {

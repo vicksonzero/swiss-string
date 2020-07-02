@@ -39,12 +39,17 @@ textarea {
 
   .main-container {
     flex: 1 1 auto;
-    margin-left: 2.5em;
     margin-top: 2px;
     margin-bottom: 2px;
     display: flex;
     // background-color: #F0F0F0;
     align-items: stretch;
+
+    margin-left: 2.5em;
+
+    &.isEditor {
+      margin-left: 0;
+    }
 
     fa-icon {
       display: inline-block;
@@ -60,11 +65,17 @@ textarea {
       justify-content: center;
       width: 100%;
 
+      &.isEditor {
+        margin-left: 0;
+      }
+
       h4 {
         display: block;
         background-color: #bdf3bd;
         padding-top: 1em;
         padding-bottom: 1em;
+        padding-left: 4px;
+        padding-right: 4px;
         clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1em), calc(100% - 1em) 100%, 0 100%);
         margin: 0;
       }
@@ -139,4 +150,8 @@ textarea {
 
 .custom-select {
   width: 50%;
+}
+
+ngx-codemirror {
+  height: 100%;
 }
