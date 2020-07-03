@@ -1,0 +1,13 @@
+:host{
+  height: 100%;
+}
+ol {
+  width: 100%;
+
+  li {
+    input {
+      width: 100%;
+      display: inline-block;
+    }
+  }
+}

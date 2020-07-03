@@ -1,0 +1,7 @@
+<ul [style.flexDirection]="options.direction">
+  <li *ngFor="let item of items; let i = index">
+    <label [for]="('hi')+i"> {{['x','y','z','w'][i]}}
+    </label>
+    <input type="number" [value]="item" [name]="('hi')+i" />
+  </li>
+</ul>

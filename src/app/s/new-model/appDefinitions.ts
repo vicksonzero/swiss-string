@@ -53,6 +53,7 @@ export interface IColumn {
 export interface INodeInstance {
   nodeID: number;
   title: string;
+  editor?: any;
   nodeType: Operators | string;
   inputs: (EditorInputSocket | ILinkedInputSocket)[];
   outputs: (ISocket | ILinkedOutputSocket)[];

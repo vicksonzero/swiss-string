@@ -17,6 +17,8 @@ import { MainComponent } from './main/main.component';
 import { ColumnComponent } from './main/step/column/column.component';
 import { StepComponent } from './main/step/step.component';
 import { NodeComponent } from './node/node.component';
+import { EditorArrayComponent } from './editors/editor-array/editor-array.component';
+import { EditorVectorComponent } from './editors/editor-vector/editor-vector.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { NodeComponent } from './node/node.component';
     DimBgComponent,
     MatchHeightDirective,
     LongPressDirective,
+    EditorArrayComponent,
+    EditorVectorComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,7 @@
+<ol [style.flexDirection]="options.direction">
+  <li *ngFor="let item of items">
+    <input [type]="(options.items.type === 'number' ? 'number' : 'text')"
+      [value]="item"
+       />
+  </li>
+</ol>

@@ -74,7 +74,10 @@
     {
       "nodeID": 0,
       "title": "Input",
-      "nodeType": "editor-textarea",
+      "nodeType": "editor",
+      "editor": {
+        "type": "textarea"
+      },
       "inputs": [],
       "outputs": [
         {
@@ -92,7 +95,10 @@
     {
       "nodeID": 1,
       "title": "Input Regex",
-      "nodeType": "editor-regex",
+      "nodeType": "editor",
+      "editor": {
+        "type": "regex"
+      },
       "inputs": [],
       "outputs": [
         {
@@ -105,7 +111,13 @@
     {
       "nodeID": 2,
       "title": "Token Names",
-      "nodeType": "editor-list-string",
+      "nodeType": "editor",
+      "editor": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
       "inputs": [],
       "outputs": [
         {
@@ -119,6 +131,10 @@
       "nodeID": 3,
       "title": "Test Vector2",
       "nodeType": "editor",
+      "editor": {
+        "type": "vector",
+        "length": 2
+      },
       "inputs": [
         {
           "name": "testVector2",
@@ -140,6 +156,10 @@
       "nodeID": 4,
       "title": "Test Vector3",
       "nodeType": "editor",
+      "editor": {
+        "type": "vector",
+        "length": 3
+      },
       "inputs": [
         {
           "name": "testVector3",

@@ -30,6 +30,8 @@ export class NodeComponent implements OnInit, AfterViewInit {
   isEditor = false;
   @ViewChild('cmEditor', { static: false }) nameInputRef: CodemirrorComponent;
 
+  editor: any = {}; // text | textarea | number | list | regex
+
   operatorList = Object.keys(operators);
 
   content = '{\n  data:{a:"b"}\n}';
@@ -37,6 +39,7 @@ export class NodeComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.updateDeviceWidth();
     this.isEditor = this.nodeInstance.nodeType.startsWith('editor');
+    if (this.isEditor && this.nodeInstance.editor) { this.editor = this.nodeInstance.editor; }
   }
 
   ngAfterViewInit() {

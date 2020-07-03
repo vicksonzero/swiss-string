@@ -17,7 +17,7 @@
     <div [class]="('main' + (isEditor ? ' isEditor' : ''))">
       <!-- <textarea *ngIf="nodeInstance.nodeType === 'editor'"></textarea> -->
       <ngx-codemirror
-        *ngIf="isEditor"
+        *ngIf="(isEditor && editor.type === 'textarea')"
         #cmEditor
         [(ngModel)]="content"
         [options]="{
@@ -34,6 +34,10 @@
           }
         }">
       </ngx-codemirror>
+      <app-editor-array
+        *ngIf="(isEditor && editor.type === 'array')" [options]="editor"></app-editor-array>
+      <app-editor-vector
+        *ngIf="(isEditor && editor.type === 'vector')" [options]="editor"></app-editor-vector>
       <h4 *ngIf="!isEditor">{{nodeInstance.nodeType}}</h4>
       <select class="custom-select" *ngIf="nodeInstance.nodeType === ''">
         <option value="editor">editor</option>
