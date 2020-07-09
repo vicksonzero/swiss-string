@@ -28,6 +28,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "bootstrap": "^4.4.1",
+    "cm-show-invisibles": "^3.0.1",
     "codemirror": "^5.55.0",
     "hammerjs": "^2.0.8",
     "handlebars": "^4.7.6",
